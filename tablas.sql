@@ -29,13 +29,30 @@ CREATE TABLE locations (
     zipcodeId INT FOREIGN KEY REFERENCES zipcodes(zipcodeId)
 );
 
+CREATE TABLE contactsInfo (
+    contactId INT NOT NULL PRIMARY KEY IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    position VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    notes VARCHAR(255)
+);
+
 CREATE TABLE producers (
     producerId INT NOT NULL PRIMARY KEY IDENTITY,
     name VARCHAR(255) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    web VARCHAR(255),
     locationId INT NOT NULL,
     FOREIGN KEY (locationId) REFERENCES locations(locationId)
+);
+
+CREATE TABLE producerXcontacts (
+    producerId INT NOT NULL,
+    contactId INT NOT NULL,
+    PRIMARY KEY (producerId, contactId),
+    FOREIGN KEY (producerId) REFERENCES producers(producerId),
+    FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
 );
 
 CREATE TABLE producerCategories (
