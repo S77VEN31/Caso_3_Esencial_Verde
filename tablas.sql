@@ -3,7 +3,6 @@
 --TO DO:
     -- Posibles Tablas por Agregar: colletionPoints
     -- Arreglar las columnas de wasteTraceability
-    -- Columna tipo BIT para saber si una empresa es nacional o externa
 
 CREATE TABLE states (
     stateId INT PRIMARY KEY IDENTITY,
@@ -44,6 +43,7 @@ CREATE TABLE producers (
     name VARCHAR(255) NOT NULL,
     web VARCHAR(255),
     locationId INT NOT NULL,
+    isLocal BIT NOT NULL DEFAULT 1, 
     FOREIGN KEY (locationId) REFERENCES locations(locationId)
 );
 
@@ -188,14 +188,29 @@ CREATE TABLE wasteCollectionCompanyEvaluations (
 );
 
 -- Tablas según el tercer enunciado --
+CREATE TABLE vehicle_type (
+typeId INT NOT NULL PRIMARY KEY,
+typeName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE brand (
+brandId INT NOT NULL PRIMARY KEY,
+brandName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE model (
+modelId INT NOT NULL PRIMARY KEY,
+modelName VARCHAR(255) NOT NULL,
+typeId INT NOT NULL REFERENCES vehicle_type(typeId),
+brandId INT NOT NULL REFERENCES brand(brandId)
+);
 
 CREATE TABLE fleet (
-    fleetId INT NOT NULL PRIMARY KEY IDENTITY,
-    vehicleType VARCHAR(255) NOT NULL,
-    brand VARCHAR(255) NOT NULL,
-    model VARCHAR(255) NOT NULL,
-    plateNumber VARCHAR(20) NOT NULL,
-    capacity INT NOT NULL
+  fleetId INT NOT NULL PRIMARY KEY IDENTITY,
+  modelId INT NOT NULL FOREIGN KEY REFERENCES model(modelId),
+  plateNumber VARCHAR(20) NOT NULL,
+  capacity INT NOT NULL,
+  color VARCHAR(7) NOT NULL
 );
 
 CREATE TABLE collectionContracts (
