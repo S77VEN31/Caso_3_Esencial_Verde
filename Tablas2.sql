@@ -84,6 +84,7 @@ CREATE TABLE containers (
     containerId INT NOT NULL PRIMARY KEY IDENTITY,
     manufacturerInfo VARCHAR(255) NOT NULL,
     isInUse BIT NOT NULL DEFAULT 0,
+    active BIT NOT NULL DEFAULT 1,
     maxWeight DECIMAL(10, 2),
     weight DECIMAL(10, 2),
     currentWeight DECIMAL(10, 2)
