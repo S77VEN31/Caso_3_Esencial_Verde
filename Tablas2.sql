@@ -83,11 +83,17 @@ CREATE TABLE wasteTypes (
 CREATE TABLE containers (
     containerId INT NOT NULL PRIMARY KEY IDENTITY,
     manufacturerInfo VARCHAR(255) NOT NULL,
-    wasteTypeId INT,
     isInUse BIT NOT NULL DEFAULT 0,
-    maxCapacity DECIMAL(10, 2),
-    currentWeight DECIMAL(10, 2), 
-    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId) 
+    maxWeight DECIMAL(10, 2),
+    weight DECIMAL(10, 2),
+    currentWeight DECIMAL(10, 2)
+);
+
+CREATE TABLE containersXwasteTypes (
+    containerId INT NOT NULL,
+    wasteTypeId INT NOT NULL,
+    FOREIGN KEY (containerId) REFERENCES containers(containerId),
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId)
 );
 
 CREATE TABLE pickupSchedules (
@@ -114,11 +120,9 @@ CREATE TABLE wasteTypesXtreatmentMethods (
 CREATE TABLE containerLogs (
     logId INT PRIMARY KEY IDENTITY,
     logDate DATE NOT NULL,
-    producerId INT NOT NULL,
-    wasteTypeId INT NOT NULL,
+    pickupScheduleId INT NOT NULL,
     containerId INT NOT NULL,
-    FOREIGN KEY (producerId) REFERENCES producers(producerId),
-    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
+    FOREIGN KEY (pickupScheduleId) REFERENCES pickupSchedules(pickupScheduleId),
     FOREIGN KEY (containerId) REFERENCES containers(containerId) 
 );
 
