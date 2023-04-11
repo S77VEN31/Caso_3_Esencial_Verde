@@ -85,8 +85,9 @@ CREATE TABLE containers (
     containerId INT NOT NULL PRIMARY KEY IDENTITY,
     manufacturerInfo VARCHAR(255) NOT NULL,
     wasteTypeId INT,
-    isInUse BIT NOT NULL DEFAULT 0, 
-    maxCapacity DECIMAL(10, 2) 
+    isInUse BIT NOT NULL DEFAULT 0,
+    maxCapacity DECIMAL(10, 2),
+    currentWeight DECIMAL(10, 2), 
     FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId) -- Clave foránea al tipo de desecho
 );
 
