@@ -111,22 +111,19 @@ CREATE TABLE trainingAttendances (
     attendanceId INT NOT NULL PRIMARY KEY IDENTITY,
     trainingId INT NOT NULL,
     wasteCollectorId INT, 
-    producerId INT,
     FOREIGN KEY (trainingId) REFERENCES trainings(trainingId),
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
-    FOREIGN KEY (producerId) REFERENCES producers(producerId)
 );
 
 CREATE TABLE certificates (
     certificateId INT NOT NULL PRIMARY KEY IDENTITY,
     certificateTypeId INT NOT NULL,
     attendanceId INT NOT NULL,
+    expiration DATE NOT NULL,
     certificateStatus BIT NOT NULL,
     additionalInfo VARCHAR(255),
     wasteCollectorId INT, 
-    producerId INT,
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
-    FOREIGN KEY (producerId) REFERENCES producers(producerId)
     FOREIGN KEY (certificateTypeId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId),
     FOREIGN KEY (attendanceId) REFERENCES trainings(trainingId)
 );
