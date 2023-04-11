@@ -195,3 +195,4 @@ CREATE TABLE fleet (
     capacity INT NOT NULL,
     color VARCHAR(7) NOT NULL
 );
+
