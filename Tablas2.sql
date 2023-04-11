@@ -104,7 +104,7 @@ CREATE TABLE trainings (
     endTime TIME NOT NULL,
     description VARCHAR(255) NOT NULL,
     trainingTypeId INT NOT NULL, 
-    FOREIGN KEY (trainingTypeId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeMethodId)
+    FOREIGN KEY (trainingTypeId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)
 );
 
 CREATE TABLE trainingAttendances (
@@ -115,6 +115,20 @@ CREATE TABLE trainingAttendances (
     FOREIGN KEY (trainingId) REFERENCES trainings(trainingId),
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
     FOREIGN KEY (producerId) REFERENCES producers(producerId)
+);
+
+CREATE TABLE certificates (
+    certificateId INT NOT NULL PRIMARY KEY IDENTITY,
+    certificateTypeId INT NOT NULL,
+    attendanceId INT NOT NULL,
+    certificateStatus BIT NOT NULL,
+    additionalInfo VARCHAR(255),
+    wasteCollectorId INT, 
+    producerId INT,
+    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    FOREIGN KEY (producerId) REFERENCES producers(producerId)
+    FOREIGN KEY (certificateTypeId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId),
+    FOREIGN KEY (attendanceId) REFERENCES trainings(trainingId)
 );
 
 CREATE TABLE containers (
