@@ -68,6 +68,15 @@ CREATE TABLE producerXcontacts (
     FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
 );
 
+CREATE TABLE wasteCollectors (
+    wasteCollectorId INT NOT NULL PRIMARY KEY IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    locationId INT NOT NULL,
+    companyId INT,
+    FOREIGN KEY (locationId) REFERENCES locations(locationId),
+    FOREIGN KEY (companyId) REFERENCES companies(companyId)
+);
+
 CREATE TABLE treatmentMethods (
     methodId INT NOT NULL PRIMARY KEY IDENTITY,
     name VARCHAR(255) NOT NULL,
@@ -78,6 +87,34 @@ CREATE TABLE wasteTypes (
     wasteTypeId INT NOT NULL PRIMARY KEY IDENTITY,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255)
+);
+
+CREATE TABLE wasteTypesXtreatmentMethods (
+    wasteTypeTreatmentMethodId INT NOT NULL PRIMARY KEY IDENTITY,
+    wasteTypeId INT NOT NULL,
+    methodId INT NOT NULL,
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteType(wasteTypeId),
+    FOREIGN KEY (methodId) REFERENCES treatmentMethod(methodId)
+);
+
+CREATE TABLE trainings (
+    trainingId INT NOT NULL PRIMARY KEY IDENTITY,
+    date DATE NOT NULL,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    trainingTypeId INT NOT NULL, 
+    FOREIGN KEY (trainingTypeId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeMethodId)
+);
+
+CREATE TABLE trainingAttendances (
+    attendanceId INT NOT NULL PRIMARY KEY IDENTITY,
+    trainingId INT NOT NULL,
+    wasteCollectorId INT, 
+    producerId INT,
+    FOREIGN KEY (trainingId) REFERENCES trainings(trainingId),
+    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    FOREIGN KEY (producerId) REFERENCES producers(producerId)
 );
 
 CREATE TABLE containers (
@@ -111,13 +148,6 @@ CREATE TABLE pickupSchedules (
     FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
 );
 
-CREATE TABLE wasteTypesXtreatmentMethods (
-    wasteTypeId INT NOT NULL,
-    methodId INT NOT NULL,
-    FOREIGN KEY (wasteTypeId) REFERENCES wasteType(wasteTypeId),
-    FOREIGN KEY (methodId) REFERENCES treatmentMethod(methodId)
-);
-
 CREATE TABLE containerLogs (
     logId INT PRIMARY KEY IDENTITY,
     logDate DATE NOT NULL,
@@ -127,44 +157,26 @@ CREATE TABLE containerLogs (
     FOREIGN KEY (containerId) REFERENCES containers(containerId) 
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-CREATE TABLE vehicle_type (
+CREATE TABLE vehicleTypes (
     typeId INT NOT NULL PRIMARY KEY,
     typeName VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE brand (
+CREATE TABLE brands (
     brandId INT NOT NULL PRIMARY KEY,
     brandName VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE model (
+CREATE TABLE models (
     modelId INT NOT NULL PRIMARY KEY,
-    modelName VARCHAR(255) NOT NULL,
-    typeId INT NOT NULL REFERENCES vehicle_type(typeId),
-    brandId INT NOT NULL REFERENCES brand(brandId)
+    modelName VARCHAR(255) NOT NULL,    
+    typeId INT NOT NULL REFERENCES vehicleTypes(typeId),
+    brandId INT NOT NULL REFERENCES brands(brandId)
 );
 
 CREATE TABLE fleet (
     fleetId INT NOT NULL PRIMARY KEY IDENTITY,
-    modelId INT NOT NULL FOREIGN KEY REFERENCES model(modelId),
+    modelId INT NOT NULL FOREIGN KEY REFERENCES models(modelId),
     plateNumber VARCHAR(20) NOT NULL,
     capacity INT NOT NULL,
     color VARCHAR(7) NOT NULL
