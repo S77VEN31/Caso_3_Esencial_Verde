@@ -64,7 +64,6 @@ CREATE TABLE producers (
 CREATE TABLE producerXcontacts (
     producerId INT NOT NULL,
     contactId INT NOT NULL,
-    PRIMARY KEY (producerId, contactId),
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
     FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
 );
@@ -88,22 +87,36 @@ CREATE TABLE containers (
     isInUse BIT NOT NULL DEFAULT 0,
     maxCapacity DECIMAL(10, 2),
     currentWeight DECIMAL(10, 2), 
-    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId) -- Clave foránea al tipo de desecho
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId) 
+);
+
+CREATE TABLE pickupSchedules (
+    pickupScheduleId INT NOT NULL PRIMARY KEY IDENTITY,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
+    producerId INT NOT NULL,
+    frequency VARCHAR(15)
+	CHECK (frequency IN('daily', 'weekly', 'monthly')) NOT NULL,
+    pickupDay VARCHAR(15)
+	CHECK (pickupDay IN('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday')) NOT NULL,
+    wasteTypeId INT NOT NULL,
+    FOREIGN KEY (producerId) REFERENCES producers(producerId),
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
 );
 
 CREATE TABLE wasteTypesXtreatmentMethods (
     wasteTypeId INT NOT NULL,
     methodId INT NOT NULL,
-    PRIMARY KEY (wasteTypeId, treatmentId),
     FOREIGN KEY (wasteTypeId) REFERENCES wasteType(wasteTypeId),
     FOREIGN KEY (methodId) REFERENCES treatmentMethod(methodId)
 );
 
-CREATE TABLE producersXwasteTypesXcontainers (
+CREATE TABLE containerLogs (
+    logId INT PRIMARY KEY IDENTITY,
+    logDate DATE NOT NULL,
     producerId INT NOT NULL,
     wasteTypeId INT NOT NULL,
-    containerId INT NOT NULL, 
-    PRIMARY KEY (producerId, wasteTypeId),
+    containerId INT NOT NULL,
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
     FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
     FOREIGN KEY (containerId) REFERENCES containers(containerId) 
