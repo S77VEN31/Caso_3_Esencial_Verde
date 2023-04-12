@@ -97,6 +97,13 @@ CREATE TABLE wasteTypesXtreatmentMethods (
     FOREIGN KEY (methodId) REFERENCES treatmentMethod(methodId)
 );
 
+CREATE TABLE wasteTreatmentCosts (
+    costId INT NOT NULL PRIMARY KEY IDENTITY,
+    wasteTypeTreatmentMethodId INT NOT NULL,
+    cost DECIMAL(10, 2),
+    FOREIGN KEY (wasteTypeTreatmentMethodId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)
+);
+
 CREATE TABLE trainings (
     trainingId INT NOT NULL PRIMARY KEY IDENTITY,
     date DATE NOT NULL,
@@ -168,6 +175,40 @@ CREATE TABLE containerLogs (
     FOREIGN KEY (containerId) REFERENCES containers(containerId) 
 );
 
+CREATE TABLE wasteTreatmentSites (
+    siteId INT PRIMARY KEY IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    locationId INT NOT NULL,
+    FOREIGN KEY (locationId) REFERENCES locations(locationId),
+);
+
+CREATE TABLE treatmentSitesXcontacts (
+    siteId INT NOT NULL,
+    contactId INT NOT NULL,
+    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
+    FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
+);
+
+CREATE TABLE wasteTreatmentLogs (
+    logId INT PRIMARY KEY IDENTITY,
+    costId INT NOT NULL,
+    containerLogId INT NOT NULL, -- Includes dates, wasteType and the producer.
+    siteId INT NOT NULL,
+    carrierType VARCHAR(15)
+	CHECK (carrier IN('treatment site', 'producer', 'waste collector')) NOT NULL,
+    wasteCollectorId INT, 
+    fleetId INT,
+    -- If the carrierType is:
+    -- treatment site = siteId
+    -- producer = producerId
+    -- waste collector = wasteCollectorId and have a fleetId
+    FOREIGN KEY (fleetId) REFERENCES fleet(fleetId),
+    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
+    FOREIGN KEY (costId) REFERENCES wasteTreatmentCosts(costId),
+    FOREIGN KEY (containerLogId) REFERENCES containerLogs(logId)
+);
+
 CREATE TABLE vehicleTypes (
     typeId INT NOT NULL PRIMARY KEY,
     typeName VARCHAR(255) NOT NULL
@@ -188,9 +229,16 @@ CREATE TABLE models (
 CREATE TABLE fleet (
     fleetId INT NOT NULL PRIMARY KEY IDENTITY,
     modelId INT NOT NULL FOREIGN KEY REFERENCES models(modelId),
-    plateNumber VARCHAR(20) NOT NULL,
     capacity INT NOT NULL,
     color VARCHAR(7) NOT NULL
+);
+
+CREATE TABLE fleetXwasteTreatmentSites (
+    fleetId INT NOT NULL,
+    siteId INT NOT NULL,
+    isAvailable BIT NOT NULL DEFAULT 1,
+    FOREIGN KEY (fleetId) REFERENCES fleet(fleetId),
+    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId)
 );
 
 CREATE TABLE currencies (                  
@@ -221,7 +269,7 @@ CREATE TABLE languages (
     name VARCHAR(50) NOT NULL
 );
 
-CRATE TABLE countries (                     
+CREATE TABLE countries (                     
     code VARCHAR(2) NOT NULL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     currency VARCHAR(3) NOT NULL,
