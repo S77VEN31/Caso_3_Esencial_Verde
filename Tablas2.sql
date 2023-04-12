@@ -93,8 +93,8 @@ CREATE TABLE wasteTypesXtreatmentMethods (
     wasteTypeTreatmentMethodId INT NOT NULL PRIMARY KEY IDENTITY,
     wasteTypeId INT NOT NULL,
     methodId INT NOT NULL,
-    FOREIGN KEY (wasteTypeId) REFERENCES wasteType(wasteTypeId),
-    FOREIGN KEY (methodId) REFERENCES treatmentMethod(methodId)
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
+    FOREIGN KEY (methodId) REFERENCES treatmentMethods(methodId)
 );
 
 CREATE TABLE trainings (
@@ -225,12 +225,11 @@ CREATE TABLE languages (                    -- Tabla con todos los idiomas
     name VARCHAR(50) NOT NULL
 );
 
-CRATE TABLE countries (                     -- Tabla con todos los países
+CREATE TABLE countries (                     -- Tabla con todos los países
     code VARCHAR(2) NOT NULL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    currency VARCHAR(3) NOT NULL,
-    language VARCHAR(2) NOT NULL,
-    
-    FOREIGN KEY (currency) REFERENCES currencies(code)
-    FOREIGN KEY (language) REFERENCES languages(code)
+    currencyId INT NOT NULL,
+    languageId INT NOT NULL,
+    FOREIGN KEY (currencyId) REFERENCES currencies(currencyId),
+    FOREIGN KEY (languageId) REFERENCES languages(languageId)
 );
