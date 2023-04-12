@@ -193,3 +193,44 @@ CREATE TABLE fleet (
     color VARCHAR(7) NOT NULL
 );
 
+-- ---------------- --
+-- MONEDA E IDIOMA  --
+-- ---------------- --
+
+CREATE TABLE currencies (                  -- Tabla con todas las monedas
+    currencyId INT NOT NULL PRIMARY KEY IDENTITY,
+    code varchar(3) NOT NULL,
+    name varchar(50) NOT NULL,
+    symbol varchar(5) NOT NULL
+);
+
+CREATE TABLE systemCurrency (               -- Tabla con una única fila que contiene la moneda del sistema
+    currencyId INT NOT NULL PRIMARY KEY,
+    FOREIGN KEY (currencyId) REFERENCES currencies(currencyId)
+);
+
+CREATE TABLE currencyRates (               -- Tabla con los tipos de cambio
+    currencyRateId INT NOT NULL PRIMARY KEY IDENTITY,
+    currencyFrom INT NOT NULL,
+    currencyTo INT NOT NULL,
+    rate decimal(10, 4) NOT NULL,
+    date date NOT NULL,
+    FOREIGN KEY (currencyFrom) REFERENCES systemCurrency(currencyId),
+    FOREIGN KEY (currencyTo) REFERENCES currencies(currencyId)
+);
+
+CREATE TABLE languages (                    -- Tabla con todos los idiomas  
+    languageId INT NOT NULL PRIMARY KEY IDENTITY,
+    code VARCHAR(2) NOT NULL,
+    name VARCHAR(50) NOT NULL
+);
+
+CRATE TABLE countries (                     -- Tabla con todos los países
+    code VARCHAR(2) NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    currency VARCHAR(3) NOT NULL,
+    language VARCHAR(2) NOT NULL,
+    
+    FOREIGN KEY (currency) REFERENCES currencies(code)
+    FOREIGN KEY (language) REFERENCES languages(code)
+);
