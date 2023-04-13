@@ -72,13 +72,6 @@ CREATE TABLE wasteTreatmentSites (
     FOREIGN KEY (locationId) REFERENCES locations(locationId),
 );
 
-CREATE TABLE treatmentSitesXcontacts (
-    siteId INT NOT NULL,
-    contactId INT NOT NULL,
-    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
-    FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
-);
-
 CREATE TABLE producerXcontacts (
     producerId INT NOT NULL,
     contactId INT NOT NULL,
@@ -109,6 +102,13 @@ CREATE TABLE wasteCollectors (
     FOREIGN KEY (companyId) REFERENCES companies(companyId)
 );
 
+CREATE TABLE  wasteCollectorsXcontacts (
+    wasteCollectorId  INT NOT NULL,
+    contactId INT NOT NULL,
+    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
+);
+
 CREATE TABLE treatmentMethods (
     methodId INT NOT NULL PRIMARY KEY IDENTITY,
     name VARCHAR(255) NOT NULL,
@@ -125,6 +125,7 @@ CREATE TABLE wasteTypesXtreatmentMethods (
     wasteTypeTreatmentMethodId INT NOT NULL PRIMARY KEY IDENTITY,
     wasteTypeId INT NOT NULL,
     methodId INT NOT NULL,
+    pollutionLevel INT NOT NULL,
     FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
     FOREIGN KEY (methodId) REFERENCES treatmentMethods(methodId)
 );
@@ -132,7 +133,7 @@ CREATE TABLE wasteTypesXtreatmentMethods (
 CREATE TABLE wasteTreatmentCosts (
     costId INT NOT NULL PRIMARY KEY IDENTITY,
     wasteTypeTreatmentMethodId INT NOT NULL,
-    cost DECIMAL(10, 2),
+    cost DECIMAL(10, 2), -- IMPORTANTE
     FOREIGN KEY (wasteTypeTreatmentMethodId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)
 );
 
@@ -240,6 +241,7 @@ CREATE TABLE wasteTreatmentLogs (
     siteId INT NOT NULL,
     carrierType VARCHAR(15)
 	CHECK (carrierType IN('treatment site', 'producer', 'waste collector')) NOT NULL,
+    carrierInfo VARCHAR(255) NOT NULL,
     wasteCollectorId INT, 
     fleetId INT,
     -- If the carrierType is:
