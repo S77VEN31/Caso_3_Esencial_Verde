@@ -33,10 +33,13 @@ CREATE TABLE contactsInfo (
     position VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
-    address VARCHAR(255) NOT NULL,
+    address INT NOT NULL,
     notes VARCHAR(255),
+    postDate DATE NOT NULL,
     contactTypeId INT,
-    FOREIGN KEY (contactTypeId) REFERENCES contactTypes(contactTypeId)
+    active BIT NOT NULL DEFAULT 1,
+    FOREIGN KEY (contactTypeId) REFERENCES contactTypes(contactTypeId),
+    FOREIGN KEY (address) REFERENCES locations(locationId)
 );
 
 CREATE TABLE companyCategories (
@@ -61,10 +64,38 @@ CREATE TABLE producers (
     FOREIGN KEY (companyId) REFERENCES companies(companyId)
 );
 
+CREATE TABLE wasteTreatmentSites (
+    siteId INT PRIMARY KEY IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    locationId INT NOT NULL,
+    FOREIGN KEY (locationId) REFERENCES locations(locationId),
+);
+
+CREATE TABLE treatmentSitesXcontacts (
+    siteId INT NOT NULL,
+    contactId INT NOT NULL,
+    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
+    FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
+);
+
 CREATE TABLE producerXcontacts (
     producerId INT NOT NULL,
     contactId INT NOT NULL,
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
+    FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
+);
+
+CREATE TABLE companiesXcontacts (
+    companyId INT NOT NULL,
+    contactId INT NOT NULL,
+    FOREIGN KEY (companyId) REFERENCES companies(companyId),
+    FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
+);
+
+CREATE TABLE wasteTreatmentSitesXContacts (
+    wasteTreatmentSiteId INT NOT NULL,
+    contactId INT NOT NULL,
+    FOREIGN KEY (wasteTreatmentSiteId) REFERENCES wasteTreatmentSites(siteId),
     FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
 );
 
@@ -93,8 +124,8 @@ CREATE TABLE wasteTypesXtreatmentMethods (
     wasteTypeTreatmentMethodId INT NOT NULL PRIMARY KEY IDENTITY,
     wasteTypeId INT NOT NULL,
     methodId INT NOT NULL,
-    FOREIGN KEY (wasteTypeId) REFERENCES wasteType(wasteTypeId),
-    FOREIGN KEY (methodId) REFERENCES treatmentMethod(methodId)
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
+    FOREIGN KEY (methodId) REFERENCES treatmentMethods(methodId)
 );
 
 CREATE TABLE wasteTreatmentCosts (
@@ -139,10 +170,12 @@ CREATE TABLE containers (
     containerId INT NOT NULL PRIMARY KEY IDENTITY,
     manufacturerInfo VARCHAR(255) NOT NULL,
     isInUse BIT NOT NULL DEFAULT 0,
-    active BIT NOT NULL DEFAULT 1,
     maxWeight DECIMAL(10, 2),
     weight DECIMAL(10, 2),
-    currentWeight DECIMAL(10, 2)
+    size VARCHAR(10)
+    CHECK (size IN('small', 'medium', 'large')) NOT NULL,
+    currentWeight DECIMAL(10, 2),
+    active BIT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE containersXwasteTypes (
@@ -175,40 +208,6 @@ CREATE TABLE containerLogs (
     FOREIGN KEY (containerId) REFERENCES containers(containerId) 
 );
 
-CREATE TABLE wasteTreatmentSites (
-    siteId INT PRIMARY KEY IDENTITY,
-    name VARCHAR(255) NOT NULL,
-    locationId INT NOT NULL,
-    FOREIGN KEY (locationId) REFERENCES locations(locationId),
-);
-
-CREATE TABLE treatmentSitesXcontacts (
-    siteId INT NOT NULL,
-    contactId INT NOT NULL,
-    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
-    FOREIGN KEY (contactId) REFERENCES contactsInfo(contactId)
-);
-
-CREATE TABLE wasteTreatmentLogs (
-    logId INT PRIMARY KEY IDENTITY,
-    costId INT NOT NULL,
-    containerLogId INT NOT NULL, -- Includes dates, wasteType and the producer.
-    siteId INT NOT NULL,
-    carrierType VARCHAR(15)
-	CHECK (carrier IN('treatment site', 'producer', 'waste collector')) NOT NULL,
-    wasteCollectorId INT, 
-    fleetId INT,
-    -- If the carrierType is:
-    -- treatment site = siteId
-    -- producer = producerId
-    -- waste collector = wasteCollectorId and have a fleetId
-    FOREIGN KEY (fleetId) REFERENCES fleet(fleetId),
-    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
-    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
-    FOREIGN KEY (costId) REFERENCES wasteTreatmentCosts(costId),
-    FOREIGN KEY (containerLogId) REFERENCES containerLogs(logId)
-);
-
 CREATE TABLE vehicleTypes (
     typeId INT NOT NULL PRIMARY KEY,
     typeName VARCHAR(255) NOT NULL
@@ -231,6 +230,26 @@ CREATE TABLE fleet (
     modelId INT NOT NULL FOREIGN KEY REFERENCES models(modelId),
     capacity INT NOT NULL,
     color VARCHAR(7) NOT NULL
+);
+
+CREATE TABLE wasteTreatmentLogs (
+    logId INT PRIMARY KEY IDENTITY,
+    costId INT NOT NULL,
+    containerLogId INT NOT NULL, -- Includes dates, wasteType and the producer.
+    siteId INT NOT NULL,
+    carrierType VARCHAR(15)
+	CHECK (carrierType IN('treatment site', 'producer', 'waste collector')) NOT NULL,
+    wasteCollectorId INT, 
+    fleetId INT,
+    -- If the carrierType is:
+    -- treatment site = siteId
+    -- producer = producerId
+    -- waste collector = wasteCollectorId and have a fleetId
+    FOREIGN KEY (fleetId) REFERENCES fleet(fleetId),
+    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
+    FOREIGN KEY (costId) REFERENCES wasteTreatmentCosts(costId),
+    FOREIGN KEY (containerLogId) REFERENCES containerLogs(logId)
 );
 
 CREATE TABLE fleetXwasteTreatmentSites (
@@ -269,12 +288,89 @@ CREATE TABLE languages (
     name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE countries (                     
-    code VARCHAR(2) NOT NULL PRIMARY KEY,
+CREATE TABLE countries (   
+    countryId INT NOT NULL PRIMARY KEY IDENTITY,                  
+    code VARCHAR(2) NOT NULL,
     name VARCHAR(50) NOT NULL,
-    currency VARCHAR(3) NOT NULL,
-    language VARCHAR(2) NOT NULL,
-    FOREIGN KEY (currency) REFERENCES currencies(code)
-    FOREIGN KEY (language) REFERENCES languages(code)
+    currencyId INT NOT NULL,
+    languageId INT NOT NULL,
+    FOREIGN KEY (currencyId) REFERENCES currencies(currencyId),
+    FOREIGN KEY (languageId) REFERENCES languages(languageId)
 );
 
+CREATE TABLE treatmentMethodsXcountries (
+    countryId INT NOT NULL,
+    treatmentMethodId INT NOT NULL,
+    FOREIGN KEY (countryId) REFERENCES countries(countryId),
+    FOREIGN KEY (treatmentMethodId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)    
+)
+
+CREATE TABLE containersStockLogs (
+    logId INT NOT NULL PRIMARY KEY IDENTITY,
+    wasteCollectorId INT NOT NULL,
+    wasteTypeId INT NOT NULL,
+    conteinerSize VARCHAR(10) 
+    CHECK (conteinerSize IN('small', 'medium', 'large')) NOT NULL,
+    action VARCHAR(10)
+    CHECK (action IN('request', 'return')) NOT NULL, 
+    amount INT NOT NULL,
+    pastAmount INT NOT NULL,
+    lastUpdate DATE NOT NULL DEFAULT GETDATE(),
+    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId)
+);
+
+CREATE TABLE contractTypes (
+    contractTypeId INT NOT NULL PRIMARY KEY IDENTITY,
+    contractTypeName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE contracts (
+    contractId INT NOT NULL PRIMARY KEY IDENTITY,
+    contractTypeId INT NOT NULL,
+    wasteCollectorId INT NOT NULL,
+    producerId INT NOT NULL,
+    wasteTypeId INT NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    deliveryContact INT NOT NULL,
+    receiverContact INT NOT NULL,
+    isSigned BIT NOT NULL DEFAULT 0,
+    FOREIGN KEY (contractTypeId) REFERENCES contractTypes(contractTypeId),
+    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    FOREIGN KEY (producerId) REFERENCES producers(producerId),
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
+    FOREIGN KEY (deliveryContact) REFERENCES contactsInfo(contactId),
+    FOREIGN KEY (receiverContact) REFERENCES contactsInfo(contactId)
+);
+
+CREATE TABLE eventTypes (
+    eventTypeId INT NOT NULL PRIMARY KEY IDENTITY,
+    eventTypeName VARCHAR(50) NOT NULL,
+    eventTypeDescription VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE eventSources (
+    eventSourceId INT NOT NULL PRIMARY KEY IDENTITY,
+    eventSourceName VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE eventStatus (
+    eventStatusId INT NOT NULL PRIMARY KEY IDENTITY,
+    eventStatusName VARCHAR(50) NOT NULL,
+    eventStatusDescription VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE eventLogs (
+    eventId INT NOT NULL PRIMARY KEY IDENTITY,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    eventTypeId INT NOT NULL,
+    eventSourceId INT NOT NULL,
+    eventStatusId INT NOT NULL,
+    logMessage VARCHAR(255) NOT NULL,
+    logDetails VARCHAR(255) NOT NULL,
+    FOREIGN KEY (eventTypeId) REFERENCES eventTypes(eventTypeId),
+    FOREIGN KEY (eventSourceId) REFERENCES eventSources(eventSourceId),
+    FOREIGN KEY (eventStatusId) REFERENCES eventStatus(eventStatusId)
+);
