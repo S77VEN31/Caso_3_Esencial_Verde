@@ -52,7 +52,8 @@ CREATE TABLE companies (
     companyId INT NOT NULL PRIMARY KEY IDENTITY,
     companyName VARCHAR(255) NOT NULL,
     companyCategoryId INT, 
-    isLocal BIT NOT NULL DEFAULT 1
+    isLocal BIT NOT NULL DEFAULT 1,
+    FOREIGN KEY (companyCategoryId) REFERENCES companyCategories(companyCategoryId)
 );
 
 CREATE TABLE producers (
