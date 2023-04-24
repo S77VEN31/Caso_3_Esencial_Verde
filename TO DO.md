@@ -1,7 +1,6 @@
-# TO DO:
+# RODRI FEED BACK:
 ## DEBATE
 - [ ] El capacity de un fleet es algo más que un tamaño, si no también sobre que tipo de desechos es capaz de jalar
-
     * Aquí el problema es que el fleet no es que maneja el tipo de desechos que es capaz de transportar pues es un camión
  lo único que carga es uno o varios containers que son los capacitados para cargar distintos tipos de desechos y son
  los que tienen la información pertinente de su capacidad máxima, tipo de desechos etc.
@@ -144,6 +143,7 @@ no sabemos que es lo que faltaría.
             FOREIGN KEY (containerId) REFERENCES containers(containerId) 
         );
         ```
+
 - [ ] No puedo ver que será frecuency pero si es texto estamos mal, veo poca info para poder modelar una recurrencia.
     * En esta parte modificamos el frequency la idea es que en el contrato se estipule una frecuencia y los dias
     en los que se va a recoger x tipo de desecho cambiamos los strings por un int que indique la info.
@@ -162,6 +162,7 @@ no sabemos que es lo que faltaría.
         FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
     );
     ```
+
 - [ ] Trainings no se si es el catalogo o el registro de cuando se hizo un training a alguien
     * Se tiene un registro de trainings con la fecha en la que se realizaron y cuanto duraron etc,
     la idea es controlar cuales wasteCollectors fueron a los training mediante training attendances
@@ -207,12 +208,15 @@ no sabemos que es lo que faltaría.
 - [x] No amarren un country a una moneda ni a un idioma
 - [x] Quitemos esa tabla de systemcurrency
 - [x] Ocupamos un default y un enddate en currencyrates, 
-## TO FIX
-- [ ] Currencyrates debería ser el PK de varios FKS en pagos y transacciones e invoices
-- [ ] En invoices no se involucren con el cambio, solo documéntenlo, es decir lo asocian y si quieren lo copian, pero no conviertan
-- [ ] Contracts muy pobre, hay mezcla entre la definición de contrato, la planificación de los mismos y la ejecución, tiene muy poco de las cosas que tienen que quedar resueltas en el contrato, ver las preguntas en el documento , es imposible lograr todo lo que está ahí
-- [ ] El sponsorship muy pobre, hacerlo segun el modelo
-- [ ] No se puede mepear productos a lotes de productos y lotes de recursos usados para poder llegar a los contratos y repartir
-- [ ] No tengo claro invoicing, pago y transacciones
-- [ ] No es multiidioma 
+- [x] En invoices no se involucren con el cambio, solo documéntenlo, es decir lo asocian y si quieren lo copian, pero no conviertan
+- [x] El sponsorship muy pobre, hacerlo segun el modelo
+- [x] No tengo claro invoicing, pago y transacciones
+- [x] Currencyrates debería ser el PK de varios FKS en pagos y transacciones e invoices
+- [x] No es multiidioma 
 
+## TO FIX
+- [ ] Contracts muy pobre, hay mezcla entre la definición de contrato, la planificación de los mismos y la ejecución, tiene muy poco de las cosas que tienen que quedar resueltas en el contrato, ver las preguntas en el documento , es imposible lograr todo lo que está ahí
+- [ ] No se puede mepear productos a lotes de productos y lotes de recursos usados para poder llegar a los contratos y repartir
+
+# CASE TO DO:
+- [ ] Hacer el trigered que detecte si se inserta una empresa con un porcentaje mayor a 44 se debe insertar a la tabla de sponsors, entonces basado en el porcentaje de la empresa se debe pagar un monto (Ejem: porcentaje X 100$ = monto a pagar) O bien un select que haga esto en una tabla temporal o vista
