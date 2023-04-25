@@ -1,7 +1,8 @@
 CREATE TABLE countries (   
-    countryId INT NOT NULL PRIMARY KEY IDENTITY,                  
-    code VARCHAR(3) NOT NULL,
-    name VARCHAR(50) NOT NULL
+    countryId INT NOT NULL PRIMARY KEY IDENTITY,      
+    name VARCHAR(50) NOT NULL,            
+    nameCode VARCHAR(2) NOT NULL,
+    phoneCode INT NOT NULL
 );
 
 CREATE TABLE states (
@@ -20,7 +21,7 @@ CREATE TABLE cities (
 CREATE TABLE locations (
     locationId INT NOT NULL PRIMARY KEY IDENTITY,
     latitude DECIMAL(10, 8) NOT NULL,
-    longitude DECIMAL(11, 8) NOT NULL,
+    longitude DECIMAL(10, 8) NOT NULL,
     zipcode INT NOT NULL,
     cityId INT NOT NULL,
     FOREIGN KEY (cityId) REFERENCES cities(cityId)
@@ -54,14 +55,14 @@ CREATE TABLE contacts (
     name VARCHAR(255) NOT NULL,
     surname1 VARCHAR(255) NOT NULL,
     surname2 VARCHAR(255),
-    position VARCHAR(255),
-    password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     notes VARCHAR(255),
-    postDate DATE NOT NULL,
     contactTypeId INT NOT NULL,
     active BIT NOT NULL DEFAULT 1,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (contactTypeId) REFERENCES contactTypes(contactTypeId)
 );
 
@@ -77,6 +78,10 @@ CREATE TABLE companies (
     companyCategoryId INT, 
     isLocal BIT NOT NULL DEFAULT 1,
     carbonFootprint DECIMAL(10, 2),
+    active BIT NOT NULL DEFAULT 1,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (companyCategoryId) REFERENCES companyCategories(companyCategoryId)
 );
 
@@ -86,6 +91,10 @@ CREATE TABLE sponsorCompanies (
     percentage DECIMAL(3, 2) NOT NULL,  -- Based in if carbon footprint >= 44
     reason VARCHAR(255) NOT NULL,
     sponsoredRegionId INT NOT NULL,
+    active BIT NOT NULL DEFAULT 1,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (sponsorCompany) REFERENCES companies(companyId),
     FOREIGN KEY (sponsoredRegionId) REFERENCES regions(regionId)
 )
@@ -96,6 +105,10 @@ CREATE TABLE producers (
     locationId INT NOT NULL,
     companyId INT,
     balance DECIMAL(10, 2) NOT NULL,
+    active BIT NOT NULL DEFAULT 1,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (locationId) REFERENCES locations(locationId),
     FOREIGN KEY (companyId) REFERENCES companies(companyId)
 );
@@ -104,6 +117,10 @@ CREATE TABLE wasteTreatmentSites (
     siteId INT PRIMARY KEY IDENTITY,
     name VARCHAR(255) NOT NULL,
     locationId INT NOT NULL,
+    active BIT NOT NULL DEFAULT 1,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (locationId) REFERENCES locations(locationId),
 );
 
@@ -124,6 +141,7 @@ CREATE TABLE companiesXcontacts (
 CREATE TABLE wasteTreatmentSitesXContacts (
     wasteTreatmentSiteId INT NOT NULL,
     contactId INT NOT NULL,
+    
     FOREIGN KEY (wasteTreatmentSiteId) REFERENCES wasteTreatmentSites(siteId),
     FOREIGN KEY (contactId) REFERENCES contacts(contactId)
 );
@@ -133,6 +151,10 @@ CREATE TABLE wasteCollectors (
     name VARCHAR(255) NOT NULL,
     locationId INT NOT NULL,
     companyId INT,
+    active BIT NOT NULL DEFAULT 1,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (locationId) REFERENCES locations(locationId),
     FOREIGN KEY (companyId) REFERENCES companies(companyId)
 );
@@ -147,7 +169,8 @@ CREATE TABLE  wasteCollectorsXcontacts (
 CREATE TABLE treatmentMethods (
     methodId INT NOT NULL PRIMARY KEY IDENTITY,
     name VARCHAR(255) NOT NULL,
-    description VARCHAR(255)
+    description VARCHAR(255),
+    active BIT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE wasteTypes (
@@ -171,31 +194,41 @@ CREATE TABLE countryTreatmentCost (
     countryId INT NOT NULL,
     cost DECIMAL(10, 2),
     active BIT NOT NULL DEFAULT 1,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (treatmentMethodId) REFERENCES treatmentMethods(methodId),
     FOREIGN KEY (countryId) REFERENCES countries(countryId)
 );
 
-CREATE TABLE recyclableWaste (
-    recyclableWasteId INT NOT NULL PRIMARY KEY IDENTITY,
+CREATE TABLE recyclableMethod (
+    recyclableMethodId INT NOT NULL PRIMARY KEY IDENTITY,
     wasteTypeTreatmentMethodId INT NOT NULL,
     price DECIMAL(10, 2), 
+    active BIT NOT NULL DEFAULT 1,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (wasteTypeTreatmentMethodId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)
 );
 
-CREATE TABLE recyclableWasteSale (
-    recyclableWasteSaleId INT NOT NULL PRIMARY KEY IDENTITY,
-    recyclableWasteId INT NOT NULL,
+CREATE TABLE recyclableMethodSale (
+    recyclableMethodSaleId INT NOT NULL PRIMARY KEY IDENTITY,
+    recyclableMethodId INT NOT NULL,
     wasteCollectorId INT NOT NULL,
     saleDate DATE NOT NULL,
     sellerContact INT NOT NULL,
     buyerContact INT NOT NULL,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (sellerContact) REFERENCES contacts(contactId),
     FOREIGN KEY (buyerContact) REFERENCES contacts(contactId),
-    FOREIGN KEY (recyclableWasteId) REFERENCES recyclableWaste(recyclableWasteId),
+    FOREIGN KEY (recyclableMethodId) REFERENCES recyclableMethod(recyclableMethodId),
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId)
 );
 
-CREATE TABLE trainings (
+CREATE TABLE trainingLogs (
     trainingId INT NOT NULL PRIMARY KEY IDENTITY,
     date DATE NOT NULL,
     startTime TIME NOT NULL,
@@ -209,7 +242,7 @@ CREATE TABLE trainingAttendances (
     attendanceId INT NOT NULL PRIMARY KEY IDENTITY,
     trainingId INT NOT NULL,
     wasteCollectorId INT, 
-    FOREIGN KEY (trainingId) REFERENCES trainings(trainingId),
+    FOREIGN KEY (trainingId) REFERENCES trainingLogs(trainingId),
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
 );
 
@@ -223,7 +256,7 @@ CREATE TABLE certificates (
     wasteCollectorId INT, 
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
     FOREIGN KEY (certificateTypeId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId),
-    FOREIGN KEY (attendanceId) REFERENCES trainings(trainingId)
+    FOREIGN KEY (attendanceId) REFERENCES trainingLogs(trainingId)
 );
 
 CREATE TABLE containers (
@@ -231,7 +264,6 @@ CREATE TABLE containers (
     manufacturerInfo VARCHAR(255) NOT NULL,
     isInUse BIT NOT NULL DEFAULT 0,
     maxWeight DECIMAL(10, 2),
-    weight DECIMAL(10, 2),
     size INT NOT NULL, -- small 1, medium 2, large 3
     currentWeight DECIMAL(10, 2),
     active BIT NOT NULL DEFAULT 1
@@ -253,6 +285,9 @@ CREATE TABLE pickupSchedules (
     frequency INT NOT NULL, -- daily 1, weekly 2, monthly 3
     pickupDay INT NOT NULL, -- Sunday 1, Monday 2, Tuesday 3, Wednesday 4, Thursday 5, Friday 6, Saturday 7
     wasteTypeId INT NOT NULL,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
     FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
@@ -274,8 +309,6 @@ CREATE TABLE carriersXcontacts (
     FOREIGN KEY (carrierId) REFERENCES carriers(carrierId),
     FOREIGN KEY (contactId) REFERENCES contacts(contactId)
 );
-
-
 
 CREATE TABLE vehicleTypes (
     typeId INT NOT NULL PRIMARY KEY,
@@ -300,7 +333,8 @@ CREATE TABLE fleet (
     color VARCHAR(7) NOT NULL,
     smallContainers INT,
     mediumContainers INT,
-    largeContainers INT
+    largeContainers INT,
+    active BIT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE containerLogs ( -- Trasabilidad de los contenedores
@@ -310,6 +344,8 @@ CREATE TABLE containerLogs ( -- Trasabilidad de los contenedores
     containerId INT NOT NULL,
     carrierId INT NOT NULL,
     fleetId INT, -- Puede ser null al pertenecer a otra empresa
+    weight DECIMAL(10, 2) NOT NULL,
+    operationType INT NOT NULL, -- 1: pickup, 2: delivery, 3: transfer, 4: cleaning, 5: maintenance, 6: repair
     FOREIGN KEY (fleetId) REFERENCES fleet(fleetId),
     FOREIGN KEY (carrierId) REFERENCES carriers(carrierId),
     FOREIGN KEY (pickupScheduleId) REFERENCES pickupSchedules(pickupScheduleId),
@@ -337,8 +373,9 @@ CREATE TABLE currencyRates (
     currencyFrom INT NOT NULL,
     currencyTo INT NOT NULL,
     rate decimal(10, 4) NOT NULL,
-    startDate date NOT NULL,
-    endDate date,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (currencyTo) REFERENCES currencies(currencyId)
 );
 
@@ -353,7 +390,7 @@ CREATE TABLE containersStockLogs (
     logId INT NOT NULL PRIMARY KEY IDENTITY,
     wasteCollectorId INT NOT NULL,
     wasteTypeId INT NOT NULL,
-conteinerSize INT NOT NULL, -- small 1, medium 2, large 3
+    conteinerSize INT NOT NULL, -- small 1, medium 2, large 3
     action INT NOT NULL, -- request 1, return 2
     amount INT NOT NULL,
     pastAmount INT NOT NULL,
@@ -362,12 +399,12 @@ conteinerSize INT NOT NULL, -- small 1, medium 2, large 3
     FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId)
 );
 
-CREATE TABLE contractTypes (
+CREATE TABLE contractTypes (        -- TO DO
     contractTypeId INT NOT NULL PRIMARY KEY IDENTITY,
     contractTypeName VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE contracts (
+CREATE TABLE contracts (            -- TO DO
     contractId INT NOT NULL PRIMARY KEY IDENTITY,
     contractTypeId INT NOT NULL,
     wasteCollectorId INT NOT NULL,
@@ -429,6 +466,9 @@ CREATE TABLE invoices (                  -- Tema Deudas
     buyerContact INT NOT NULL,
     companyId INT NOT NULL,
     details VARCHAR(255) NOT NULL,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (companyId) REFERENCES companies(companyId),
     FOREIGN KEY (sellerContact) REFERENCES contacts(contactId),
     FOREIGN KEY (buyerContact) REFERENCES contacts(contactId)
@@ -444,6 +484,9 @@ CREATE TABLE transactions(                      -- Tema Transacciones
     currencyRateId INT NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     details VARCHAR(255) NOT NULL,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (currencyRateId) REFERENCES currencyRates(currencyRateId)
 );
 
@@ -455,6 +498,9 @@ CREATE TABLE payments (                         -- Tema Pagos
     amount DECIMAL(10, 2) NOT NULL,
     details VARCHAR(255) NOT NULL,
     transactionId INT NOT NULL,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NULL,
+    checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (invoiceId) REFERENCES invoices(invoiceId),
     FOREIGN KEY (transactionId) REFERENCES transactions(transactionId)
 );
@@ -465,20 +511,19 @@ CREATE TABLE languages (                 --Idiomas
     name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE objectTextTypes (          --Objetos que tienen un atributo texto          
-    objectTextTypeId INT NOT NULL PRIMARY KEY IDENTITY,
-    objectTextTypeName VARCHAR(50) NOT NULL
+CREATE TABLE textObjectTypes (          --Objetos que tienen un atributo texto          
+    textObjectTypeId INT NOT NULL PRIMARY KEY IDENTITY,
+    textObjectTypeName VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE translations (              --Traducciones para los objetos que tienen un atributo texto
     translationId INT NOT NULL PRIMARY KEY IDENTITY,
     transactionFrom INT NOT NULL,
     transactionTo INT NOT NULL,
-    objectTextTypeId INT NOT NULL,
+    textObjectTypeId INT NOT NULL,
     translationKey VARCHAR(255) NOT NULL,
     translationValue VARCHAR(255) NOT NULL,
     FOREIGN KEY (transactionFrom) REFERENCES languages(languageId),
     FOREIGN KEY (transactionTo) REFERENCES languages(languageId),
-    FOREIGN KEY (objectTextTypeId) REFERENCES objectTextTypes(objectTextTypeId)
+    FOREIGN KEY (textObjectTypeId) REFERENCES textObjectTypes(textObjectTypeId)
 );
-
