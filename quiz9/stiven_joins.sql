@@ -1,3 +1,4 @@
+/* PARTE A*/
 INSERT INTO wasteTypes (name, description) VALUES 
     ('Biodegradable', 'Waste materials that can be broken down by natural processes.'),
     ('Non-biodegradable', 'Waste materials that cannot be broken down by natural processes.'),
@@ -45,3 +46,79 @@ JOIN containersXwasteTypes cwt ON c.containerId = cwt.containerId
 JOIN wasteTypes wt ON cwt.wasteTypeId = wt.wasteTypeId
 JOIN treatmentMethods tm ON wt.wasteTypeId = tm.methodId
 WHERE c.active = 1
+/* PARTE B */
+CREATE TYPE VerboEntidadTableType 
+   AS TABLE
+      ( Param1 NVARCHAR(35)
+      , Param2 BIGINT );
+GO
+CREATE PROCEDURE [dbo].[XXXXXXSP_VerboEntidad]
+	@TVP VerboEntidadTableType READONLY
+AS 
+BEGIN
+	
+	SET NOCOUNT ON -- no retorne metadatos
+	
+	DECLARE @ErrorNumber INT, @ErrorSeverity INT, @ErrorState INT, @CustomError INT
+	DECLARE @Message VARCHAR(200)
+	DECLARE @InicieTransaccion BIT
+
+	-- declaracion de otras variables
+
+	-- operaciones de select que no tengan que ser bloqueadas
+	-- tratar de hacer todo lo posible antes de q inice la transaccion
+	
+	SET @InicieTransaccion = 0
+	IF @@TRANCOUNT=0 BEGIN
+		SET @InicieTransaccion = 1
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+		BEGIN TRANSACTION		
+	END
+	
+	BEGIN TRY
+		SET @CustomError = 2001
+
+		-- put your code here
+
+		INSERT INTO YourTable (Param1, Param2)
+		SELECT Param1, Param2
+		FROM @TVP;
+		
+		IF @InicieTransaccion=1 BEGIN
+			COMMIT
+		END
+	END TRY
+	BEGIN CATCH
+		SET @ErrorNumber = ERROR_NUMBER()
+		SET @ErrorSeverity = ERROR_SEVERITY()
+		SET @ErrorState = ERROR_STATE()
+		SET @Message = ERROR_MESSAGE()
+		
+		IF @InicieTransaccion=1 BEGIN
+			ROLLBACK
+		END
+		RAISERROR('%s - Error Number: %i', 
+			@ErrorSeverity, @ErrorState, @Message, @CustomError)
+	END CATCH	
+END
+RETURN 0
+GO
+
+DECLARE @VerboEntidadTVP AS VerboEntidadTableType;
+
+INSERT INTO @VerboEntidadTVP (Param1, Param2)
+VALUES ('Value1', 123), ('Value2', 456);
+
+EXEC [dbo].[XXXXXXSP_VerboEntidad] @TVP = @VerboEntidadTVP;
+
+/* PARTE C */
+WITH cteContainers AS (
+SELECT containerId, manufacturerInfo
+FROM containers
+WHERE active = 1
+)
+SELECT cc.containerId, cc.manufacturerInfo, wt.name, tm.name
+FROM cteContainers cc
+JOIN containersXwasteTypes cwt ON cc.containerId = cwt.containerId
+JOIN wasteTypes wt ON cwt.wasteTypeId = wt.wasteTypeId
+JOIN treatmentMethods tm ON wt.wasteTypeId = tm.methodId
