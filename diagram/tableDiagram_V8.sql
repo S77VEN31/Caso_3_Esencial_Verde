@@ -45,25 +45,19 @@ CREATE TABLE regions (
     FOREIGN KEY (regionAreaId) REFERENCES regionAreas(regionAreasId)
 );
 
-CREATE TABLE contactTypes (
-    contactTypeId INT NOT NULL PRIMARY KEY IDENTITY,
-    typeName VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE contacts (
     contactId INT NOT NULL PRIMARY KEY IDENTITY,
     name VARCHAR(255) NOT NULL,
     surname1 VARCHAR(255) NOT NULL,
     surname2 VARCHAR(255),
-    email VARCHAR(255) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(255),
+    phone VARCHAR(20),
     notes VARCHAR(255),
-    contactTypeId INT NOT NULL,
+    contactType VARCHAR(255) NOT NULL,
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
-    FOREIGN KEY (contactTypeId) REFERENCES contactTypes(contactTypeId)
+    checksum VARBINARY(64) NOT NULL
 );
 
 CREATE TABLE companyCategories (
@@ -201,21 +195,51 @@ CREATE TABLE countryTreatmentCost (
     FOREIGN KEY (countryId) REFERENCES countries(countryId)
 );
 
-CREATE TABLE recyclableMethod (
-    recyclableMethodId INT NOT NULL PRIMARY KEY IDENTITY,
+CREATE TABLE recycledProduct (
+    recycledProductId INT NOT NULL PRIMARY KEY IDENTITY,
     wasteTypeTreatmentMethodId INT NOT NULL,
-    price DECIMAL(10, 2), 
-    active BIT NOT NULL DEFAULT 1,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2),       -- Can be null in case of donations
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
     checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (wasteTypeTreatmentMethodId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)
 );
 
-CREATE TABLE recyclableMethodSale (
-    recyclableMethodSaleId INT NOT NULL PRIMARY KEY IDENTITY,
-    recyclableMethodId INT NOT NULL,
-    wasteCollectorId INT NOT NULL,
+CREATE TABLE materials (
+    materialId INT NOT NULL PRIMARY KEY IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(255)
+);
+
+CREATE TABLE recycledProductXmaterials (
+    recycledProductXmaterialId INT NOT NULL PRIMARY KEY IDENTITY,
+    recycledProductId INT NOT NULL,
+    materialId INT NOT NULL,
+    treatmentXcountriesPriceLogsId INT NOT NULL,
+    quantity INT NOT NULL,                      -- In kilos
+    active BIT NOT NULL DEFAULT 1,
+    FOREIGN KEY (recycledProductId) REFERENCES recycledProduct(recycledProductId),
+    FOREIGN KEY (materialId) REFERENCES materials(materialId)
+);
+
+CREATE TABLE producerXmaterialPricesLogs (
+    logId INT NOT NULL PRIMARY KEY IDENTITY,
+    recycledProductXmaterialId INT NOT NULL,
+    producerId INT NOT NULL,
+    productionPrice DECIMAL(10, 2) NOT NULL,
+    producerComision DECIMAL(3, 2) NOT NULL,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NOT NULL DEFAULT GETDATE(),
+    checksum VARBINARY(64) NOT NULL,
+    FOREIGN KEY (recycledProductXmaterialId) REFERENCES recycledProductXmaterials(recycledProductXmaterialId),
+    FOREIGN KEY (producerId) REFERENCES producers(producerId)
+);
+
+CREATE TABLE recycledProductSale (
+    recycledProductSaleId INT NOT NULL PRIMARY KEY IDENTITY,
+    recycledProductId INT NOT NULL,
+    producerId INT NOT NULL,
     saleDate DATE NOT NULL,
     sellerContact INT NOT NULL,
     buyerContact INT NOT NULL,
@@ -224,18 +248,24 @@ CREATE TABLE recyclableMethodSale (
     checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (sellerContact) REFERENCES contacts(contactId),
     FOREIGN KEY (buyerContact) REFERENCES contacts(contactId),
-    FOREIGN KEY (recyclableMethodId) REFERENCES recyclableMethod(recyclableMethodId),
-    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId)
+    FOREIGN KEY (recycledProductId) REFERENCES recycledProduct(recycledProductId),
+    FOREIGN KEY (producerId) REFERENCES producers(producerId)
+);
+
+CREATE TABLE trainingTypes (
+    trainingTypeId INT NOT NULL PRIMARY KEY IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    wasteTypeTreatmentMethodId INT NOT NULL,
+    description VARCHAR(255),               --Other things to consider
+    FOREIGN KEY (wasteTypeTreatmentMethodId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)
 );
 
 CREATE TABLE trainingLogs (
     trainingId INT NOT NULL PRIMARY KEY IDENTITY,
-    date DATE NOT NULL,
-    startTime TIME NOT NULL,
-    endTime TIME NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    trainingTypeId INT NOT NULL, 
-    FOREIGN KEY (trainingTypeId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)
+    startTime DATETIME NOT NULL,
+    endTime DATETIME NOT NULL,
+    trainingTypeId INT NOT NULL,
+    FOREIGN KEY (trainingTypeId) REFERENCES trainingTypes(trainingTypeId)
 );
 
 CREATE TABLE trainingAttendances (
@@ -330,9 +360,6 @@ CREATE TABLE fleet (
     fleetId INT NOT NULL PRIMARY KEY IDENTITY,
     modelId INT NOT NULL FOREIGN KEY REFERENCES models(modelId),
     color VARCHAR(7) NOT NULL,
-    smallContainers INT,
-    mediumContainers INT,
-    largeContainers INT,
     active BIT NOT NULL DEFAULT 1
 );
 
@@ -348,22 +375,16 @@ CREATE TABLE containerLogs ( -- Trasabilidad de los contenedores
     logDate DATE NOT NULL,
     pickupScheduleId INT NOT NULL,
     containerId INT NOT NULL,
+    countryTreatmentCost INT NOT NULL,
     carrierId INT NOT NULL,
     fleetId INT, -- Puede ser null al pertenecer a otra empresa
     weight DECIMAL(10, 2) NOT NULL,
     operationType INT NOT NULL, -- 1: pickup, 2: delivery, 3: transfer, 4: cleaning, 5: maintenance, 6: repair
     FOREIGN KEY (fleetId) REFERENCES fleet(fleetId),
+    FOREIGN KEY (countryTreatmentCost) REFERENCES countries(countryId),
     FOREIGN KEY (carrierId) REFERENCES carriers(carrierId),
     FOREIGN KEY (pickupScheduleId) REFERENCES pickupSchedules(pickupScheduleId),
     FOREIGN KEY (containerId) REFERENCES containers(containerId) 
-);
-
-CREATE TABLE wasteTreatmentLogs (
-    logId INT PRIMARY KEY IDENTITY,
-    countryTreatmentCost INT NOT NULL,
-    containerLogId INT NOT NULL, -- Includes dates, wasteType and the producer.
-    FOREIGN KEY (countryTreatmentCost) REFERENCES countries(countryId),
-    FOREIGN KEY (containerLogId) REFERENCES containerLogs(logId)
 );
 
 CREATE TABLE currencies (                  
@@ -386,11 +407,23 @@ CREATE TABLE currencyRates (
 );
 
 CREATE TABLE treatmentMethodsXcountries (
+    treatmentMethodXcountriesId INT NOT NULL PRIMARY KEY IDENTITY,
     countryId INT NOT NULL,
     treatmentMethodId INT NOT NULL,
     FOREIGN KEY (countryId) REFERENCES countries(countryId),
     FOREIGN KEY (treatmentMethodId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)    
 );
+
+CREATE TABLE treatmentXcountriesPriceLogs (
+    logId INT NOT NULL PRIMARY KEY IDENTITY,
+    treatmentMethodXcountriesId INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NOT NULL DEFAULT GETDATE(),
+    checksum VARBINARY(64) NOT NULL,
+    active BIT NOT NULL DEFAULT 1,
+    FOREIGN KEY (treatmentMethodXcountriesId) REFERENCES treatmentMethodsXcountries(treatmentMethodXcountriesId)
+)
 
 CREATE TABLE containersStockLogs (
     logId INT NOT NULL PRIMARY KEY IDENTITY,
@@ -415,25 +448,35 @@ CREATE TABLE contractTypes (        -- TO DO
 CREATE TABLE contracts (            -- TO DO
     contractId INT NOT NULL PRIMARY KEY IDENTITY,
     contractTypeId INT NOT NULL,
-    wasteCollectorId INT NOT NULL,
+    wasteCollectorId INT,
     producerId INT NOT NULL,
-    wasteTypeId INT NOT NULL,
-    kiloPrice DECIMAL(10, 2) NOT NULL,  --Precio default por kilo
-    specialPrice DECIMAL(10, 2),        -- Precio especial
+    countryId INT NOT NULL,
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
-    deliveryContact INT NOT NULL,
-    receiverContact INT NOT NULL,
-    isSigned BIT NOT NULL DEFAULT 0,
+    contractCreator INT NOT NULL,
+    contractSigner INT NOT NULL,
+    active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
     checksum VARBINARY(64) NOT NULL,
     FOREIGN KEY (contractTypeId) REFERENCES contractTypes(contractTypeId),
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
-    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
-    FOREIGN KEY (deliveryContact) REFERENCES contacts(contactId),
-    FOREIGN KEY (receiverContact) REFERENCES contacts(contactId)
+    FOREIGN KEY (contractCreator) REFERENCES contacts(contactId),
+    FOREIGN KEY (contractSigner) REFERENCES contacts(contactId)
+);
+
+CREATE TABLE contractsXtretmentPriceLogs ( -- TO DO
+    contractId INT NOT NULL,
+    treatmentXcountriesPriceLogs INT NOT NULL,
+    specialPrice INT,
+    pickupScheduleId INT NOT NULL,    
+    createAt DATE NOT NULL DEFAULT GETDATE(),
+    updateAt DATE NOT NULL DEFAULT GETDATE(),
+    checksum VARBINARY(64) NOT NULL,
+    FOREIGN KEY (contractId) REFERENCES contracts(contractId),
+    FOREIGN KEY (treatmentXcountriesPriceLogs) REFERENCES treatmentXcountriesPriceLogs(logId),
+    FOREIGN KEY (pickupScheduleId) REFERENCES pickupSchedules(pickupScheduleId)
 );
 
 CREATE TABLE eventTypes (
