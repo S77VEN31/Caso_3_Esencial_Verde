@@ -1,0 +1,14 @@
+{
+  "version": "2.0",
+  "name": "EsencialVerde_caso3",
+  "id": "6e329d63-bb7f-45fa-8d9a-362847f1433b",
+  "databaseType": "SqlServer",
+  "development": {
+    "scriptsFolder": "./schema-model"
+  },
+  "deployment": {
+    "flywayConfFiles": [
+      "./flyway.conf"
+    ]
+  }
+}
