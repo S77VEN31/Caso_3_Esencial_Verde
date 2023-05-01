@@ -294,7 +294,6 @@ CREATE TABLE containers (
     manufacturerInfo VARCHAR(255) NOT NULL,
     isInUse BIT NOT NULL DEFAULT 0,
     maxWeight DECIMAL(10, 2),
-    currentWeight DECIMAL(10, 2),
     active BIT NOT NULL DEFAULT 1
 );
 
