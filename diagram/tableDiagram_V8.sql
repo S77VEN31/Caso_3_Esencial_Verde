@@ -21,7 +21,7 @@ CREATE TABLE cities (
 CREATE TABLE locations (
     locationId INT NOT NULL PRIMARY KEY IDENTITY,
     latitude DECIMAL(10, 8) NOT NULL,
-    longitude DECIMAL(10, 8) NOT NULL,
+    longitude DECIMAL(11, 8) NOT NULL,
     zipcode INT NOT NULL,
     cityId INT NOT NULL,
     FOREIGN KEY (cityId) REFERENCES cities(cityId)
@@ -57,7 +57,7 @@ CREATE TABLE contacts (
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL
+    CHECKSUM VARBINARY(64)
 );
 
 CREATE TABLE companyCategories (
@@ -75,7 +75,7 @@ CREATE TABLE companies (
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (companyCategoryId) REFERENCES companyCategories(companyCategoryId)
 );
 
@@ -88,7 +88,7 @@ CREATE TABLE sponsorCompanies (
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (sponsorCompany) REFERENCES companies(companyId),
     FOREIGN KEY (sponsoredRegionId) REFERENCES regions(regionId)
 )
@@ -102,7 +102,7 @@ CREATE TABLE producers (
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (locationId) REFERENCES locations(locationId),
     FOREIGN KEY (companyId) REFERENCES companies(companyId)
 );
@@ -114,7 +114,7 @@ CREATE TABLE wasteTreatmentSites (
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (locationId) REFERENCES locations(locationId),
 );
 
@@ -148,7 +148,7 @@ CREATE TABLE wasteCollectors (
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (locationId) REFERENCES locations(locationId),
     FOREIGN KEY (companyId) REFERENCES companies(companyId)
 );
@@ -190,7 +190,7 @@ CREATE TABLE countryTreatmentCost (
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (treatmentMethodId) REFERENCES treatmentMethods(methodId),
     FOREIGN KEY (countryId) REFERENCES countries(countryId)
 );
@@ -202,7 +202,7 @@ CREATE TABLE recycledProduct (
     price DECIMAL(10, 2),       -- Can be null in case of donations
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (wasteTypeTreatmentMethodId) REFERENCES wasteTypesXtreatmentMethods(wasteTypeTreatmentMethodId)
 );
 
@@ -231,7 +231,7 @@ CREATE TABLE producerXmaterialPricesLogs (
     producerComision DECIMAL(3, 2) NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (recycledProductXmaterialId) REFERENCES recycledProductXmaterials(recycledProductXmaterialId),
     FOREIGN KEY (producerId) REFERENCES producers(producerId)
 );
@@ -245,7 +245,7 @@ CREATE TABLE recycledProductSale (
     buyerContact INT NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (sellerContact) REFERENCES contacts(contactId),
     FOREIGN KEY (buyerContact) REFERENCES contacts(contactId),
     FOREIGN KEY (recycledProductId) REFERENCES recycledProduct(recycledProductId),
@@ -316,7 +316,7 @@ CREATE TABLE pickupSchedules (
     wasteTypeId INT NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
     FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
@@ -402,7 +402,7 @@ CREATE TABLE currencyRates (
     rate decimal(10, 4) NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (currencyTo) REFERENCES currencies(currencyId)
 );
 
@@ -420,24 +420,23 @@ CREATE TABLE treatmentXcountriesPriceLogs (
     price DECIMAL(10, 2) NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     active BIT NOT NULL DEFAULT 1,
     FOREIGN KEY (treatmentMethodXcountriesId) REFERENCES treatmentMethodsXcountries(treatmentMethodXcountriesId)
 )
 
 CREATE TABLE containersStockLogs (
     logId INT NOT NULL PRIMARY KEY IDENTITY,
-    wasteCollectorId INT NOT NULL,
-    wasteTypeId INT NOT NULL,
-    conteinerSize INT NOT NULL, -- small 1, medium 2, large 3
+    wasteCollectorId INT,
+    producerId INT NOT NULL,
+    containerId INT NOT NULL,
     action INT NOT NULL, -- request 1, return 2
-    amount INT NOT NULL,
-    pastAmount INT NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
-    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId)
+    FOREIGN KEY (containerId) REFERENCES containers(containerId),
+    FOREIGN KEY (producerId) REFERENCES producers(producerId)
 );
 
 CREATE TABLE contractTypes (        -- TO DO
@@ -458,7 +457,7 @@ CREATE TABLE contracts (            -- TO DO
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (contractTypeId) REFERENCES contractTypes(contractTypeId),
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
@@ -473,7 +472,7 @@ CREATE TABLE contractsXtretmentPriceLogs ( -- TO DO
     pickupScheduleId INT NOT NULL,    
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (contractId) REFERENCES contracts(contractId),
     FOREIGN KEY (treatmentXcountriesPriceLogs) REFERENCES treatmentXcountriesPriceLogs(logId),
     FOREIGN KEY (pickupScheduleId) REFERENCES pickupSchedules(pickupScheduleId)
@@ -524,7 +523,7 @@ CREATE TABLE invoices (                  -- Tema Deudas
     details VARCHAR(255) NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (companyId) REFERENCES companies(companyId),
     FOREIGN KEY (sellerContact) REFERENCES contacts(contactId),
     FOREIGN KEY (buyerContact) REFERENCES contacts(contactId)
@@ -542,7 +541,7 @@ CREATE TABLE transactions(                      -- Tema Transacciones
     details VARCHAR(255) NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (currencyRateId) REFERENCES currencyRates(currencyRateId)
 );
 
@@ -556,7 +555,7 @@ CREATE TABLE payments (                         -- Tema Pagos
     transactionId INT NOT NULL,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
-    checksum VARBINARY(64) NOT NULL,
+    CHECKSUM VARBINARY(64),
     FOREIGN KEY (invoiceId) REFERENCES invoices(invoiceId),
     FOREIGN KEY (transactionId) REFERENCES transactions(transactionId)
 );

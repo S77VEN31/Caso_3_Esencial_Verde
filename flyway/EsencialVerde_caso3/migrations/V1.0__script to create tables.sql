@@ -1,5 +1,5 @@
 -----------------------------------------------------------
--- Autor: joseGranados
+-- Autor: joseGranados & stivenGuzman
 -- Fecha: 29/04/2023
 -- Descripcion: script to create tables
 -- Now all fixes are done
