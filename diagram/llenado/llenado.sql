@@ -1,12 +1,12 @@
 INSERT INTO
-    countries (countryId, name, nameCode, phoneCode)
+    countries (name, nameCode, phoneCode)
 VALUES
     ('Mexico', 'MX', 52),
     ('Costa Rica', 'CR', 506),
     ('United States', 'US', 1);
 
 INSERT INTO
-    states (stateId, name, countryId)
+    states (name, countryId)
 VALUES
     ('Aguascalientes', 1),
     ('Baja California', 1),
@@ -98,7 +98,7 @@ VALUES
     ('Wyoming', 3);
 
 INSERT INTO
-    cities (cityId, name, stateId)
+    cities (name, stateId)
 VALUES
     ('Mexico City', 14),
     ('Guadalajara', 13),
@@ -169,7 +169,7 @@ VALUES
     ('Cheyenne', 88);
 
 INSERT INTO
-    locations (locationId, latitude, longitude, zipcode, cityId)
+    locations (latitude, longitude, zipcode, cityId)
 VALUES
     (19.4326, -99.1332, 01000, 1),
     (20.6597, -103.3496, 44100, 2),
