@@ -43,7 +43,7 @@ JOIN regions ON regions.regionAreaId = regionAreas.regionAreasId;
 
 SELECT * FROM location_data;
 
--- Duración: CPU time = 15 ms,  elapsed time = 1 ms.
+-- Duración:   CPU time = 403922 ms,  elapsed time = 578681 ms.
 
 -----------------------------------------------------------
 -- Vista Indexada
@@ -86,7 +86,7 @@ CREATE UNIQUE CLUSTERED INDEX idx_MyIndexedView
 GO
 SELECT * FROM dbo.MyIndexedView;
 
--- Duración: CPU time = 17 ms,  elapsed time = 1 ms.
+-- Duración: CPU time = 427125 ms,  elapsed time = 596607 ms.
 
 
 -- Justificación de la diferencia de tiempos de ejecución entre la vista dinámica y la vista indexada
