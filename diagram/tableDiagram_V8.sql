@@ -1,6 +1,6 @@
 CREATE TABLE countries (   
     countryId INT NOT NULL PRIMARY KEY IDENTITY,      
-    name VARCHAR(50) NOT NULL,            
+    name VARCHAR(255) NOT NULL,            
     nameCode VARCHAR(2) NOT NULL,
     phoneCode INT NOT NULL
 );

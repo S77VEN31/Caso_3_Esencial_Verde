@@ -316,6 +316,27 @@ VALUES
     ('Dunkin', 6, 0, 12345.67, 1, '2022-03-01', '2022-03-01', 0x345678),
     ('Chipotle', 7, 0, 23456.78, 1, '2022-03-01', '2022-03-01', 0x456789);
 
+INSERT INTO producers (name, locationId, companyId, balance)
+VALUES ('Productor 1', 1, 2, 1000.50),
+       ('Productor 2', 2, 3, 5000.00),
+       ('Productor 3', 3, 1, 0),
+       ('Productor 4', 4, 4, 250.75),
+       ('Productor 5', 5, 5, 0),
+       ('Productor 6', 6, 6, 10000.00),
+       ('Productor 7', 7, 7, 0),
+       ('Productor 8', 8, 8, 750.25),
+       ('Productor 9', 9, 9, 0),
+       ('Productor 10', 10, 10, 500.50),
+       ('Productor 11', 1, 3, 0),
+       ('Productor 12', 2, 1, 2000.00),
+       ('Productor 13', 3, 4, 150.75),
+       ('Productor 14', 4, 2, 0),
+       ('Productor 15', 5, 5, 3000.00),
+       ('Productor 16', 6, 6, 0),
+       ('Productor 17', 7, 8, 800.25),
+       ('Productor 18', 8, 10, 0),
+       ('Productor 19', 9, 7, 1000.50),
+       ('Productor 20', 10, 9, 5000.00);
 
     INSERT INTO wasteTypes (name, description) VALUES 
     ('Organic Waste', 'Waste that comes from plants or animals'),
