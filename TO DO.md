@@ -1,5 +1,5 @@
-# RODRI FEED BACK:
-
+# TO DO:
+- [ ] Hacer la comparacio del select con la vista dinamica y la vista indexada
 ## DONE
 ### 15/04
 - [x] Quitemos fleetxwastetreatmentsites, solo nos ata y no hay control previo de eso
