@@ -1,5 +1,20 @@
 # TO DO:
-- [ ] Hacer la comparacio del select con la vista dinamica y la vista indexada
+- [ ] Hacer la comparacion del select con la vista dinamica y la vista indexada en cuanto a tiempo y efiencia
+- [ ] Mega Query
+- [ ] Apicar optimizar el MEGA QUERY con CTE
+- [ ] Subir todos los archivos al Flyway
+
+# TO FIX
+ EMPTY 😎
+# PROCEDURES/TRIGGERS TO DO:
+- [ ] Hacer el trigered que detecte si se inserta una empresa con un porcentaje mayor a 44 se debe insertar a la tabla de sponsors, entonces basado en el porcentaje de la empresa se debe pagar un monto (Ejem: porcentaje X 100$ = monto a pagar) O bien un select que haga esto en una tabla temporal o vista
+
+- [ ] Hacer un triger que para insertar un wasteType en un container, este debe existir dentro del containersXwastetypes, si no existe no se puede insertar
+
+- [ ] Hacer un triger que para insertar un container en un fleet, este debe existir dentro del fleetXwasteTypes, si no existe no se puede insertar
+
+- [ ] Select para sacar el precio de cada producto reciclado quantity por price + percentage = precio
+
 ## DONE
 ### 15/04
 - [x] Quitemos fleetxwastetreatmentsites, solo nos ata y no hay control previo de eso
@@ -24,13 +39,3 @@
 - [x] se nota que nunca han trabajado en un camión de carga. Lo que me refiero, no cualquier camión o transporte puede llevar containers con cloro, o con ácido de batería, o con aceite o con combustible, entonces es bueno especificar tal vez si un peso máximo permitido, pero decir cuáles tipos de desechos soporta
 - [x] jumm que raro que no haya visto eso, listo, si recuerden que no falta el historial de precios y lo otro falta lo del contrato que les menciono ahí, es decir, puede ser que el método de oxidación para comida valga en CR, 200 colones el kilo, pero cuando la empresa hace el contrato, dado el volumen, el term del contrato y así, ellos podrían llegar a un precio especial y decir, ok hotel riu, le vamos a dejar el kilo de comida por métido de oxidación en 120 colones
 
-# TO FIX
- EMPTY 😎
-# PROCEDURES/TRIGGERS TO DO:
-- [ ] Hacer el trigered que detecte si se inserta una empresa con un porcentaje mayor a 44 se debe insertar a la tabla de sponsors, entonces basado en el porcentaje de la empresa se debe pagar un monto (Ejem: porcentaje X 100$ = monto a pagar) O bien un select que haga esto en una tabla temporal o vista
-
-- [ ] Hacer un triger que para insertar un wasteType en un container, este debe existir dentro del containersXwastetypes, si no existe no se puede insertar
-
-- [ ] Hacer un triger que para insertar un container en un fleet, este debe existir dentro del fleetXwasteTypes, si no existe no se puede insertar
-
-- [ ] Select para sacar el precio de cada producto reciclado quantity por price + percentage = precio
