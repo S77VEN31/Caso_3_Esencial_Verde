@@ -1,3 +1,9 @@
+-----------------------------------------------------------
+-- Autor: joseGranados & stivenGuzman
+-- Fecha: 29/04/2023
+-- Descripcion: script to create tables
+-- Now all fixes are done
+-----------------------------------------------------------
 -- Tablas Base del proyecto --
 
 --TO DO:

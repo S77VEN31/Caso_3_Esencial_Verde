@@ -1,3 +1,9 @@
+-----------------------------------------------------------
+-- Autor: joseGranados & stivenGuzman
+-- Fecha: 29/04/2023
+-- Descripcion: script to create tables
+-- Now all fixes are done
+-----------------------------------------------------------
 CREATE TABLE producers (
     producerId INT NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -108,6 +114,3 @@ CREATE TABLE services (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(1000) NOT NULL
 );
-
-
-
