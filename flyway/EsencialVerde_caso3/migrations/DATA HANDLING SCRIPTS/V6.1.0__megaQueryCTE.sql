@@ -1,3 +1,8 @@
+-----------------------------------------------------------
+-- Autor: joseGranados & stivenGuzman
+-- Fecha: 30/04/2023
+-- Descripcion: same  megaQuery but with improvements and CTE (Common Table Expression) and others
+-----------------------------------------------------------
 -- Las mejoras realizadas son:
 -- Usar un CTE (Common Table Expression) para crear una tabla temporal "customer_payments" que contiene los datos
 -- de clientes y pagos. Esto permite reutilizar la consulta en la subconsulta "customer_payments_2022" para obtener

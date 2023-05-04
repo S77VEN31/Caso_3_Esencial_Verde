@@ -1,4 +1,8 @@
-
+-----------------------------------------------------------
+-- Autor: joseGranados & stivenGuzman
+-- Fecha: 29/04/2023
+-- Descripcion: TVP to insert containersStockLogs
+-----------------------------------------------------------
 CREATE TYPE dbo.ContainersStockLogTableType AS TABLE
 (
    wasteCollectorId INT,

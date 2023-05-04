@@ -510,12 +510,11 @@ CREATE TABLE eventLogs (
 
 CREATE TABLE invoices (                  -- Tema Deudas
     invoiceId INT NOT NULL PRIMARY KEY IDENTITY,
-    number VARCHAR(50) NOT NULL,    -- Numero de factura, se puede manejar para esa empresa en particular
     postdate DATE NOT NULL,
     posttime TIME NOT NULL,
     duedate DATE NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
-    status VARCHAR(50) NOT NULL,
+    status INT NOT NULL, -- 1: pending, 2: paid, 3: cancelled
     sellerContact INT NOT NULL,
     buyerContact INT NOT NULL,
     companyId INT NOT NULL,
