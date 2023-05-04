@@ -2,6 +2,9 @@
 - [x] Hacer la comparacion del select con la vista dinamica y la vista indexada en cuanto a tiempo y efiencia
 - [x] Mega Query
 - [x] Apicar optimizar el MEGA QUERY con CTE
+- [ ] Aplicar normas justo como en Quiz 10
+- [ ] Cambiar el nombre CUSTOMERS
+- [ ] Ver si hay mejoría al aplicar index en las vistas
 - [ ] Llenado de las tablas que requieren del MEGA QUERY
 - [ ] Subir todos los archivos al Flyway
 

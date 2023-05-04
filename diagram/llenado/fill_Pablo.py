@@ -1,7 +1,7 @@
 import pyodbc
 from faker import Faker
 import random
-server = 'DESKTOP-EVNPENN'
+server = 'localhost'
 database = 'caso3'
 username = 'sa'
 password = 'pablito09'
