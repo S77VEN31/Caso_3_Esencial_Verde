@@ -19,7 +19,6 @@ JOIN regions ON regions.regionAreaId = regionAreas.regionAreasId;
 -----------------------------------------------------------
 -- Vista Dinámica
 -----------------------------------------------------------
-CREATE VIEW location_data AS
 SELECT 
   countries.name AS country_name, 
   states.name AS state_name, 
@@ -35,7 +34,6 @@ JOIN cities ON states.stateId = cities.stateId
 JOIN locations ON cities.cityId = locations.cityId
 JOIN regionAreas ON regionAreas.cityId = cities.cityId OR regionAreas.stateId = states.stateId OR regionAreas.countryId = countries.countryId
 JOIN regions ON regions.regionAreaId = regionAreas.regionAreasId;
-SELECT * FROM location_data;
 
 -- Duración:   CPU time = 403922 ms,  elapsed time = 578681 ms. --
 
