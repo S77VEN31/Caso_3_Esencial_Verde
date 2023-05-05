@@ -71,7 +71,6 @@ CREATE VIEW dbo.MyIndexedView
          JOIN dbo.regions ON regions.regionAreaId = regionAreas.regionAreasId;
 GO
 -- Crear índice agrupado en la vista
-DROP idx_MyIndexedView IF EXISTS;
 CREATE UNIQUE CLUSTERED INDEX idx_MyIndexedView
 	ON dbo.MyIndexedView (country_name, state_name, city_name, zipcode, latitude, longitude, region_area_name, region_name);
 GO

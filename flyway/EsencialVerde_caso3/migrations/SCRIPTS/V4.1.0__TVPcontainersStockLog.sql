@@ -3,6 +3,7 @@
 -- Fecha: 29/04/2023
 -- Descripcion: TVP to insert containersStockLogs
 -----------------------------------------------------------
+
 CREATE TYPE dbo.ContainersStockLogTableType AS TABLE
 (
    wasteCollectorId INT,
@@ -58,15 +59,17 @@ END;
 GO
 
 -- Ejecutar el procedimiento almacenado usp_InsertContainersStockLog
-DECLARE @TVP ContainersStockLogTableType;
+-- DECLARE @TVP ContainersStockLogTableType;
 
-INSERT INTO @TVP (wasteCollectorId, producerId, containerId, action, CHECKSUM)
-VALUES
-(1, 2, 3, 1, 0x0000),
-(1, 2, 4, 2, 0x0000),
-(1, 3, 5, 1, 0x0000);
+-- INSERT INTO @TVP (wasteCollectorId, producerId, containerId, action, CHECKSUM)
+-- VALUES
+-- (1, 2, 3, 1, 0x0000),
+-- (2, 2, 4, 2, 0x0000),
+-- (3, 3, 5, 1, 0x0000);
 
-BEGIN TRANSACTION;
-EXEC dbo.usp_InsertContainersStockLog @TVP;
-COMMIT TRANSACTION;
+-- BEGIN TRANSACTION;
+-- EXEC dbo.usp_InsertContainersStockLog @TVP;
+-- COMMIT TRANSACTION;
+
+
 
