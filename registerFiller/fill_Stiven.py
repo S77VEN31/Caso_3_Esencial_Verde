@@ -2,6 +2,7 @@ import pyodbc
 from faker import Faker
 import random
 import datetime
+import time
 from googletrans import Translator
 faker = Faker()
 translator = Translator()
@@ -71,30 +72,7 @@ currencyRates_dict = {'out': 'currency rates inserted', 'num': 1000 }
 transactions_dict = {'out': 'transactions inserted', 'num': 5000 }
 payments_dict = {'out': 'payments inserted', 'num': 5000 }
 
-cursor.execute("SELECT countryId FROM countries")
-country_ids = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT stateId FROM states")
-state_ids = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT cityId FROM cities")
-city_ids = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT contactId FROM contacts")
-seller = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT contactId FROM contacts")
-buyer = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT companyId FROM companies")
-company = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT currencyId FROM currencies")
-currency_ids = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT currencyRateId FROM currencyRates")
-currencyRate_ids = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT invoiceId FROM invoices")
-invoice = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT transactionId FROM transactions")
-transaction = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT regionAreasId FROM regionAreas")
-regionArea_ids = [row[0] for row in cursor.fetchall()]
-cursor.execute("SELECT companyCategoryId FROM companyCategories")
-companyCategory_ids = [row[0] for row in cursor.fetchall()]
+
 
 # === countries === #
 def countries (props): 
@@ -103,6 +81,7 @@ def countries (props):
     for country in countries:
         cursor.execute("INSERT INTO countries (name, nameCode, phoneCode) VALUES (?, ?, ?)", country)
     print(props['out'])
+    cnxn.commit()
 
 # === states === #
 def states (props):
@@ -111,6 +90,7 @@ def states (props):
     for state in states:
         cursor.execute("INSERT INTO states (name, countryId) VALUES (?, ?)", state)
     print(props['out'])
+    cnxn.commit()
 
 # === cities === #
 def cities (props):
@@ -119,6 +99,7 @@ def cities (props):
     for city in cities:
         cursor.execute("INSERT INTO cities (name, stateId) VALUES (?, ?)", city)
     print(props['out'])
+    cnxn.commit()
 
 # === locations === #
 def locations (props):
@@ -127,6 +108,7 @@ def locations (props):
     for location in locations:
         cursor.execute("INSERT INTO locations (latitude, longitude, zipcode, cityId) VALUES (?, ?, ?, ?)", location)
     print(props['out'])
+    cnxn.commit()
 
 # === regionAreas and regions === #
 def regionAreasAndRegions (props):
@@ -141,7 +123,10 @@ def regionAreasAndRegions (props):
         region_areas.append((name, city_id, state_id, country_id))
     for region_area in region_areas:
         cursor.execute("INSERT INTO regionAreas (name, cityId, stateId, countryId) VALUES (?, ?, ?, ?)", region_area)
+    cnxn.commit()
 
+    cursor.execute("SELECT regionAreasId FROM regionAreas")
+    regionArea_ids = [row[0] for row in cursor.fetchall()]
     # === regions === #
     num_regions = props['num2']
     regions = []
@@ -152,6 +137,7 @@ def regionAreasAndRegions (props):
     for region in regions:
         cursor.execute("INSERT INTO regions (name, regionAreaId) VALUES (?, ?)", region)
     print(props['out'])
+    cnxn.commit()
 
 # === contacts === #
 def contacts (props):
@@ -176,17 +162,20 @@ def contacts (props):
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (name, surname1, surname2, email, phone, notes, contactType, active, createAt_str, updateAt_str, checksum))
     print(props['out'])
+    cnxn.commit()
 
 # === languages === #
 def languages (props):
     lang_data = props['data']
     cursor.executemany("INSERT INTO languages (code, name) VALUES (?, ?)", lang_data)
     print(props['out'])
+    cnxn.commit()
 
 # === textObjectTypes === #
 def textObjectTypes (props):
     cursor.execute("INSERT INTO textObjectTypes (textObjectTypeName) VALUES ('label')", )
     print(props['out'])
+    cnxn.commit()
 
 # === translations === #
 def translations (props):
@@ -205,6 +194,7 @@ def translations (props):
         params = (transaction_from, transaction_to, text_object_type_id, translation_key, translation_value)
         cursor.execute(query, params)
     print(props['out'])
+    cnxn.commit()
 
 # === companyCategories === #
 def companyCategories (props):
@@ -212,6 +202,7 @@ def companyCategories (props):
     for category in company_categories:
         cursor.execute("INSERT INTO companyCategories (name, description) VALUES (?, ?)", category)
     print(props['out'])
+    cnxn.commit()
 
 # === companies === #
 def companies (props):
@@ -228,6 +219,7 @@ def companies (props):
         cursor.execute(f"INSERT INTO companies (companyName, companyCategoryId, isLocal, carbonFootprint, active, createAt, updateAt, checksum) "
                     f"VALUES ('{company_name}', {company_category}, {is_local}, {carbon_footprint}, {active}, '{create_at}', '{update_at}', 0x{checksum.hex()})")
     print(props['out'])
+    cnxn.commit()
 
 # === invoices === #
 def invoices (props):
@@ -246,6 +238,7 @@ def invoices (props):
         cursor.execute(f"INSERT INTO invoices (postdate, posttime, duedate, amount, status, sellerContact, buyerContact, companyId, details, CHECKSUM) "
                     f"VALUES ('{postdate}', '{posttime}', '{duedate}', {amount}, {status}, {seller_contact}, {buyer_contact}, {company_id}, '{details}', 0x{checksum.hex()})")
     print(props['out'])
+    cnxn.commit()
 
 # === currencies === #
 def currencies (props):
@@ -258,6 +251,7 @@ def currencies (props):
         cursor.execute(f"INSERT INTO currencies (code, name, symbol, defaultCurrency) "
                     f"VALUES ('{code}', '{name}', '{symbol}', {default_currency})")
     print(props['out'])
+    cnxn.commit()
 
 # === currencyRates === #
 def currencyRates (props):
@@ -274,6 +268,7 @@ def currencyRates (props):
         cursor.execute(f"INSERT INTO currencyRates (currencyFrom, currencyTo, rate, createAt, updateAt, checksum) "
                     f"VALUES ({currency_from}, {currency_to}, {rate}, '{create_at}', '{update_at}', 0x{checksum.hex()})")
     print(props['out'])
+    cnxn.commit()
 
 # === transactions === #
 def transactions (props):
@@ -293,6 +288,7 @@ def transactions (props):
         cursor.execute(f"INSERT INTO transactions (transactionDate, transactionTime, transactionType, acountNumber, acountIban, currencyRateId, amount, details, createAt, updateAt, checksum) "
                     f"VALUES ('{transaction_date}', '{transaction_time}', {transaction_type}, '{account_number}', '{account_iban}', {currency_rate_id}, {amount}, '{details}', '{create_at}', '{update_at}', 0x{checksum.hex()})")
     print(props['out'])
+    cnxn.commit()
 
 # === payments === #
 def payments (props):
@@ -308,24 +304,62 @@ def payments (props):
         query = f"INSERT INTO payments (invoiceId, paymentDate, paymentTime, amount, details, transactionId, CHECKSUM) VALUES ({invoiceId}, '{paymentDate}', '{paymentTime}', {amount}, '{details}', {transactionId}, 0x{checksum.hex()})"
         cursor.execute(query)
     print(props['out'])
-'''
+    cnxn.commit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 countries(countries_dict)
+cursor.execute("SELECT countryId FROM countries")
+country_ids = [row[0] for row in cursor.fetchall()]
 states (states_dict)
+cursor.execute("SELECT stateId FROM states")
+state_ids = [row[0] for row in cursor.fetchall()]
 cities (cities_dict)
+cursor.execute("SELECT cityId FROM cities")
+city_ids = [row[0] for row in cursor.fetchall()]
 locations (locations_dict)
 regionAreasAndRegions (regionAreasAndRegions_dict)
 contacts (contacts_dict)
+cursor.execute("SELECT contactId FROM contacts")
+seller = [row[0] for row in cursor.fetchall()]
+cursor.execute("SELECT contactId FROM contacts")
+buyer = [row[0] for row in cursor.fetchall()]
 languages (languages_dict)
 textObjectTypes (textObjectTypes_dict)
 translations (translations_dict)
 companyCategories (companyCategories_dict)
+cursor.execute("SELECT companyCategoryId FROM companyCategories")
+companyCategory_ids = [row[0] for row in cursor.fetchall()]
 companies(companies_dict)
+cursor.execute("SELECT companyId FROM companies")
+company = [row[0] for row in cursor.fetchall()]
 invoices(invoices_dict)
+cursor.execute("SELECT invoiceId FROM invoices")
+invoice = [row[0] for row in cursor.fetchall()]
 currencies(currencies_dict)
+cursor.execute("SELECT currencyId FROM currencies")
+currency_ids = [row[0] for row in cursor.fetchall()]
 currencyRates (currencyRates_dict)
+cursor.execute("SELECT currencyRateId FROM currencyRates")
+currencyRate_ids = [row[0] for row in cursor.fetchall()]
 transactions(transactions_dict)
+cursor.execute("SELECT transactionId FROM transactions")
+transaction = [row[0] for row in cursor.fetchall()]
 payments(payments_dict)
-'''
 
-cnxn.commit()
+
+
+
 cnxn.close()
