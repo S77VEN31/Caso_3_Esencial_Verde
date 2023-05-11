@@ -3,6 +3,8 @@
 -- Fecha: 29/04/2023
 -- Descripcion: TVP to insert containersStockLogs
 -----------------------------------------------------------
+DROP PROCEDURE dbo.usp_InsertContainersStockLog;
+DROP TYPE dbo.ContainersStockLogTableType;
 
 CREATE TYPE dbo.ContainersStockLogTableType AS TABLE
 (
@@ -71,5 +73,5 @@ GO
 -- EXEC dbo.usp_InsertContainersStockLog @TVP;
 -- COMMIT TRANSACTION;
 
-
+SELECT * FROM containersStockLogs WHERE wasteCollectorId = 3;
 

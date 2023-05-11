@@ -3,6 +3,9 @@
 -- Fecha: 30/04/2023
 -- Descripcion: same  megaQuery but with improvements and CTE (Common Table Expression) and others
 -----------------------------------------------------------
+DROP INDEX contacts.idx_contacts_contactId;
+DROP INDEX invoices.idx_invoices_buyerContact;
+
 CREATE INDEX idx_contacts_contactId ON contacts (contactId);
 CREATE INDEX idx_invoices_buyerContact ON invoices (buyerContact);
 
