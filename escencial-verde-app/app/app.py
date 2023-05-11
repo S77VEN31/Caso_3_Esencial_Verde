@@ -1,10 +1,14 @@
 from flask import Flask, render_template
-
+from models import db
 app = Flask(__name__)
+
+
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    data = db.get_top_100_data()
+    return render_template('index.html', data=data)
 
 @app.route('/about')
 def about():

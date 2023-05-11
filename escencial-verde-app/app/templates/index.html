@@ -8,6 +8,14 @@
 </head>
 <body>
     <h1>Menú principal</h1>
+    {% for row in data %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <!-- ... -->
+    </tr>
+    {% endfor %}
     <ul>
         <li><a href="{{ url_for('about') }}">Acerca de</a></li>
         <li><a href="{{ url_for('contact') }}">Contacto</a></li>
