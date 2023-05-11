@@ -1,0 +1,16 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Menú principal</h1>
+    <ul>
+        <li><a href="{{ url_for('about') }}">Acerca de</a></li>
+        <li><a href="{{ url_for('contact') }}">Contacto</a></li>
+    </ul>
+</body>
+</html>

@@ -16,10 +16,10 @@ fake = Faker()
 
 # === FILL VARIABLES === #
 countries_dict = {'out': 'countries inserted', 'num': 200 }
-states_dict = {'out': 'states inserted', 'num': 5000 }
-cities_dict = {'out': 'cities inserted', 'num': 20000 }
-locations_dict = {'out': 'locations inserted', 'num': 50000 }
-regionAreasAndRegions_dict = {'out': 'region areas and regions inserted', 'num1': 20000,'num2': 80000 }
+states_dict = {'out': 'states inserted', 'num': 500 }
+cities_dict = {'out': 'cities inserted', 'num': 2000 }
+locations_dict = {'out': 'locations inserted', 'num': 5000 }
+regionAreasAndRegions_dict = {'out': 'region areas and regions inserted', 'num1': 1000,'num2': 2000 }
 contacts_dict = {'out': 'contacts inserted', 'num': 20000, 'data': ('Customer', 'Supplier', 'Partner', 'Competitor', 'Investor', 'Employee', 'Former employee', 'Sales contact', 'Marketing contact', 'Public relations contact', 'Human resources contact', 'Customer service contact', 'Technical support contact', 'Supplier contact', 'Logistics contact', 'Driver', 'Buyer', 'Seller') }
 languages_dict = {'out': 'languages inserted', 'data': [('en', 'English'), ('es', 'Spanish'), ('fr', 'French')] }
 textObjectTypes_dict = {'out': 'text object types inserted'}
@@ -47,7 +47,7 @@ companyCategories_dict = {'out': 'company categories inserted', 'data': [
         ('Municipal', 'Municipal waste producers.')
     ] }
 companies_dict = {'out': 'companies inserted', 'num': 3000 }
-invoices_dict = {'out': 'invoices inserted', 'num': 10000 }
+invoices_dict = {'out': 'invoices inserted', 'num': 1000 }
 currencies_dict = {'out': 'currencies inserted', 'data': [
         {
             'code': 'USD',

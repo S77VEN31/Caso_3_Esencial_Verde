@@ -9,6 +9,19 @@
   "deployment": {
     "flywayConfFiles": [
       "./flyway.conf"
+    ],
+    "targetDatabases": [
+      {
+        "connectionProvider": {
+          "type": "UsernamePassword",
+          "url": "jdbc:sqlserver://localhost:1433;authentication=sqlPassword;databaseName=caso3;encrypt=true;trustServerCertificate=true",
+          "username": "sa",
+          "password": {
+            "secretType": "DefaultSecretStore",
+            "name": "Flyway Desktop 1f2d18c9-5707-421b-9750-b3f247c32fe4"
+          }
+        }
+      }
     ]
   }
 }
