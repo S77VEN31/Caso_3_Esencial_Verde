@@ -10,7 +10,7 @@ class Database:
 
     def get_top_100_data(self):
         cursor = self.cnxn.cursor()
-        cursor.execute("SELECT TOP 100 * FROM countries")
+        cursor.execute("SELECT TOP 10 * FROM countries")
         data = cursor.fetchall()
         cursor.close()
         return data

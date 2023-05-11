@@ -1,5 +1,15 @@
 /* style.css */
-
+.header-main-container {
+    background-color: aqua;
+    display: flex;
+    min-height: 80px;
+}
+.header-item-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
