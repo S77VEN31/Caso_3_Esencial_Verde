@@ -17,7 +17,6 @@ ul {
 
 li {
     display: inline-block;
-    margin-right: 20px;
 }
 
 body {
@@ -62,6 +61,7 @@ body {
     display: flex;
     align-items: center;
     list-style: none;
+    gap: 40px;
 }
 
 .header-item {

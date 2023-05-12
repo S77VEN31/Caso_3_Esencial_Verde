@@ -1,101 +1,150 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Acerca de</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/containers.styles.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
-        <script src="{{ url_for('static', filename='js/containers.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/dropdown.styles.css') }}">
-        <script src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
-    </head>
-    <body>
-        {% include 'header.html' %}
-        <div id="popup" class="popup">
-            <div class="popup-content">
-                <li class="dropdown-selector">
-                    <a class="dropdown-card" href="#" id="dropdown-wastes" onclick="toggleDropdown('dropdown-wastes-menu')">
-                        Waste type
-                        <i class="fas fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-selector-content" id="dropdown-wastes-menu">
-                        {% for wasteType in wasteTypes %}
-                        <li>
-                            <a href="#" onclick="toggleDropdown('dropdown-wastes-menu'); changeText('{{ wasteType[1] }}', 'dropdown-wastes-selected')">{{ wasteType[1] }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    <span id="dropdown-wastes-selected">No seleccionado</span>
-                </li>
-                <li class="dropdown-selector">
-                    <a class="dropdown-card" href="#" id="dropdown-operations" onclick="toggleDropdown('dropdown-operations-menu')">
-                        Operation type
-                        <i class="fas fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-selector-content" id="dropdown-operations-menu">
-                        {% for operation in operations %}
-                        <li>
-                            <a href="#" onclick="toggleDropdown('dropdown-operations-menu'); changeText('{{ operation }}','dropdown-operations-selected')">{{ operation }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    <span id="dropdown-operations-selected">No seleccionado</span>
-                </li>
-                <li class="dropdown-selector">
-                    <a class="dropdown-card" href="#" id="dropdown-companies" onclick="toggleDropdown('dropdown-companies-menu')">
-                        Waste type
-                        <i class="fas fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-selector-content" id="dropdown-companies-menu">
-                        {% for wasteType in wasteTypes %}
-                        <li>
-                            <a href="#" onclick="toggleDropdown('dropdown-companies-menu'); changeText('{{ wasteType[1] }}', 'dropdown-companies-selected')">{{ wasteType[1] }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    <span id="dropdown-companies-selected">No seleccionado</span>
-                </li>
-                <li class="dropdown-selector">
-                    <a class="dropdown-card" href="#" id="dropdown-producers" onclick="toggleDropdown('dropdown-producers-menu')">
-                        Operation type
-                        <i class="fas fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-selector-content" id="dropdown-producers-menu">
-                        {% for operation in operations %}
-                        <li>
-                            <a href="#" onclick="toggleDropdown('dropdown-producers-menu'); changeText('{{ operation }}','dropdown-producers-selected')">{{ operation }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    <span id="dropdown-producers-selected">No seleccionado</span>
-                </li>
-                <form method="POST" action="/submit">
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="999">
-                    <br><br>
-                </form>
-                <button class="add-container-button" onclick="hidePopup()">
-                    Submit
-                </button>
-                <button class="delete-button" onclick="hidePopup()">
-                    Close
-                </button>
-            </div>
-        </div>
-        <div class="container-transport-main-container">
+  <head>
+    <title>Acerca de</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/containers.styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/all.min.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/containers.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dropdown.styles.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
+    <script>
+      var myGlobalVar = "initial value";
+      function setMyVar(value) {
+        myGlobalVar = value;
+        console.log(myGlobalVar); 
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+  </head>
+  <body onload="showDateTime()">
+    {% include 'header.html' %}
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <div class="inputs-and-text-container">
+          <div class="text-container">
+            <span>Carrier: <br> Stiven Segura Guzman</span>
+            <span>Plate: 12331231</span>
+            <span>Location: Costa Rica <br> San jose Perez Zeledón: Zona La Santa</span>
+            <span>
+              <span>Date and Time:</span>
+              <p id="dateTime"></p>
+            </span>
             
-            <div>
-                <button class="add-container-button" onclick="showPopup()">
-                    Mostrar popup
-                </button>
-                <button class="delete-button">
-                    <i class="fas fa-trash"></i>
-                    Eliminar
-                </button>
-            </div>
+          </div>
+          <div class="inputs-container">
+            <li class="dropdown-selector">
+              <a
+                class="dropdown-card"
+                href="#"
+                id="dropdown-wastes"
+                onclick="toggleDropdown('dropdown-wastes-menu')"
+              >
+                Waste type
+                <i class="fas fa-caret-down"></i>
+              </a>
+              <ul class="dropdown-selector-content" id="dropdown-wastes-menu">
+                {% for wasteType in wasteTypes %}
+                <li>
+                  <a
+                    href="#"
+                    onclick="toggleDropdown('dropdown-wastes-menu'); changeText('{{ wasteType[1] }}', 'dropdown-wastes-selected')"
+                    >{{ wasteType[1] }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+              <span id="dropdown-wastes-selected">No seleccionado</span>
+            </li>
+            <li class="dropdown-selector">
+              <a
+                class="dropdown-card"
+                href="#"
+                id="dropdown-operations"
+                onclick="toggleDropdown('dropdown-operations-menu')"
+              >
+                Operation type
+                <i class="fas fa-caret-down"></i>
+              </a>
+              <ul class="dropdown-selector-content" id="dropdown-operations-menu">
+                {% for operation in operations %}
+                <li>
+                  <a
+                    href="#"
+                    onclick="toggleDropdown('dropdown-operations-menu'); changeText('{{ operation }}','dropdown-operations-selected')"
+                    >{{ operation }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+              <span id="dropdown-operations-selected">No seleccionado</span>
+            </li>
+            <li class="dropdown-selector">
+              <a
+                class="dropdown-card"
+                href="#"
+                id="dropdown-companies"
+                onclick="toggleDropdown('dropdown-companies-menu')"
+              >
+                Company
+                <i class="fas fa-caret-down"></i>
+              </a>
+              <ul class="dropdown-selector-content" id="dropdown-companies-menu">
+                {% for comp in compXprod %}
+                <li>
+                  <a
+                    id="load-content-button"
+                    href="#"
+                    onclick="toggleDropdown('dropdown-companies-menu'); changeText('{{ comp[0][1] }}' +' {{ comp[1][1]  }}', 'dropdown-companies-selected');"
+                    >{{ comp[0][1] }} {{ comp[1][1]  }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+              <span id="dropdown-companies-selected">No seleccionado</span>
+            </li>
+            <form method="POST" action="/submit">
+              <label for="quantity">Quantity:</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                max="999"
+              />
+              <br />
+              <br />
+            </form>
+          </div>
         </div>
-        {% for producer in producersBased %}
-        <div>{{producer}}</div>
-        {% endfor %}
-    </body>
+        <div class="buttons-container">
+          <button class="add-container-button" onclick="hidePopup()">
+            Submit
+          </button>
+          <button class="delete-button" onclick="hidePopup()">Close</button>
+        </div>
+      </div>
+    </div>
+    <div class="container-transport-main-container">
+      <div>
+        <button class="add-container-button" onclick="showPopup()">
+          Mostrar popup
+        </button>
+        <button class="delete-button">
+          <i class="fas fa-trash"></i>
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </body>
 </html>
