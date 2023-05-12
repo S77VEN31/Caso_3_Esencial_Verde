@@ -3,17 +3,13 @@ from models import db
 app = Flask(__name__)
 
 
-
-
 @app.route('/')
 def index():
-    
     return render_template('index.html')
 
 @app.route('/about')
 def about():
-    data = db.get_top_100_data()
-    return render_template('about.html', data=data)
+    return render_template('about.html')
 
 @app.route('/contact')
 def contact():
@@ -21,7 +17,9 @@ def contact():
 
 @app.route('/containers')
 def containers():
-    return render_template('containers.html')
+    ranProducer = db.get_random_logIn()
+    wasteTypes = db.get_wasteTypes()
+    return render_template('containers.html', ranProducer=ranProducer, wasteTypes=wasteTypes)
 
 if __name__ == '__main__':
     app.run(debug=True)
