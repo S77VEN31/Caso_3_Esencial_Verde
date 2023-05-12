@@ -20,7 +20,10 @@ def containers():
     operations = ["Pickup", "Delivery", "Transfer", "Cleaning", "Maintenance", "Repair"]
     ranProducer = db.get_random_logIn()
     wasteTypes = db.get_wasteTypes()
-    return render_template('containers.html', ranProducer=ranProducer, wasteTypes=wasteTypes, operations = operations)
+    companies = db.get_companies()
+    producers = db.get_producers()
+    producersBased = db.get_producersBasedOnCompany(companies[0][0], producers)
+    return render_template('containers.html', ranProducer=ranProducer, wasteTypes=wasteTypes, operations = operations, companies = companies, producers = producers, producersBased = producersBased)
 
 
 if __name__ == '__main__':

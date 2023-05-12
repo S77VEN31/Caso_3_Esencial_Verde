@@ -2,10 +2,10 @@ import pyodbc
 
 class Database:
     def __init__(self):
-        self.server = 'localhost'
+        self.server = 'JPABLIX'
         self.database = 'caso3'
         self.username = 'sa'
-        self.password = 'Sven1234'
+        self.password = 'Pablito09'
         self.cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+self.server+';DATABASE='+self.database+';UID='+self.username+';PWD='+ self.password)
 
     def get_top_100_data(self):
@@ -27,6 +27,27 @@ class Database:
         cursor.execute("SELECT * FROM dbo.wasteTypes")
         data = cursor.fetchall()
         cursor.close()
-        return data  
+        return data 
+    
+    def get_companies(self):
+        cursor = self.cnxn.cursor()
+        cursor.execute("SELECT * FROM dbo.companies")
+        data = cursor.fetchall()
+        cursor.close()
+        return data 
+    
+    def get_producers(self):
+        cursor = self.cnxn.cursor()
+        cursor.execute("SELECT * FROM dbo.producers")
+        data = cursor.fetchall()
+        cursor.close()
+        return data
+    
+    def get_producersBasedOnCompany(self, companyId, producers):
+        data = []
+        for producer in producers:
+            if producer[3] == companyId:
+                data.append(producer)
+        return data
 
 db = Database()
