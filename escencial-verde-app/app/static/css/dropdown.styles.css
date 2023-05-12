@@ -1,12 +1,19 @@
 .dropdown-selector {
     position: relative;
     display: inline-block;
-    background-color: #f0f7ee;
+    background-color: #e2f2dd;
     padding: 8px;
     border: #205b3d 2px solid;
-    max-width: 250px;
     width: fit-content;
+    transition: background-color 0.3s, color 0.3s;
     border-radius: 5px;
+}
+
+.dropdown-selector:hover .dropdown-card,
+.dropdown-selector:hover {
+    transition: background-color 0.3s, color 0.3s;
+    color: white;
+    background-color: #205b3d;
 }
 
 .dropdown-selector-content {
@@ -31,18 +38,19 @@
     color: #205b3d;
     padding: 10px;
     display: block;
- 
+
 }
-.dropdown-selector-content li a:hover{
+
+.dropdown-selector-content li a:hover {
     color: white;
     background-color: #205b3d;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .dropdown-selector:onclick .dropdown-selector-content {
     display: block;
 }
 
-/* Estilos para los ítems del menú desplegable */
 .dropdown-selector-item {
     display: block;
     padding: 10px;

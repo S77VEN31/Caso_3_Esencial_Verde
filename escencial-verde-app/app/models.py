@@ -2,10 +2,10 @@ import pyodbc
 
 class Database:
     def __init__(self):
-        self.server = 'JPABLIX'
+        self.server = 'localhost'
         self.database = 'caso3'
         self.username = 'sa'
-        self.password = 'Pablito09'
+        self.password = 'Sven1234'
         self.cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+self.server+';DATABASE='+self.database+';UID='+self.username+';PWD='+ self.password)
 
     def get_top_100_data(self):

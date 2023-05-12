@@ -17,9 +17,10 @@ def contact():
 
 @app.route('/containers')
 def containers():
+    operations = ["Pickup", "Delivery", "Transfer", "Cleaning", "Maintenance", "Repair"]
     ranProducer = db.get_random_logIn()
     wasteTypes = db.get_wasteTypes()
-    return render_template('containers.html', ranProducer=ranProducer, wasteTypes=wasteTypes)
+    return render_template('containers.html', ranProducer=ranProducer, wasteTypes=wasteTypes, operations = operations)
 
 
 if __name__ == '__main__':

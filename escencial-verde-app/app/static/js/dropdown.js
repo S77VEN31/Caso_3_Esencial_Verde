@@ -1,9 +1,9 @@
-function changeText(selectedOption) {
-    document.getElementById("dropdown-selector-selected").innerHTML = selectedOption;
+function changeText(selectedOption, id) {
+    document.getElementById(id).innerHTML = selectedOption;
 }
 
-function toggleDropdown() {
-    var dropdownContent = document.getElementById("dropdown-selector-menu");
+function toggleDropdown(id) {
+    var dropdownContent = document.getElementById(id);
     if (dropdownContent.style.display === "block") {
       dropdownContent.style.display = "none";
     } else {

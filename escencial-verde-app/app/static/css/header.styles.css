@@ -114,8 +114,6 @@ body {
     display: block;
 }
 
-
-
 @media only screen and (max-width: 768px) {
     .header-main-container {
         height: auto;
