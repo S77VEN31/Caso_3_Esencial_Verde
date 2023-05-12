@@ -36,25 +36,62 @@ function addRow() {
   var wasteTypeCell = row.insertCell();
   var operationTypeCell = row.insertCell();
   var companyCell = row.insertCell();
+  var producerCell = row.insertCell();
   var carrierCell = row.insertCell();
   var plateCell = row.insertCell();
   var locationCell = row.insertCell();
+  var quantityCell = row.insertCell();
   var deleteCell = row.insertCell(); // Nueva celda para el botón de eliminar
   
   wasteTypeCell.innerHTML = currentOperation.wasteType;
   operationTypeCell.innerHTML = currentOperation.operationType;
   companyCell.innerHTML = currentOperation.company;
+  producerCell.innerHTML = currentOperation.producer;
   carrierCell.innerHTML = currentOperation.carrier;
   plateCell.innerHTML = currentOperation.plate;
   locationCell.innerHTML = currentOperation.location;
+  quantityCell.innerHTML = currentOperation.quantity;
   
   // Crear el botón de eliminar y agregarlo a la celda correspondiente
   var deleteButton = document.createElement("button");
-  deleteButton.innerHTML = "Eliminar";
+  deleteButton.classList.add("delete-button");
+  deleteButton.innerHTML = '<i class="fas fa-trash"></i>'
   deleteButton.onclick = function() {
     // Eliminar la fila correspondiente al botón de eliminar
     var rowIndex = this.parentNode.parentNode.rowIndex;
     table.deleteRow(rowIndex);
   };
   deleteCell.appendChild(deleteButton);
+  
 }
+
+
+
+
+function getAllRows() {
+  var table = document.getElementById("myTable");
+  var rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+  var data = [];
+
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var cells = row.getElementsByTagName("td");
+
+    var obj = {
+      wasteType: cells[0].innerHTML,
+      operationType: cells[1].innerHTML,
+      company: cells[2].innerHTML,
+      producer: cells[3].innerHTML,
+      carrier: cells[4].innerHTML,
+      plate: cells[5].innerHTML,
+      location: cells[6].innerHTML,
+      quantity: cells[7].innerHTML
+    };
+    
+    data.push(obj);
+  }
+  console.log(data)
+  return data;
+}
+
+

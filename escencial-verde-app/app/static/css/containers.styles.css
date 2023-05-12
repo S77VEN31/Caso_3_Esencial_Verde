@@ -7,17 +7,15 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    margin: 20px;
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 10px;
     text-align: center;
 }
 
 th, td {
     padding: 8px;
-    border: 1px solid #205b3d;
+    border: 2px solid #205b3d;
     background-color: #e2f2dd;
     color: #205b3d;
 }
@@ -35,10 +33,6 @@ td button {
     transition: background-color 0.2s ease-in-out;
 }
 
-td button:hover {
-    background-color: #fff;
-    color: #205b3d;
-}
 
 .container-transport-main-container {
     display: flex;
@@ -46,20 +40,28 @@ td button:hover {
     width: 100%;
     flex-direction: column;
 }
-
+.upload-buttons-container {
+    display: flex;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #5c986a;
+    max-width: 400px;
+    justify-content: space-around;
+    margin: 10px 20px 0px 20px;
+}
 .add-container-button {
-    background-color: white;
-    color: green;
-    border: 2px solid green;
-    padding: 10px 20px;
+    background-color: #e2f2dd;
+    color: #205b3d;
+    border: 2px solid #205b3d;
+    padding: 5px 20px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 12px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .add-container-button:hover {
-    background-color: green;
+    background-color: #205b3d;
     color: white;
 }
 
@@ -68,8 +70,8 @@ td button:hover {
     border: 2px solid red;
     color: red;
     border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 5px 20px;
+    font-size: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -77,10 +79,6 @@ td button:hover {
 .delete-button:hover {
     background-color: red;
     color: white;
-}
-
-.delete-button i {
-    margin-right: 5px;
 }
 
 .popup {

@@ -2,18 +2,32 @@
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.styles.css') }}">
     <script src="{{ url_for('static', filename='js/header.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/all.min.css') }}"
+    />
   </head>
   <body>
     <header class="header-main-container">
       <ul class="header-item-wrapper header-list">
         <li class="header-item">
-          <a class="header-text" href="{{ url_for('about') }}">Home</a>
+          <a class="header-text" href="{{ url_for('about') }}">
+            Home
+            <i class="fas fa-home icon"></i> 
+          </a>
         </li>
         <li class="header-item">
-          <a class="header-text" href="{{ url_for('contact') }}">Contact</a>
+          <a class="header-text" href="{{ url_for('contact') }}">
+            Contact
+            <i class="fas fa-phone-alt icon"></i> 
+          </a>
         </li>
         <li class="header-item">
-          <a class="header-text" href="{{ url_for('containers') }}">Waste transport</a>
+          <a class="header-text" href="{{ url_for('containers') }}">
+            Waste transport
+            <i class="fas fa-truck icon"></i>
+          </a>
         </li>
         <li class="dropdown">
           <a href="#" id="dropdown-btn">Menú <i class="fas fa-caret-down"></i></a>

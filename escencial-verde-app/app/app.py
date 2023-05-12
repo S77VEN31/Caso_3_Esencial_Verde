@@ -3,6 +3,7 @@ from models import db
 from flask import jsonify
 
 app = Flask(__name__)
+app.config['SESSION_TYPE'] = 'filesystem'
 
 
 @app.route("/")
@@ -18,7 +19,6 @@ def about():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
-
 
 @app.route("/containers")
 def containers():

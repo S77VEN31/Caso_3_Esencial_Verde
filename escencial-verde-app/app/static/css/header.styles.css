@@ -57,7 +57,7 @@ body {
 }
 
 .header-item-wrapper {
-    margin-left: 30px;
+    margin-left: 40px;
     display: flex;
     align-items: center;
     list-style: none;
@@ -71,17 +71,24 @@ body {
 }
 
 .header-text {
-    border: #205b3d 3px solid;
+    display: flex;
+    border: #205b3d 2px solid;
     background-color: #e2f2dd;
     color: #205b3d;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     padding: 6px;
-    text-transform: uppercase;
+    gap: 8px;
     border-radius: 5px;
     text-align: center;
+    align-items: center;
 }
+.icon {
+    font-size: 10px;
+    margin-bottom: -1px;
+}
+
 
 .header-text:hover {
     transition: background-color 0.3s, color 0.3s;

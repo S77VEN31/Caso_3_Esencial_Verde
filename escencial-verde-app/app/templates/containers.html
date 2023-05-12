@@ -139,31 +139,38 @@
         </div>
         <div class="buttons-container">
           <button class="add-container-button" onclick="hidePopup(); addRow()">
+            <i class="fas fa-paper-plane"></i>
             Submit
           </button>
-          <button class="delete-button" onclick="hidePopup()">Close</button>
+          <button class="delete-button" onclick="hidePopup()">
+            <i class="fas fa-times"></i>
+            Close
+          </button>
         </div>
       </div>
     </div>
     <div class="container-transport-main-container">
-      <div>
+      <div class="upload-buttons-container">
         <button class="add-container-button" onclick="showPopup()">
-          Mostrar popup
+          <i class="fas fa-plus"></i>
+          New row
         </button>
-        <button class="delete-button">
-          <i class="fas fa-trash"></i>
-          Eliminar
+        <button class="add-container-button" onclick="getAllRows()">
+          <i class="fas fa-upload"></i>
+          Upload list
         </button>
       </div>
       <table id="myTable" border="1">
         <thead>
           <tr>
-            <th>Waste Type</th>
-            <th>Operation Type</th>
+            <th>Waste</th>
+            <th>Operation</th>
             <th>Company</th>
+            <th>Producer</th>
             <th>Carrier</th>
             <th>Plate</th>
             <th>Location</th>
+            <th>Quantity</th>
           </tr>
         </thead>
         <tbody>
