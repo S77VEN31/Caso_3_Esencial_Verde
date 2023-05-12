@@ -1,7 +1,8 @@
 body {
-    background-color: #f0f7ee  !important;
+    background-color: #f0f7ee !important;
     height: 100vh;
 }
+
 .cards-container {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -63,11 +64,11 @@ body {
 }
 
 .card-social-icons a {
-    background-color:#5c986a;
+    background-color: #5c986a;
     text-align: center;
     border: #205b3d 3px solid;
     border-radius: 30%;
-    color:  #205b3d;
+    color: #205b3d;
     font-size: 25px;
     padding: 6px;
     text-decoration: none;

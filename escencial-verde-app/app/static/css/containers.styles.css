@@ -1,11 +1,17 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f7ee !important;
+    height: 100vh;
+}
+
 .container-transport-main-container {
     display: flex;
-    background-color: rgb(210, 198, 198);
-    flex: 1;
-    
     min-height: 600px;
     width: 100%;
+    flex-direction: column;
 }
+
 .add-container-button {
     background-color: white;
     color: green;
@@ -16,6 +22,7 @@
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
+
 .add-container-button:hover {
     background-color: green;
     color: white;
@@ -30,16 +37,16 @@
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-  }
-  
-  .delete-button:hover {
+}
+
+.delete-button:hover {
     background-color: red;
     color: white;
-  }
-  
-  .delete-button i {
+}
+
+.delete-button i {
     margin-right: 5px;
-  }
+}
 
 .popup {
     position: fixed;
@@ -61,3 +68,7 @@
     padding: 20px;
     border-radius: 5px;
 }
+
+
+
+

@@ -23,6 +23,9 @@ def contact():
 def containers():
     return render_template('containers.html')
 
+def dropdowns():
+    return render_template('containers.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
 
