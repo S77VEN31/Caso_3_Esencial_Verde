@@ -17,7 +17,7 @@ def contact():
 
 @app.route('/containers')
 def containers():
-    operations = ["Pickup", "Delivery", "Transfer", "Cleaning", "Maintenance", "Repair"]
+    operations = ["Pickup", "Delivery"]
     ranProducer = db.get_random_logIn()
     wasteTypes = db.get_wasteTypes()
     companies = db.get_companies()

@@ -28,7 +28,7 @@
                     <span id="dropdown-wastes-selected">No seleccionado</span>
                 </li>
                 <li class="dropdown-selector">
-                    <a class="dropdown-card" href="#" id="dropdown-btn" onclick="toggleDropdown('dropdown-operations-menu')">
+                    <a class="dropdown-card" href="#" id="dropdown-operations" onclick="toggleDropdown('dropdown-operations-menu')">
                         Operation type
                         <i class="fas fa-caret-down"></i>
                     </a>
@@ -41,8 +41,44 @@
                     </ul>
                     <span id="dropdown-operations-selected">No seleccionado</span>
                 </li>
+                <li class="dropdown-selector">
+                    <a class="dropdown-card" href="#" id="dropdown-companies" onclick="toggleDropdown('dropdown-companies-menu')">
+                        Waste type
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-selector-content" id="dropdown-companies-menu">
+                        {% for wasteType in wasteTypes %}
+                        <li>
+                            <a href="#" onclick="toggleDropdown('dropdown-companies-menu'); changeText('{{ wasteType[1] }}', 'dropdown-companies-selected')">{{ wasteType[1] }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <span id="dropdown-companies-selected">No seleccionado</span>
+                </li>
+                <li class="dropdown-selector">
+                    <a class="dropdown-card" href="#" id="dropdown-producers" onclick="toggleDropdown('dropdown-producers-menu')">
+                        Operation type
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-selector-content" id="dropdown-producers-menu">
+                        {% for operation in operations %}
+                        <li>
+                            <a href="#" onclick="toggleDropdown('dropdown-producers-menu'); changeText('{{ operation }}','dropdown-producers-selected')">{{ operation }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <span id="dropdown-producers-selected">No seleccionado</span>
+                </li>
+                <form method="POST" action="/submit">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" max="999">
+                    <br><br>
+                </form>
+                <button class="add-container-button" onclick="hidePopup()">
+                    Submit
+                </button>
                 <button class="delete-button" onclick="hidePopup()">
-                    Cerrar
+                    Close
                 </button>
             </div>
         </div>
