@@ -17,15 +17,6 @@
       href="{{ url_for('static', filename='css/dropdown.styles.css') }}"
     />
     <script src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
-    <script>
-      var myGlobalVar = "initial value";
-      function setMyVar(value) {
-        myGlobalVar = value;
-        console.log(myGlobalVar); 
-      }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
   </head>
   <body onload="showDateTime()">
     {% include 'header.html' %}
@@ -33,14 +24,19 @@
       <div class="popup-content">
         <div class="inputs-and-text-container">
           <div class="text-container">
-            <span>Carrier: <br> Stiven Segura Guzman</span>
+            <span
+              >Carrier: <br />
+              Stiven Segura Guzman</span
+            >
             <span>Plate: 12331231</span>
-            <span>Location: Costa Rica <br> San jose Perez Zeledón: Zona La Santa</span>
+            <span
+              >Location: Costa Rica <br />
+              San jose Perez Zeledón: Zona La Santa</span
+            >
             <span>
               <span>Date and Time:</span>
               <p id="dateTime"></p>
             </span>
-            
           </div>
           <div class="inputs-container">
             <li class="dropdown-selector">
@@ -58,7 +54,9 @@
                 <li>
                   <a
                     href="#"
-                    onclick="toggleDropdown('dropdown-wastes-menu'); changeText('{{ wasteType[1] }}', 'dropdown-wastes-selected')"
+                    onclick="toggleDropdown('dropdown-wastes-menu'); 
+                    setMyVar('wasteType','{{ wasteType[1] }}'); 
+                    changeText('{{ wasteType[1] }}', 'dropdown-wastes-selected')"
                     >{{ wasteType[1] }}
                   </a>
                 </li>
@@ -76,12 +74,17 @@
                 Operation type
                 <i class="fas fa-caret-down"></i>
               </a>
-              <ul class="dropdown-selector-content" id="dropdown-operations-menu">
+              <ul
+                class="dropdown-selector-content"
+                id="dropdown-operations-menu"
+              >
                 {% for operation in operations %}
                 <li>
                   <a
                     href="#"
-                    onclick="toggleDropdown('dropdown-operations-menu'); changeText('{{ operation }}','dropdown-operations-selected')"
+                    onclick="toggleDropdown('dropdown-operations-menu'); 
+                    setMyVar('operationType','{{ operation }}'); 
+                    changeText('{{ operation }}','dropdown-operations-selected')"
                     >{{ operation }}
                   </a>
                 </li>
@@ -99,14 +102,20 @@
                 Company
                 <i class="fas fa-caret-down"></i>
               </a>
-              <ul class="dropdown-selector-content" id="dropdown-companies-menu">
+              <ul
+                class="dropdown-selector-content"
+                id="dropdown-companies-menu"
+              >
                 {% for comp in compXprod %}
                 <li>
                   <a
                     id="load-content-button"
                     href="#"
-                    onclick="toggleDropdown('dropdown-companies-menu'); changeText('{{ comp[0][1] }}' +' {{ comp[1][1]  }}', 'dropdown-companies-selected');"
-                    >{{ comp[0][1] }} {{ comp[1][1]  }}
+                    onclick="toggleDropdown('dropdown-companies-menu');
+                    setMyVar('company','{{ comp[0][1] }}');
+                    setMyVar('producer',' {{ comp[1][1]  }}');
+                    changeText('{{ comp[0][1] }}' +' {{ comp[1][1]  }}', 'dropdown-companies-selected');"
+                    >{{ comp[0][1] }} {{ comp[1][1] }}
                   </a>
                 </li>
                 {% endfor %}
@@ -121,6 +130,7 @@
                 name="quantity"
                 min="1"
                 max="999"
+                onchange="setMyVar('quantity', this.value)"
               />
               <br />
               <br />
@@ -128,7 +138,7 @@
           </div>
         </div>
         <div class="buttons-container">
-          <button class="add-container-button" onclick="hidePopup()">
+          <button class="add-container-button" onclick="hidePopup(); addRow()">
             Submit
           </button>
           <button class="delete-button" onclick="hidePopup()">Close</button>
@@ -145,6 +155,22 @@
           Eliminar
         </button>
       </div>
+      <table id="myTable" border="1">
+        <thead>
+          <tr>
+            <th>Waste Type</th>
+            <th>Operation Type</th>
+            <th>Company</th>
+            <th>Carrier</th>
+            <th>Plate</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aquí se agregarán las filas -->
+        </tbody>
+      </table>
+   
     </div>
   </body>
 </html>

@@ -5,6 +5,41 @@ body {
     height: 100vh;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #205b3d;
+    background-color: #e2f2dd;
+    color: #205b3d;
+}
+
+th {
+    font-weight: bold;
+}
+
+td button {
+    background-color: #205b3d;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+td button:hover {
+    background-color: #fff;
+    color: #205b3d;
+}
+
 .container-transport-main-container {
     display: flex;
     min-height: 600px;
