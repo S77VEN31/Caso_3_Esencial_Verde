@@ -6,35 +6,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/index.styles.css') }}">
     </head>
     <body>
-        <header class="header-main-container">
-            <ul class="header-item-wrapper">
-                <li>
-                    <a href="{{ url_for('about') }}">Inicio</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('contact') }}">Contacto</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('about') }}">Acerca de</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('contact') }}">Contacto</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('about') }}">Acerca de</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('contact') }}">Contacto</a>
-                </li>
-            </ul>
-        </header>
-        {% for row in data %}
-        <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <!-- ... -->
-        </tr>
-        {% endfor %}
+        {% include 'header.html' %}
+        <div></div>
     </body>
 </html>

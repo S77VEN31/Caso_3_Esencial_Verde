@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Acerca de</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/containers.styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <script src="{{ url_for('static', filename='js/containers.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h2>¡Bienvenido!</h2>
+            <p>Este es el contenido de mi ventana emergente.</p>
+            <button onclick="hidePopup()">Cerrar</button>
+        </div>
+    </div>
+    <div class="container-transport-main-container">
+        <div>
+            <button class="add-container-button" onclick="showPopup()">
+                Mostrar popup
+            </button>
+            <button class="delete-button">
+                <i class="fas fa-trash"></i>
+                Eliminar
+            </button>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

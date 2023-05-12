@@ -7,16 +7,21 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    data = db.get_top_100_data()
-    return render_template('index.html', data=data)
+    
+    return render_template('index.html')
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    data = db.get_top_100_data()
+    return render_template('about.html', data=data)
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@app.route('/containers')
+def containers():
+    return render_template('containers.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

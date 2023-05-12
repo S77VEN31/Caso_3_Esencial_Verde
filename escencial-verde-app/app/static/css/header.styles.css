@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.logo {
+    background-color: #fff;
+    max-width: 100px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    margin-left: 0px !important;
+    margin: 20px;
+}
+
+.header-logo {
+    margin-left: 0px !important;
+    max-width: 100px;
+}
+
+.header-main-container {
+    background-color: #5c986a;
+    color: #fff;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.header-item-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+    list-style: none;
+}
+
+.header-item {
+    display: flex;
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-text {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.header-text:hover {
+    background-color: #fff;
+    color: #5c986a;
+}
+
+.dropdown {
+    display: none;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #f0f7ee;
+    z-index: 1;
+}
+
+.dropdown-content li {
+    display: block;
+}
+
+.dropdown-content li a {
+    color: #0d3321;
+    padding: 10px;
+    display: block;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .header-main-container {
+        height: auto;
+        max-height: 80px;
+    }
+
+    .dropdown {
+        display: block;
+    }
+
+    .header-item-wrapper .header-item {
+        display: none;
+    }
+
+    .header-item-wrapper.header-list {
+        display: block;
+    }
+
+    .header-item-wrapper {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-text {
+        margin: 10px 0;
+    }
+
+    .dropdown {
+        margin: 10px 0;
+    }
+
+    .dropdown-content {
+        position: fixed;
+        display: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+}

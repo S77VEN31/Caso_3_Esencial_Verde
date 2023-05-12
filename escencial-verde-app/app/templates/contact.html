@@ -1,17 +1,56 @@
 <!-- contact.html -->
-
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Contacto</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <h1>Contacto</h1>
-    <p>Puedes contactarnos por correo electrónico o por teléfono:</p>
-    <ul>
-        <li>Correo electrónico: [tu correo electrónico]</li>
-        <li>Teléfono: [tu número de teléfono]</li>
-    </ul>
-</body>
+    <head>
+        <title>Contacto</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.styles.css') }}">
+        <script src="{{ url_for('static', filename='js/containers.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
+    </head>
+    <body>
+        {% include 'header.html' %}
+      
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-header">
+                    <img src="{{ url_for('static', filename='img/stiven.jpg') }}" alt="Foto del empleado" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Stiven Segura Guzmán</h3>
+                    <p class="card-text">Front End Developer</p>
+                    <div class="card-social-icons">
+                        <a href="https://www.instagram.com/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <img src="{{ url_for('static', filename='img/pablo.jpg') }}" alt="Foto del empleado" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Jose Pablo Siles</h3>
+                    <p class="card-text">Backend End Developer</p>
+                    <div class="card-social-icons">
+                        <a href="https://www.instagram.com/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

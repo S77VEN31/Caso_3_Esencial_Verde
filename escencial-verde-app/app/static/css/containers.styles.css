@@ -1,0 +1,63 @@
+.container-transport-main-container {
+    display: flex;
+    background-color: rgb(210, 198, 198);
+    flex: 1;
+    
+    min-height: 600px;
+    width: 100%;
+}
+.add-container-button {
+    background-color: white;
+    color: green;
+    border: 2px solid green;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.add-container-button:hover {
+    background-color: green;
+    color: white;
+}
+
+.delete-button {
+    background-color: white;
+    border: 2px solid red;
+    color: red;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .delete-button:hover {
+    background-color: red;
+    color: white;
+  }
+  
+  .delete-button i {
+    margin-right: 5px;
+  }
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: none;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}

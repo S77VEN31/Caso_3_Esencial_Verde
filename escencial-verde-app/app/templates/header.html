@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.styles.css') }}">
+    <script src="{{ url_for('static', filename='js/header.js') }}"></script>
+  </head>
+  <body>
+    <header class="header-main-container">
+      <ul class="header-item-wrapper header-list">
+        <li class="header-item">
+          <a class="header-text" href="{{ url_for('about') }}">Inicio</a>
+        </li>
+        <li class="header-item">
+          <a class="header-text" href="{{ url_for('contact') }}">Contacto</a>
+        </li>
+        <li class="header-item">
+          <a class="header-text" href="{{ url_for('contact') }}">Ingresar</a>
+        </li>
+        <li class="header-item">
+          <a class="header-text" href="{{ url_for('containers') }}">Transporte de residuos</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" id="dropdown-btn">Menú <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-content" id="dropdown-menu">
+            <li><a href="#">Opción 1</a></li>
+            <li><a href="#">Opción 2</a></li>
+            <li><a href="#">Opción 3</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="logo">
+        <img class="header-logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+      </div>
+    </header>
+  </body>
+</html>
+
