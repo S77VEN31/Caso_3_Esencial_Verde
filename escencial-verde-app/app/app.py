@@ -21,6 +21,7 @@ def containers():
     wasteTypes = db.get_wasteTypes()
     return render_template('containers.html', ranProducer=ranProducer, wasteTypes=wasteTypes)
 
+
 if __name__ == '__main__':
     app.run(debug=True)
 

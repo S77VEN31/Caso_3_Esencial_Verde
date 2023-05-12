@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
     <script src="{{ url_for('static', filename='js/containers.js') }}"></script>
     <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dropdown.styles.css') }}">
+    <script src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
 </head>
 <body>
     {% include 'header.html' %}
@@ -16,7 +18,33 @@
             <button onclick="hidePopup()">Cerrar</button>
         </div>
     </div>
+
+
+
+
+
+
     <div class="container-transport-main-container">
+<li class="dropdown-selector">
+            <a href="#" id="dropdown-btn" onclick="toggleDropdown()">Transacción <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-selector-content" id="dropdown-selector-menu">
+              <li><a href="#" onclick="toggleDropdown(); changeText('Opción 1')">Opción 1</a></li>
+              <li><a href="#" onclick="toggleDropdown(); changeText('Opción 2')">Opción 2</a></li>
+              <li><a href="#" onclick="toggleDropdown(); changeText('Opción 3')">Opción 3</a></li>
+            </ul>
+            <span id="dropdown-selector-selected">No seleccionado</span>
+          </li>
+        <li class="dropdown-selector">
+            <a href="#" id="dropdown-btn" onclick="toggleDropdown()">Transacción <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-selector-content" id="dropdown-selector-menu">
+              <li><a href="#" onclick="toggleDropdown(); changeText('Opción 1')">Opción 1</a></li>
+              <li><a href="#" onclick="toggleDropdown(); changeText('Opción 2')">Opción 2</a></li>
+              <li><a href="#" onclick="toggleDropdown(); changeText('Opción 3')">Opción 3</a></li>
+            </ul>
+            <span id="dropdown-selector-selected">No seleccionado</span>
+          </li>
+
+
         <div>
             <button class="add-container-button" onclick="showPopup()">
                 Mostrar popup
