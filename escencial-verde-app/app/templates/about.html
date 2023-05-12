@@ -9,17 +9,6 @@
 <body>
     {% include 'header.html' %}
     <h1>Acerca de</h1>
-    <h2>Profile:</h2>
-    <ul>
-        <li>Productor: {{ ranProducer[0][1] }}</li>
-        <li>Localidad: {{ ranProducer[0][10] }}</li>
-    </ul>
-
-    <h2>WasteTypes:</h2>
-    <ul>
-        {% for wasteType in wasteTypes %}
-            <p>{{ wasteType[1] }}</p>
-        {% endfor %}
-    </ul>
+    
 </body>
 </html>
