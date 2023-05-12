@@ -12,7 +12,9 @@
     border-radius: 5px;
 }
 
-.dropdown-selector:hover .dropdown-card,
+.dropdown-selector:hover .dropdown-card {
+    color: white;
+}
 .dropdown-selector:hover {
     transition: background-color 0.3s, color 0.3s;
     color: white;
