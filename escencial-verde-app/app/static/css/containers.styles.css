@@ -15,14 +15,30 @@ table {
     font-family: Arial, sans-serif;
     font-size: 10px;
     text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-th, td {
+th {
+    padding: 8px;
+    border: 2px solid #205b3d;
+    background-color: #5c986a;
+    color: white;
+}
+
+td {
     padding: 8px;
     border: 2px solid #205b3d;
     background-color: #e2f2dd;
     color: #205b3d;
+    transition: background-color 0.5s ease-in-out;
+    text-transform: uppercase;
 }
+
+.fila:hover td {
+    background-color: #205b3d;
+    color: white;
+}
+
 
 th {
     font-weight: bold;
@@ -65,10 +81,12 @@ td button {
     display: flex;
     padding: 5px;
     border-radius: 8px;
+    border: 2px solid #205b3d;
     background-color: #5c986a;
     max-width: 400px;
     justify-content: space-around;
-    margin: 10px 20px 0px 20px;
+    margin: 20px 20px 0px 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 .add-container-button {
     background-color: #e2f2dd;
@@ -84,6 +102,7 @@ td button {
 .add-container-button:hover {
     background-color: #205b3d;
     color: white;
+    box-shadow: 0 2px 6px #205b3d;
 }
 
 .delete-button {
@@ -100,6 +119,7 @@ td button {
 .delete-button:hover {
     background-color: red;
     color: white;
+    box-shadow: 0 2px 6px red;
 }
 
 .popup {
@@ -178,6 +198,7 @@ td button {
     background-color: #205b3d;
     text-transform: capitalize;
     color: white;
+    box-shadow: 0 2px 6px #205b3d;
 }
 
 

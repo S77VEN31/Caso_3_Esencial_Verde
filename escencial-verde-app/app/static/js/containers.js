@@ -34,6 +34,7 @@ function addRow(carrier, plate, location) {
   var tbody = table.getElementsByTagName("tbody")[0];
 
   var row = tbody.insertRow();
+  row.classList.add("fila");
   var carrierCell = row.insertCell();
   var plateCell = row.insertCell();
   var locationCell = row.insertCell();

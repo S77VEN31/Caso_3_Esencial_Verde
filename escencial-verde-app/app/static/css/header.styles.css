@@ -94,6 +94,7 @@ body {
     transition: background-color 0.3s, color 0.3s;
     background-color: #205b3d;
     color: #fff;
+    box-shadow: 0 2px 6px #205b3d;
 }
 
 .dropdown {
