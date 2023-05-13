@@ -306,6 +306,24 @@ def payments (props):
     print(props['out'])
     cnxn.commit()
 
+# === brands === #
+def brands():
+    brands_data = [(i+1, fake.company()) for i in range(30)]
+    cursor.executemany("INSERT INTO brands (brandId, brandName) VALUES (?, ?)", brands_data)
+    cnxn.commit()
+
+# === models === #
+def models():
+    models_data = [(i+1, fake.word(), fake.random_int(min=1, max=10), fake.random_int(min=1, max=30)) for i in range(50)]
+    cursor.executemany("INSERT INTO models (modelId, modelName, typeId, brandId) VALUES (?, ?, ?, ?)", models_data)
+    cnxn.commit()
+
+# === fleets === #
+def fleets():
+    fleet_data = [(fake.random_int(min=1, max=50), fake.hex_color(), fake.random_int(min=0, max=1)) for _ in range(200)]
+    cursor.executemany("INSERT INTO fleet (modelId, color, active) VALUES (?, ?, ?)", fleet_data)
+    cnxn.commit()
+
 
 
 
@@ -358,7 +376,9 @@ cursor.execute("SELECT transactionId FROM transactions")
 transaction = [row[0] for row in cursor.fetchall()]
 payments(payments_dict)
 '''
-contacts (contacts_dict)
+brands()
+models()
+fleets()
 
 
 
