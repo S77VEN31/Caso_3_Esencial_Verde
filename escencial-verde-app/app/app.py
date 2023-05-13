@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from models import db
-from flask import jsonify
+
 
 app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -20,7 +20,7 @@ def about():
 def contact():
     return render_template("contact.html")
 
-@app.route("/containers")
+@app.route("/containers", methods=['GET','POST'])
 def containers():
     operations = ["Pickup", "Delivery"]
     ranProducer = db.get_random_logIn()
@@ -28,6 +28,11 @@ def containers():
     companies = db.get_companies()
     producers = db.get_producers()
     compXprod = db.get_companies_producers(companies, producers)
+    carrier = db.get_random_carrier()
+    if request.method == 'POST':
+        input_value = request.form.get('input-value')
+        with open("error.json", "a") as f:
+                f.write(input_value + "\n")
     return render_template(
         "containers.html",
         ranProducer=ranProducer,
@@ -35,7 +40,8 @@ def containers():
         operations=operations,
         companies=companies,
         producers=producers,
-        compXprod  = compXprod 
+        compXprod=compXprod,
+        carrier=carrier
     )
 
 

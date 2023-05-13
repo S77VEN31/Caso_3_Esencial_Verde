@@ -22,6 +22,13 @@ class Database:
         cursor.close()
         return data  
     
+    def get_random_carrier(self):
+        cursor = self.cnxn.cursor()
+        cursor.execute("SELECT TOP 1 name, surname1, surname2 FROM contacts WHERE contactType = 'Carrier' ORDER BY NEWID()")
+        data = cursor.fetchall()
+        cursor.close()
+        return data  
+    
     def get_wasteTypes(self):
         cursor = self.cnxn.cursor()
         cursor.execute("SELECT * FROM dbo.wasteTypes")

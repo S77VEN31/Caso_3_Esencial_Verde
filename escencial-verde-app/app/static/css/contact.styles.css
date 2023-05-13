@@ -3,6 +3,21 @@ body {
     height: 100vh;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #205b3d;
+    background-color: transparent;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
 .cards-container {
     padding-top: 50px;
     padding-bottom: 50px;

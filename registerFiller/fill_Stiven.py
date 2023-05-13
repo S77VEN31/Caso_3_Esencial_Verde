@@ -20,7 +20,7 @@ states_dict = {'out': 'states inserted', 'num': 500 }
 cities_dict = {'out': 'cities inserted', 'num': 2000 }
 locations_dict = {'out': 'locations inserted', 'num': 5000 }
 regionAreasAndRegions_dict = {'out': 'region areas and regions inserted', 'num1': 1000,'num2': 2000 }
-contacts_dict = {'out': 'contacts inserted', 'num': 20000, 'data': ('Customer', 'Supplier', 'Partner', 'Competitor', 'Investor', 'Employee', 'Former employee', 'Sales contact', 'Marketing contact', 'Public relations contact', 'Human resources contact', 'Customer service contact', 'Technical support contact', 'Supplier contact', 'Logistics contact', 'Driver', 'Buyer', 'Seller') }
+contacts_dict = {'out': 'contacts inserted', 'num': 20000, 'data': ('Carrier','Customer', 'Supplier', 'Partner', 'Competitor', 'Investor', 'Employee', 'Former employee', 'Sales contact', 'Marketing contact', 'Public relations contact', 'Human resources contact', 'Customer service contact', 'Technical support contact', 'Supplier contact', 'Logistics contact', 'Driver', 'Buyer', 'Seller') }
 languages_dict = {'out': 'languages inserted', 'data': [('en', 'English'), ('es', 'Spanish'), ('fr', 'French')] }
 textObjectTypes_dict = {'out': 'text object types inserted'}
 translations_dict = {'out': 'translations inserted', 'num': 20, 'data': {'lang': [2, 3], 'langCode': ['en','es','fr']} }
@@ -318,8 +318,7 @@ def payments (props):
 
 
 
-
-
+'''
 countries(countries_dict)
 cursor.execute("SELECT countryId FROM countries")
 country_ids = [row[0] for row in cursor.fetchall()]
@@ -358,6 +357,8 @@ transactions(transactions_dict)
 cursor.execute("SELECT transactionId FROM transactions")
 transaction = [row[0] for row in cursor.fetchall()]
 payments(payments_dict)
+'''
+contacts (contacts_dict)
 
 
 

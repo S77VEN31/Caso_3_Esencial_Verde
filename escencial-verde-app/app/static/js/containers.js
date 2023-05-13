@@ -26,7 +26,8 @@ function setMyVar(key, value) {
   currentOperation[key] = value;
   console.log(currentOperation);
 }
-function addRow() {
+function addRow(carrier) {
+  setMyVar('carrier', carrier);
   // Obtener la tabla y el cuerpo
   var table = document.getElementById("myTable");
   var tbody = table.getElementsByTagName("tbody")[0];
@@ -93,5 +94,17 @@ function getAllRows() {
   console.log(data)
   return data;
 }
+
+function setInputValueAndSubmit(event) {
+  event.preventDefault();
+
+  var inputValue = JSON.stringify(getAllRows());
+  document.getElementById("my-input").value = inputValue;
+
+  var miFormulario = document.getElementById("mi-formulario");
+  console.log(inputValue)
+  miFormulario.submit(); 
+}
+
 
 
