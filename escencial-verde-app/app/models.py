@@ -17,7 +17,19 @@ class Database:
     
     def get_random_logIn(self):
         cursor = self.cnxn.cursor()
-        cursor.execute("SELECT TOP 1 p.*, l.cityId, c.name FROM dbo.producers p INNER JOIN dbo.locations l ON p.locationId = l.locationId INNER JOIN dbo.cities c ON l.cityId = c.cityId ORDER BY NEWID()")
+        cursor.execute('''SELECT TOP 1
+                                r.name AS region_name,
+                                ra.name AS region_area_name,
+                                c.name AS city_name,
+                                s.name AS state_name,
+                                co.name AS country_name
+                            FROM
+                                regions r
+                                INNER JOIN regionAreas ra ON r.regionAreaId = ra.regionAreasId
+                                LEFT JOIN cities c ON ra.cityId = c.cityId
+                                LEFT JOIN states s ON ra.stateId = s.stateId
+                                LEFT JOIN countries co ON ra.countryId = co.countryId
+                            ORDER BY NEWID();''')
         data = cursor.fetchall()
         cursor.close()
         return data  
@@ -28,6 +40,13 @@ class Database:
         data = cursor.fetchall()
         cursor.close()
         return data  
+
+    def get_random_fleet(self):
+        cursor = self.cnxn.cursor()
+        cursor.execute("SELECT TOP 1 fleetId, color FROM fleet WHERE active = 1 ORDER BY NEWID()")
+        data = cursor.fetchall()
+        cursor.close()
+        return data 
     
     def get_wasteTypes(self):
         cursor = self.cnxn.cursor()

@@ -87,7 +87,7 @@ td button {
 }
 
 .delete-button {
-    background-color: white;
+    background-color:  #ffcccc;
     border: 2px solid red;
     color: red;
     border-radius: 5px;
@@ -120,10 +120,11 @@ td button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
+    background-color: #f0f7ee;
     border-radius: 5px;
-    gap: 20px
+    gap: 20px;
+    overflow: hidden;
+    border: 3px solid #205b3d;
 }
 
 .inputs-and-text-container {
@@ -138,12 +139,15 @@ td button {
     flex-direction: column;
     min-width: 200px;
     gap: 10px;
+    padding: 20px;
+    background-color: #5c986a;
 }
 
 .inputs-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 20px;
 }
 
 .buttons-container {
@@ -153,6 +157,21 @@ td button {
     justify-content: space-around;
 }
 
+.info-text-container {
+    background-color: #e2f2dd;
+    color: black;
+    border: 2px solid #205b3d;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
 
+.info-text-key {
+    font-weight: bold;
+}
+.info-text-container:hover {
+    background-color: #205b3d;
+    color: white;
+}
 
 

@@ -25,18 +25,17 @@
     border-radius: 5px;
     display: none;
     position: absolute;
-    margin-top: 30px;
+    margin-top: 40px;
     background-color: #f0f7ee;
     z-index: 3;
     border-left: #205b3d 2px solid;
     border-right: #205b3d 2px solid;
     border-top: #205b3d 2px solid;
     border-bottom: #205b3d 2px solid;
-    max-height: 200px;
+    max-height: 100px;
     margin-bottom: 10px;
     overflow-y: auto;
     overflow-x: hidden;
-
 }
 
 .dropdown-selector-content li {

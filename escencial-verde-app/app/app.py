@@ -29,9 +29,12 @@ def containers():
     producers = db.get_producers()
     compXprod = db.get_companies_producers(companies, producers)
     carrier = db.get_random_carrier()
+    fleet = db.get_random_fleet()
+    location = db.get_random_logIn()
+
     if request.method == 'POST':
         input_value = request.form.get('input-value')
-        with open("error.json", "a") as f:
+        with open("error.json", "w") as f:
                 f.write(input_value + "\n")
     return render_template(
         "containers.html",
@@ -41,7 +44,9 @@ def containers():
         companies=companies,
         producers=producers,
         compXprod=compXprod,
-        carrier=carrier
+        carrier=carrier,
+        fleet=fleet,
+        location=location
     )
 
 

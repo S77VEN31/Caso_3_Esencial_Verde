@@ -71,6 +71,9 @@ currencies_dict = {'out': 'currencies inserted', 'data': [
 currencyRates_dict = {'out': 'currency rates inserted', 'num': 1000 }
 transactions_dict = {'out': 'transactions inserted', 'num': 5000 }
 payments_dict = {'out': 'payments inserted', 'num': 5000 }
+brands_dict = {'out': 'brands inserted', 'num': 30 }
+models_dict = {'out': 'models inserted', 'num': 50 }
+fleets_dict = {'out': 'fleets inserted', 'num': 200 }
 
 
 
@@ -307,21 +310,27 @@ def payments (props):
     cnxn.commit()
 
 # === brands === #
-def brands():
-    brands_data = [(i+1, fake.company()) for i in range(30)]
+def brands(props):
+    num_brands = props['num']
+    brands_data = [(i+1, fake.company()) for i in range(num_brands)]
     cursor.executemany("INSERT INTO brands (brandId, brandName) VALUES (?, ?)", brands_data)
+    print(props['out'])
     cnxn.commit()
 
 # === models === #
-def models():
-    models_data = [(i+1, fake.word(), fake.random_int(min=1, max=10), fake.random_int(min=1, max=30)) for i in range(50)]
+def models(props):
+    num_models = props['num']
+    models_data = [(i+1, fake.word(), fake.random_int(min=1, max=10), fake.random_int(min=1, max=30)) for i in range(num_models)]
     cursor.executemany("INSERT INTO models (modelId, modelName, typeId, brandId) VALUES (?, ?, ?, ?)", models_data)
+    print(props['out'])
     cnxn.commit()
 
 # === fleets === #
-def fleets():
-    fleet_data = [(fake.random_int(min=1, max=50), fake.hex_color(), fake.random_int(min=0, max=1)) for _ in range(200)]
+def fleets(props):
+    num_fleet = props['num']
+    fleet_data = [(fake.random_int(min=1, max=50), fake.hex_color(), fake.random_int(min=0, max=1)) for _ in range(num_fleet)]
     cursor.executemany("INSERT INTO fleet (modelId, color, active) VALUES (?, ?, ?)", fleet_data)
+    print(props['out'])
     cnxn.commit()
 
 
@@ -376,9 +385,9 @@ cursor.execute("SELECT transactionId FROM transactions")
 transaction = [row[0] for row in cursor.fetchall()]
 payments(payments_dict)
 '''
-brands()
-models()
-fleets()
+brands(brands_dict)
+models(models_dict)
+fleets(fleets_dict)
 
 
 

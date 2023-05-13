@@ -26,39 +26,37 @@ function setMyVar(key, value) {
   currentOperation[key] = value;
   console.log(currentOperation);
 }
-function addRow(carrier) {
+function addRow(carrier, plate, location) {
   setMyVar('carrier', carrier);
-  // Obtener la tabla y el cuerpo
+  setMyVar('plate', plate);
+  setMyVar('location', location);
   var table = document.getElementById("myTable");
   var tbody = table.getElementsByTagName("tbody")[0];
 
-  // Crear una nueva fila y agregar celdas con los datos de currentOperation
   var row = tbody.insertRow();
-  var wasteTypeCell = row.insertCell();
-  var operationTypeCell = row.insertCell();
-  var companyCell = row.insertCell();
-  var producerCell = row.insertCell();
   var carrierCell = row.insertCell();
   var plateCell = row.insertCell();
   var locationCell = row.insertCell();
+  var companyCell = row.insertCell();
+  var producerCell = row.insertCell();
+  var wasteTypeCell = row.insertCell();
+  var operationTypeCell = row.insertCell();
   var quantityCell = row.insertCell();
-  var deleteCell = row.insertCell(); // Nueva celda para el botón de eliminar
-  
-  wasteTypeCell.innerHTML = currentOperation.wasteType;
-  operationTypeCell.innerHTML = currentOperation.operationType;
-  companyCell.innerHTML = currentOperation.company;
-  producerCell.innerHTML = currentOperation.producer;
+  var deleteCell = row.insertCell(); 
   carrierCell.innerHTML = currentOperation.carrier;
   plateCell.innerHTML = currentOperation.plate;
-  locationCell.innerHTML = currentOperation.location;
+  locationCell.innerHTML = currentOperation.location.substring(1, currentOperation.location.length - 1).split(", ")[4];
+  companyCell.innerHTML = currentOperation.company;
+  producerCell.innerHTML = currentOperation.producer;
+  wasteTypeCell.innerHTML = currentOperation.wasteType;
+  operationTypeCell.innerHTML = currentOperation.operationType;
   quantityCell.innerHTML = currentOperation.quantity;
   
-  // Crear el botón de eliminar y agregarlo a la celda correspondiente
+
   var deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
   deleteButton.innerHTML = '<i class="fas fa-trash"></i>'
   deleteButton.onclick = function() {
-    // Eliminar la fila correspondiente al botón de eliminar
     var rowIndex = this.parentNode.parentNode.rowIndex;
     table.deleteRow(rowIndex);
   };
@@ -79,13 +77,13 @@ function getAllRows() {
     var cells = row.getElementsByTagName("td");
 
     var obj = {
-      wasteType: cells[0].innerHTML,
-      operationType: cells[1].innerHTML,
-      company: cells[2].innerHTML,
-      producer: cells[3].innerHTML,
-      carrier: cells[4].innerHTML,
-      plate: cells[5].innerHTML,
-      location: cells[6].innerHTML,
+      carrier: cells[0].innerHTML,
+      plate: cells[1].innerHTML,
+      location: cells[2].innerHTML,
+      company: cells[3].innerHTML,
+      producer: cells[4].innerHTML,
+      wasteType: cells[5].innerHTML,
+      operationType: cells[6].innerHTML,
       quantity: cells[7].innerHTML
     };
     

@@ -24,17 +24,32 @@
       <div class="popup-content">
         <div class="inputs-and-text-container">
           <div class="text-container">
-            <span
-              >Carrier: <br />
-              {{ carrier[0][0] }} {{ carrier[0][1] }} {{ carrier[0][2]}}</span
-            >
-            <span>Plate: 12331231</span>
-            <span
-              >Location: Costa Rica <br />
-              San jose Perez Zeledón: Zona La Santa</span
-            >
-            <span>
-              <span>Date and Time:</span>
+            <span class="info-text-container">
+              <span class="info-text-key">Carrier: </span>
+              {{ carrier[0][0] }} {{ carrier[0][1] }} {{ carrier[0][2]}}
+              </span>
+            <span class="info-text-container">
+              <span class="info-text-key"> Plate: </span>
+              {{ fleet[0][0] }}{{ fleet[0][1][1:] }}
+            </span>
+            <span class="info-text-container">
+              <span class="info-text-key">Country: </span>
+              {{location[0][4]}} 
+              <br>
+              <span class="info-text-key">State: </span>
+              {{location[0][3]}} 
+              <br>
+              <span class="info-text-key">City: </span>
+              {{location[0][2]}} 
+              <br>
+              <span class="info-text-key">Region: </span>
+              {{location[0][0]}} 
+              <br>
+              <span class="info-text-key">Region Area: </span>
+              {{location[0][1]}} 
+            </span>
+            <span class="info-text-container">
+              <span class="info-text-key">Date and Time:</span>
               <p id="dateTime"></p>
             </span>
           </div>
@@ -135,17 +150,21 @@
               <br />
               <br />
             </form>
+            <div class="buttons-container">
+              <button class="add-container-button" onclick="hidePopup(); 
+              addRow(
+                '{{ carrier[0][0] }} {{ carrier[0][1] }} {{ carrier[0][2]}}',
+                '{{ fleet[0][0] }}{{ fleet[0][1][1:] }}',
+                '[{{location[0][4]}}, {{location[0][3]}}, {{location[0][2]}}, {{location[0][0]}}, {{location[0][1]}}]')">
+                <i class="fas fa-paper-plane"></i>
+                Submit
+              </button>
+              <button class="delete-button" onclick="hidePopup()">
+                <i class="fas fa-times"></i>
+                Close
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="buttons-container">
-          <button class="add-container-button" onclick="hidePopup(); addRow('{{ carrier[0][0] }} {{ carrier[0][1] }} {{ carrier[0][2]}}')">
-            <i class="fas fa-paper-plane"></i>
-            Submit
-          </button>
-          <button class="delete-button" onclick="hidePopup()">
-            <i class="fas fa-times"></i>
-            Close
-          </button>
         </div>
       </div>
     </div>
@@ -167,13 +186,13 @@
       <table id="myTable" border="1">
         <thead>
           <tr>
-            <th>Waste</th>
-            <th>Operation</th>
-            <th>Company</th>
-            <th>Producer</th>
             <th>Carrier</th>
             <th>Plate</th>
             <th>Location</th>
+            <th>Company</th>
+            <th>Producer</th>
+            <th>Waste</th>
+            <th>Operation</th>
             <th>Quantity</th>
           </tr>
         </thead>
