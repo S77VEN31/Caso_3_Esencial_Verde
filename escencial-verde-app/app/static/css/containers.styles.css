@@ -130,7 +130,7 @@ td button {
 .inputs-and-text-container {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 20px;
     justify-content: space-between;
 }
 
@@ -164,13 +164,19 @@ td button {
     padding: 5px 10px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
+    text-transform: capitalize;
 }
 
 .info-text-key {
     font-weight: bold;
+    text-transform: capitalize;
+}
+.info-text-plate {
+    text-transform: uppercase;
 }
 .info-text-container:hover {
     background-color: #205b3d;
+    text-transform: capitalize;
     color: white;
 }
 
