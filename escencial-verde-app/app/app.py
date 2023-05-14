@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from models import db
 
 
+
 app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'filesystem'
 
@@ -34,10 +35,8 @@ def containers():
 
     if request.method == 'POST':
         input_value = request.form.get('input-value')
+        db.validate_jsons(input_value)
         
-
-        with open("error.json", "w") as f:
-                f.write(input_value + "\n")
     return render_template(
         "containers.html",
         ranProducer=ranProducer,

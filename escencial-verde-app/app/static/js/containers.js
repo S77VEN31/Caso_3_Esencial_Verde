@@ -13,14 +13,14 @@ function showDateTime() {
 }
 
 var currentOperation = {
-  wasteType: "null",
-  operationType: "null",
-  company: "null",
-  producer: "null",
-  carrier: "null",
-  plate: "null",
-  location: "null",
-  quantity: 'null'
+  wasteType: "no ingresado",
+  operationType: "no ingresado",
+  company: "no ingresado",
+  producer: "no ingresado",
+  carrier: "no ingresado",
+  plate: "no ingresado",
+  location: "no ingresado",
+  quantity: 'no ingresado'
 };
 function setMyVar(key, value) {
   currentOperation[key] = value;

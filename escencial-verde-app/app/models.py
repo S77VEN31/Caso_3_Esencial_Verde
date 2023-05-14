@@ -1,5 +1,5 @@
 import pyodbc
-
+import json
 class Database:
     def __init__(self):
         self.server = 'localhost'
@@ -75,5 +75,25 @@ class Database:
                 if company[0] == producer[2]:
                     companies_producers.append([company, producer])
         return companies_producers
+    
+    
+
+    def validate_jsons(self, data):
+        with open("error.json", "w") as f:
+                f.write(data + "\n")
+        data = json.loads(data)
+        data = [(d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], d['quantity']) for d in data]
+        
+        cursor = self.cnxn.cursor()
+       
+       
+        cursor.execute("CREATE TABLE #TempContainersData (carrier VARCHAR(500), plate VARCHAR(500), location VARCHAR(500), company VARCHAR(500), producer VARCHAR(500), wasteType VARCHAR(500), operationType VARCHAR(500), quantity VARCHAR(500));")
+        cursor.executemany("INSERT INTO #TempContainersData (carrier, plate, location, company, producer, wasteType, operationType, quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", data)
+        cursor.execute("EXEC InsertContainersData @containers = #TempContainersData;")
+        
+        self.cnxn.commit()
+
+
+
 
 db = Database()
