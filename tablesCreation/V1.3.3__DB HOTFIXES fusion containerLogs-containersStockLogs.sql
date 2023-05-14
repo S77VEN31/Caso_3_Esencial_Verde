@@ -371,14 +371,18 @@ CREATE TABLE fleetXwasteTypes (
 
 CREATE TABLE containerLogs ( -- Trasabilidad de los contenedores
     logId INT PRIMARY KEY IDENTITY,
-    logDate DATE NOT NULL,
-    pickupScheduleId INT NOT NULL,
+    logDate DATE NOT NULL DEFAULT GETDATE(),
+    pickupScheduleId INT,
     containerId INT NOT NULL,
-    countryTreatmentCost INT NOT NULL,
+    countryTreatmentCost INT,
     carrierId INT NOT NULL,
     fleetId INT, -- Puede ser null al pertenecer a otra empresa
-    weight DECIMAL(10, 2) NOT NULL,
+    weight DECIMAL(10, 2),
     operationType INT NOT NULL, -- 1: pickup, 2: delivery, 3: transfer, 4: cleaning, 5: maintenance, 6: repair
+    wasteCollectorId INT,
+    producerId INT NOT NULL,
+    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    FOREIGN KEY (producerId) REFERENCES producers(producerId),
     FOREIGN KEY (fleetId) REFERENCES fleet(fleetId),
     FOREIGN KEY (countryTreatmentCost) REFERENCES countries(countryId),
     FOREIGN KEY (carrierId) REFERENCES carriers(carrierId),
@@ -426,16 +430,16 @@ CREATE TABLE treatmentXcountriesPriceLogs (
 
 CREATE TABLE containersStockLogs (
     logId INT NOT NULL PRIMARY KEY IDENTITY,
-    wasteCollectorId INT,
-    producerId INT NOT NULL,
+    
+    
     containerId INT NOT NULL,
     action INT NOT NULL, -- request 1, return 2
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
     CHECKSUM VARBINARY(64),
-    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
+    
     FOREIGN KEY (containerId) REFERENCES containers(containerId),
-    FOREIGN KEY (producerId) REFERENCES producers(producerId)
+    
 );
 
 CREATE TABLE contractTypes (        -- TO DO

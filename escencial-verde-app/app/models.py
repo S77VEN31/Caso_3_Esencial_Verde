@@ -76,7 +76,6 @@ class Database:
                     companies_producers.append([company, producer])
         return companies_producers
     
-    import json
 
     def validate_jsons(self, data):
         
@@ -119,6 +118,7 @@ class Database:
             """
         )
         self.cnxn.commit()
+        cursor.close()
         '''
         
         cursor.execute("SELECT * FROM ContainersDataTable")
