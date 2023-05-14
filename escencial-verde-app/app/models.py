@@ -79,13 +79,13 @@ class Database:
     import json
 
     def validate_jsons(self, data):
-        '''
+        
         with open("error.json", "w") as f:
                 f.write(data + "\n")
         data = json.loads(data)
         data = [(d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], d['quantity']) for d in data]
-        '''
-        data = ('Carrier C', 'Plate C', 'Location C', 'Company C', 'Producer C', 'Waste Type C', 'Operation Type C', '30')
+        
+        
         cursor = self.cnxn.cursor()
         cursor.execute(
             """
@@ -107,16 +107,23 @@ class Database:
             )
             """
         )
-        cursor.execute("INSERT INTO #tempContainersData VALUES (?, ?, ?, ?, ?, ?, ?, ?)", data)
+        cursor.executemany("INSERT INTO #tempContainersData VALUES (?, ?, ?, ?, ?, ?, ?, ?)", data)
+        cursor.execute("""
+            DECLARE @tempContainersData AS containersData;
+            INSERT INTO @tempContainersData (carrier, plate, location, company, producer, wasteType, operationType, quantity)
+            SELECT carrier, plate, location, company, producer, wasteType, operationType, quantity
+            FROM #tempContainersData;
 
-        
+            EXEC InsertContainersData @containersData=@tempContainersData;
 
-        
+        """)
+
+
         self.cnxn.commit()
-        cursor.execute("SELECT * FROM #tempContainersData")
+        cursor.execute("SELECT * FROM ContainersDataTable")
         test = cursor.fetchall()
         with open("xd.txt", "w") as f:
-                f.write(str(test) + "\n")
+                f.write(str(test) + "\n")'''''''''
 
 
 db = Database()
