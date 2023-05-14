@@ -118,12 +118,13 @@ class Database:
 
         """)
 
-
+        '''
         self.cnxn.commit()
         cursor.execute("SELECT * FROM ContainersDataTable")
         test = cursor.fetchall()
         with open("xd.txt", "w") as f:
-                f.write(str(test) + "\n")'''''''''
+                f.write(str(test) + "\n")
+        '''
 
 
 db = Database()
