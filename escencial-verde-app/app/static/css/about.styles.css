@@ -1,0 +1,88 @@
+html {
+    background-color: #205b3d !important;
+}
+
+body {
+    margin: 0;
+    color: white;
+    background: #205b3d;
+    overflow-x: hidden;
+}
+
+p {
+    text-align: justify;
+}
+
+.center-p {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+p, h2 {
+    position: relative;
+    z-index: 1;
+    margin: 25px 15%;
+}
+
+section {
+    padding: 40px 0;
+}
+
+.content-container {
+    z-index: 5;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #205b3d;
+    background-color: transparent;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+.image {
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-image: url("../../static/img/bg.jpg");
+}
+
+.first {
+    height: 100px;
+}
+.second {
+    height: 300px;
+}
+
+.third {
+    height: 200px;
+}
+
+.text {
+    background: #205b3d;
+    position: relative;
+}
+
+.text::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 135%;
+    background: #205b3d;
+    rotate: -3deg;
+    translate: -50% -50%;
+    box-shadow: 0 4px 20px black;
+}

@@ -2,6 +2,7 @@ html {
     background-color: #f0f7ee !important;
     height: 100vh;
 }
+
 body {
     display: flex;
     flex-direction: column;
@@ -55,21 +56,24 @@ td button {
 
 ::-webkit-scrollbar {
     width: 0px;
-  }
-  ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
     background-color: #205b3d;
     background-color: transparent;
     border-radius: 5px;
-  }
-  ::-webkit-scrollbar-corner {
-    background-color: transparent;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  
+}
 
-  
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+
+
 
 .container-transport-main-container {
     display: flex;
@@ -77,6 +81,7 @@ td button {
     width: 100%;
     flex-direction: column;
 }
+
 .upload-buttons-container {
     display: flex;
     padding: 5px;
@@ -88,6 +93,7 @@ td button {
     margin: 20px 20px 0px 20px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
+
 .add-container-button {
     background-color: #e2f2dd;
     color: #205b3d;
@@ -106,7 +112,7 @@ td button {
 }
 
 .delete-button {
-    background-color:  #ffcccc;
+    background-color: #ffcccc;
     border: 2px solid red;
     color: red;
     border-radius: 5px;
@@ -199,6 +205,7 @@ td button {
     align-items: center;
     gap: 10px;
 }
+
 .number-selector-container:hover {
     background-color: #205b3d;
     text-transform: capitalize;
@@ -210,14 +217,14 @@ td button {
     font-weight: bold;
     text-transform: capitalize;
 }
+
 .info-text-plate {
     text-transform: uppercase;
 }
+
 .info-text-container:hover {
     background-color: #205b3d;
     text-transform: capitalize;
     color: white;
     box-shadow: 0 2px 6px #205b3d;
 }
-
-

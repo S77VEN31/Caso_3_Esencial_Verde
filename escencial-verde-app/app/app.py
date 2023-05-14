@@ -34,6 +34,8 @@ def containers():
 
     if request.method == 'POST':
         input_value = request.form.get('input-value')
+        
+
         with open("error.json", "w") as f:
                 f.write(input_value + "\n")
     return render_template(
