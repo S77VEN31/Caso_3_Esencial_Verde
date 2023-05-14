@@ -1,5 +1,7 @@
 import pyodbc
 import json
+
+import pymssql
 class Database:
     def __init__(self):
         self.server = 'localhost'
@@ -82,9 +84,16 @@ class Database:
         with open("error.json", "w") as f:
                 f.write(data + "\n")
         data = json.loads(data)
+
         data = [(d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], d['quantity']) for d in data]
-        
-        
+        a = [
+            ('a','b','a','b','a','b','a','b')
+        ]
+        conn = pymssql.connect(server='localhost', user='sa', password='Sven1234', database='caso3')
+        cursor = conn.cursor()
+        cursor.execute('{ CALL InsertContainersData (?)}', a)
+        cursor.close()
+        conn.close()
         cursor = self.cnxn.cursor()
         cursor.execute(
             """
@@ -119,6 +128,49 @@ class Database:
         )
         self.cnxn.commit()
         cursor.close()
+        #data = [(d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], d['quantity']) for d in data]
+        
+        
+        '''try:'''
+        
+        # Call the InsertContainersData stored procedure
+        """cursor.execute("{CALL InsertContainersData(?)}", data)
+        
+        error = cursor.fetchall()
+        with open("error.log", "a") as f:
+                f.write(f"{str(error)}\n")
+        self.cnxn.commit()
+        cursor.close()"""
+           
+        '''except pyodbc.Error as e:
+            # Handle the error
+            print("An error occurred:", e)'''
+
+            
+        ''' if type(e) == str:
+            message = e.args[1]
+            # [Microsoft sql ] [ error code ... ] - message
+            # Extract the error message
+            start_index = message.rfind(']') + 1
+            end_index = message.find('-', start_index)
+            message = message[start_index:end_index].strip()
+
+            errorStr = f"Ha ocurrido un error: {message}"
+            with open("error.log", "a") as f:
+                f.write(f"{errorStr}\n")
+            cursor.close()
+            return errorStr
+        else:
+            error = 'Must add a container register'
+            with open("error.log", "a") as f:
+                f.write(f"{error}\n")
+            cursor.close()
+            return error'''
+
+
+        
+
+
         '''
         
         cursor.execute("SELECT * FROM ContainersDataTable")

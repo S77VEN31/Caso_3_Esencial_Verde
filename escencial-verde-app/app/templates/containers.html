@@ -20,6 +20,15 @@
   </head>
   <body onload="showDateTime()">
     {% include 'header.html' %}
+    {% if state != "" and state != "-1" %}
+      <div class="error">
+        {{ state }}
+      </div>
+    {% elif state == "-1" %}
+      <div class="success">
+        Se ha registrado la transacción exitosamente
+      </div>
+    {% endif %}
     <div id="popup" class="popup">
       <div class="popup-content">
         <div class="inputs-and-text-container">

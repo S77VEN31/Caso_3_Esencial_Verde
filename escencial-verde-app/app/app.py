@@ -32,10 +32,12 @@ def containers():
     carrier = db.get_random_carrier()
     fleet = db.get_random_fleet()
     location = db.get_random_logIn()
-
+    
     if request.method == 'POST':
         input_value = request.form.get('input-value')
-        db.validate_jsons(input_value)
+        state = db.validate_jsons(input_value)
+    else:
+        state = ''
         
     return render_template(
         "containers.html",
@@ -47,7 +49,8 @@ def containers():
         compXprod=compXprod,
         carrier=carrier,
         fleet=fleet,
-        location=location
+        location=location,
+        state=state
     )
 
 

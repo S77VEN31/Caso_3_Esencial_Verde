@@ -19,7 +19,7 @@ countries_dict = {'out': 'countries inserted', 'num': 200 }
 states_dict = {'out': 'states inserted', 'num': 500 }
 cities_dict = {'out': 'cities inserted', 'num': 2000 }
 locations_dict = {'out': 'locations inserted', 'num': 5000 }
-regionAreasAndRegions_dict = {'out': 'region areas and regions inserted', 'num1': 1000,'num2': 2000 }
+regionAreasAndRegions_dict = {'out': 'region areas and regions inserted', 'num1': 2000,'num2': 4000 }
 contacts_dict = {'out': 'contacts inserted', 'num': 20000, 'data': ('Carrier','Customer', 'Supplier', 'Partner', 'Competitor', 'Investor', 'Employee', 'Former employee', 'Sales contact', 'Marketing contact', 'Public relations contact', 'Human resources contact', 'Customer service contact', 'Technical support contact', 'Supplier contact', 'Logistics contact', 'Driver', 'Buyer', 'Seller') }
 languages_dict = {'out': 'languages inserted', 'data': [('en', 'English'), ('es', 'Spanish'), ('fr', 'French')] }
 textObjectTypes_dict = {'out': 'text object types inserted'}
@@ -74,7 +74,7 @@ payments_dict = {'out': 'payments inserted', 'num': 5000 }
 brands_dict = {'out': 'brands inserted', 'num': 30 }
 models_dict = {'out': 'models inserted', 'num': 50 }
 fleets_dict = {'out': 'fleets inserted', 'num': 200 }
-
+containers_dict = {'out': 'containers inserted', 'num': 40000 }
 
 
 # === countries === #
@@ -333,6 +333,16 @@ def fleets(props):
     print(props['out'])
     cnxn.commit()
 
+# === containers === #
+def containers(props):
+    containers_data = []
+    num_containers = props['num']
+    for _ in range(num_containers):
+        manufacturer_info = fake.company()
+        containers_data.append((manufacturer_info, fake.random_int(min=0, max=1), 1))
+    cursor.executemany("INSERT INTO containers (manufacturerInfo, isInUse, active) VALUES (?, ?, ?)", containers_data)
+    print(props['out'])
+    cnxn.commit()
 
 
 
@@ -345,7 +355,6 @@ def fleets(props):
 
 
 
-'''
 countries(countries_dict)
 cursor.execute("SELECT countryId FROM countries")
 country_ids = [row[0] for row in cursor.fetchall()]
@@ -364,7 +373,7 @@ cursor.execute("SELECT contactId FROM contacts")
 buyer = [row[0] for row in cursor.fetchall()]
 languages (languages_dict)
 textObjectTypes (textObjectTypes_dict)
-translations (translations_dict)
+#translations (translations_dict)
 companyCategories (companyCategories_dict)
 cursor.execute("SELECT companyCategoryId FROM companyCategories")
 companyCategory_ids = [row[0] for row in cursor.fetchall()]
@@ -384,10 +393,10 @@ transactions(transactions_dict)
 cursor.execute("SELECT transactionId FROM transactions")
 transaction = [row[0] for row in cursor.fetchall()]
 payments(payments_dict)
-'''
 brands(brands_dict)
 models(models_dict)
 fleets(fleets_dict)
+containers(containers_dict)
 
 
 
