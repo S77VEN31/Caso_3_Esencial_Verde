@@ -108,18 +108,19 @@ class Database:
             """
         )
         cursor.executemany("INSERT INTO #tempContainersData VALUES (?, ?, ?, ?, ?, ?, ?, ?)", data)
-        cursor.execute("""
+        cursor.execute(
+            """
             DECLARE @tempContainersData AS containersData;
             INSERT INTO @tempContainersData (carrier, plate, location, company, producer, wasteType, operationType, quantity)
             SELECT carrier, plate, location, company, producer, wasteType, operationType, quantity
             FROM #tempContainersData;
 
             EXEC InsertContainersData @containersData=@tempContainersData;
-
-        """)
-
-        '''
+            """
+        )
         self.cnxn.commit()
+        '''
+        
         cursor.execute("SELECT * FROM ContainersDataTable")
         test = cursor.fetchall()
         with open("xd.txt", "w") as f:
