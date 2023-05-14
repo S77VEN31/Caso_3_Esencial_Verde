@@ -76,24 +76,47 @@ class Database:
                     companies_producers.append([company, producer])
         return companies_producers
     
-    
+    import json
 
     def validate_jsons(self, data):
+        '''
         with open("error.json", "w") as f:
                 f.write(data + "\n")
         data = json.loads(data)
         data = [(d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], d['quantity']) for d in data]
-        
+        '''
+        data = ('Carrier C', 'Plate C', 'Location C', 'Company C', 'Producer C', 'Waste Type C', 'Operation Type C', '30')
         cursor = self.cnxn.cursor()
-       
-       
-        cursor.execute("CREATE TABLE #TempContainersData (carrier VARCHAR(500), plate VARCHAR(500), location VARCHAR(500), company VARCHAR(500), producer VARCHAR(500), wasteType VARCHAR(500), operationType VARCHAR(500), quantity VARCHAR(500));")
-        cursor.executemany("INSERT INTO #TempContainersData (carrier, plate, location, company, producer, wasteType, operationType, quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", data)
-        cursor.execute("EXEC InsertContainersData @containers = #TempContainersData;")
+        cursor.execute(
+            """
+            IF OBJECT_ID('tempdb..#tempContainersData') IS NOT NULL
+                DROP TABLE #tempContainersData;
+            """
+        )
+        cursor.execute(
+            """
+            CREATE TABLE #tempContainersData (
+                carrier VARCHAR(500),
+                plate VARCHAR(500),
+                location VARCHAR(500),
+                company VARCHAR(500),
+                producer VARCHAR(500),
+                wasteType VARCHAR(500),
+                operationType VARCHAR(500),
+                quantity VARCHAR(500)
+            )
+            """
+        )
+        cursor.execute("INSERT INTO #tempContainersData VALUES (?, ?, ?, ?, ?, ?, ?, ?)", data)
+
+        
+
         
         self.cnxn.commit()
-
-
+        cursor.execute("SELECT * FROM #tempContainersData")
+        test = cursor.fetchall()
+        with open("xd.txt", "w") as f:
+                f.write(str(test) + "\n")
 
 
 db = Database()
