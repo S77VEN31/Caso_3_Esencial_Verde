@@ -2,41 +2,33 @@
 IF OBJECT_ID('InsertContainersData', 'P') IS NOT NULL
     DROP PROCEDURE InsertContainersData;
 
-IF OBJECT_ID('containersData', 'TT') IS NOT NULL
-    DROP TYPE containersData;
-
 IF OBJECT_ID('ContainersDataTable', 'U') IS NOT NULL
     DROP TABLE ContainersDataTable;
 
 CREATE TABLE ContainersDataTable (
-    carrier VARCHAR(500),
-    plate VARCHAR(500),
-    location VARCHAR(500),
-    company VARCHAR(500),
-    producer VARCHAR(500),
-    wasteType VARCHAR(500),
-    operationType VARCHAR(500),
-    quantity VARCHAR(500)
+    carrier VARCHAR(255),
+    plate VARCHAR(255),
+    location VARCHAR(255),
+    company VARCHAR(255),
+    producer VARCHAR(255),
+    wasteType VARCHAR(255),
+    operationType VARCHAR(255),
+    quantity VARCHAR(255)
 );
 
--- Recreate the type and procedure
-IF NOT EXISTS (SELECT * FROM sys.types WHERE name = 'containersData' AND is_table_type = 1)
-BEGIN
-    CREATE TYPE containersData AS TABLE (
-        carrier VARCHAR(500),
-        plate VARCHAR(500),
-        location VARCHAR(500),
-        company VARCHAR(500),
-        producer VARCHAR(500),
-        wasteType VARCHAR(500),
-        operationType VARCHAR(500),
-        quantity VARCHAR(500)
-    );
-END
-GO
+
+
 
 CREATE PROCEDURE InsertContainersData
-    @containersData containersData READONLY
+	@carrier VARCHAR(255),
+    @plate VARCHAR(255),
+    @location VARCHAR(255),
+    @company VARCHAR(255),
+    @producer VARCHAR(255),
+    @wasteType VARCHAR(255),
+    @operationType VARCHAR(255),
+    @quantity VARCHAR(255)
+
 AS
 BEGIN
 
@@ -59,23 +51,27 @@ BEGIN
 
     BEGIN TRY
 		SET @CustomError = 2001
-
-        
-		
-		IF NOT EXISTS (
-            SELECT *
-            FROM @containersData
-        ) BEGIN
-            RAISERROR('No hay recipientes para registrar', 16, 1)
+     
+        IF (@producer = 'no ingresado') BEGIN
+            RAISERROR('You must enter the producer', 16, 1)
         END
 
-        IF (SELECT COUNT(*) FROM @containersData WHERE Producer = 'no ingresado') != 0 BEGIN
-            RAISERROR('Debe ingresar el productor', 16, 1)
+		IF (@wasteType = 'no ingresado') BEGIN
+            RAISERROR('You must enter the waste type', 16, 1)
+        END
+
+		IF (@operationType = 'no ingresado') BEGIN
+            RAISERROR('You must enter the operation type', 16, 1)
+        END
+
+		IF (@quantity = 'no ingresado') BEGIN
+            RAISERROR('You must enter the container quantity', 16, 1)
+
         END
 
         INSERT INTO ContainersDataTable (carrier, plate, location, company, producer, wasteType, operationType, quantity)
-        SELECT carrier, plate, location, company, producer, wasteType, operationType, quantity
-        FROM @containersData;
+		VALUES (@carrier, @plate, @location, @company, @producer,@wasteType, @operationType, @quantity)
+      
 
 
 		IF @InicieTransaccion=1 BEGIN
