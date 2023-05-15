@@ -1,0 +1,28 @@
+{
+  "name": "api-rest",
+  "version": "1.0.0",
+  "description": "Instalaciones:\r     Módulos:\r         Express: manejo de backend, es un frame work de nodejs para manejar las url para el usuario\r         Morgan: ver las peticiones del usuario\r         Cors: recibir peticiones de otros servidores\r         Dotenv: variables de entorno (contraseñas, etc)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src --exec babel-node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "mssql": "^9.1.1",
+    "tedious": "^16.0.0",
+    "tedious-connection-pool": "^1.0.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.8",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.21.5",
+    "nodemon": "^2.0.22"
+  }
+}

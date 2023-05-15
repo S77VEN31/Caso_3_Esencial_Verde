@@ -1,0 +1,17 @@
+@api = http://localhost:3000/contacts
+
+###
+GET {{api}}/Buyer_3
+
+###
+POST {{api}}
+Content-Type: application/json
+{
+  "name": "Pedrito",
+  "surname1": "Gonzales",
+  "surname2": "Gonzales",
+  "email": "pedritogg@gmail.com",
+  "phone": "12123434",
+  "notes": "El mejor del mundo",
+  "contactType": "jornalero"
+}

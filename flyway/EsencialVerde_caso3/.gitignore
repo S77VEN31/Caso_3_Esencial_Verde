@@ -1,1 +1,3 @@
 flyway-dev.user.json
+.env
+node_modules

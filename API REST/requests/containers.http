@@ -1,0 +1,7 @@
+@api = http://localhost:3000/containers
+
+###
+GET {{api}}
+
+###
+GET {{api}}/1
