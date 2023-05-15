@@ -152,7 +152,7 @@ td button {
 
 .errorPopup .popup-content {
     padding: 20px 40px;
-    
+
     max-width: 200px;
 }
 
@@ -176,8 +176,6 @@ td button {
     gap: 20px;
     overflow: hidden;
     border: 3px solid #205b3d;
-    animation-name: bounce;
-    animation-duration: 1s;
 }
 
 
