@@ -1,8 +1,36 @@
-Ha ocurrido un error: Tipo de datos SQL no válido (0) (SQLBindParameter
-Ha ocurrido un error: Tipo de datos SQL no válido (0) (SQLBindParameter
-Ha ocurrido un error: Tipo de datos SQL no válido (0) (SQLBindParameter
-Ha ocurrido un error: Tipo de datos SQL no válido (0) (SQLBindParameter
-Ha ocurrido un error: Tipo de datos SQL no válido (0) (SQLBindParameter
-Ha ocurrido un error: Tipo de datos SQL no válido (0) (SQLBindParameter
-Ha ocurrido un error: Tipo de datos SQL no válido (0) (SQLBindParameter
-('22018', '[22018] [Microsoft][ODBC SQL Server Driver]Valor de carácter no válido para especificación cast (0) (SQLExecDirectW)')
+
+Ha ocurrido un error: You must enter the waste type
+Ha ocurrido un error: You must enter the producer
+An error has occurred: You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the waste type
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the waste type
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 1 : You must enter the waste type
+An error has occurred in the row 2 : Attempt to use a closed cursor.
+An error has occurred in the row 2 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer
+An error has occurred in the row 3 : You must enter the producer
+An error has occurred in the row 1 : You must enter the producer

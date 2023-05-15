@@ -1,9 +1,9 @@
-function showPopup() {
-  document.getElementById("popup").style.display = "block";
+function showPopup(popupId) {
+  document.getElementById(popupId).style.display = "block";
 }
 
-function hidePopup() {
-  document.getElementById("popup").style.display = "none";
+function hidePopup(popupId) {
+  document.getElementById(popupId).style.display = "none";
 }
 function showDateTime() {
   var dateTime = new Date();
@@ -20,8 +20,29 @@ var currentOperation = {
   carrier: "no ingresado",
   plate: "no ingresado",
   location: "no ingresado",
-  quantity: 'no ingresado'
+  quantity: "no ingresado"
 };
+var local = currentOperation
+function getOperationValue (key) {
+  return currentOperation[key];
+}
+function refreshInfo () {
+  setMyVar('wasteType',  "no ingresado")
+  document.getElementById("dropdown-wastes-selected").innerHTML = getOperationValue("wasteType");
+
+  setMyVar("operationType","no ingresado")
+  document.getElementById("dropdown-operations-selected").innerHTML = getOperationValue("operationType");
+
+  setMyVar("company", "no ingresado")
+  setMyVar("producer", "no ingresado")
+  document.getElementById("dropdown-companies-selected").innerHTML = getOperationValue("producer");
+  
+  setMyVar("quantity", "no ingresado")
+  document.getElementById("quantity").value = getOperationValue("quantity");
+}
+
+
+
 function setMyVar(key, value) {
   currentOperation[key] = value;
   console.log(currentOperation);
@@ -102,7 +123,8 @@ function setInputValueAndSubmit(event) {
 
   var miFormulario = document.getElementById("mi-formulario");
   console.log(inputValue)
-  miFormulario.submit(); 
+  miFormulario.submit();
+  
 }
 
 

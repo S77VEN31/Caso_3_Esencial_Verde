@@ -80,52 +80,38 @@ class Database:
     
 
     def validate_jsons(self, data):
-        
-        with open("error.json", "w") as f:
-                f.write(data + "\n")
-        data = json.loads(data)
-
-        data = [(d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], d['quantity']) for d in data]
-        a = [
-            ('a','b','a','b','a','b','a','b')
-        ]
+        currentIndex = 0
         
         cursor = self.cnxn.cursor()
-        cursor.execute(
-            """
-            IF OBJECT_ID('tempdb..#tempContainersData') IS NOT NULL
-                DROP TABLE #tempContainersData;
-            """
-        )
-        cursor.execute(
-            """
-            CREATE TABLE #tempContainersData (
-                carrier VARCHAR(500),
-                plate VARCHAR(500),
-                location VARCHAR(500),
-                company VARCHAR(500),
-                producer VARCHAR(500),
-                wasteType VARCHAR(500),
-                operationType VARCHAR(500),
-                quantity VARCHAR(500)
-            )
-            """
-        )
-        cursor.executemany("INSERT INTO #tempContainersData VALUES (?, ?, ?, ?, ?, ?, ?, ?)", data)
-        cursor.execute(
-            """
-            DECLARE @tempContainersData AS containersData;
-            INSERT INTO @tempContainersData (carrier, plate, location, company, producer, wasteType, operationType, quantity)
-            SELECT carrier, plate, location, company, producer, wasteType, operationType, quantity
-            FROM #tempContainersData;
-
-            EXEC InsertContainersData @containersData=@tempContainersData;
-            """
-        )
-        self.cnxn.commit()
-        cursor.close()
-        #data = [(d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], d['quantity']) for d in data]
+        data = json.loads(data)
+        if data == []:
+                    return ('1', currentIndex)
+        # Convert the list of dictionaries into a list of tuples
+        data = [(d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], d['quantity']) for d in data]
         
-
+        try:
+            for row in data:
+                currentIndex = currentIndex + 1
+                cursor.execute('{CALL InsertContainersData(?,?,?,?,?,?,?,?)}', row)
+                self.cnxn.commit()
+            cursor.close()
+            return ('-1', currentIndex)
+        except pyodbc.Error as e:
+            if len(e.args) > 1:
+                message = e.args[1]
+                # [Microsoft sql ] [ error code ... ] - message
+                # Extract the error message
+                start_index = message.rfind(']') + 1
+                end_index = message.find('-', start_index)
+                message = message[start_index:end_index].strip()
+            else:
+                message = str(e)
+            errorStr = f"An error has occurred in the row { currentIndex } : {message}"
+            with open("error.log", "a") as f:
+                f.write(f"{errorStr}\n")
+            cursor.close()
+            return (errorStr, currentIndex)
+        
+   
 
 db = Database()

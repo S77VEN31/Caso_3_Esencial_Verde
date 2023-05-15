@@ -35,9 +35,12 @@ def containers():
     
     if request.method == 'POST':
         input_value = request.form.get('input-value')
-        state = db.validate_jsons(input_value)
+        validateInsertedData = db.validate_jsons(input_value)
+        state = validateInsertedData[0]
+        rowNumber = validateInsertedData[1]
     else:
-        state = ''
+        state=''
+        rowNumber=''
         
     return render_template(
         "containers.html",
@@ -50,7 +53,8 @@ def containers():
         carrier=carrier,
         fleet=fleet,
         location=location,
-        state=state
+        state=state,
+        rowNumber=rowNumber
     )
 
 

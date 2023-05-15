@@ -20,14 +20,42 @@
   </head>
   <body onload="showDateTime()">
     {% include 'header.html' %}
-    {% if state != "" and state != "-1" %}
-      <div class="error">
-        {{ state }}
+    {% if state != "" and state != "-1" and rowNumber != 0 %}
+    <div id='errorPop' class="errorPopup">
+      <div class="popup-content">
+        <div class="error">
+          {{ state }}
+        </div>
+        <button  class="delete-button" onclick="hidePopup('errorPop')">
+          <i class="fas fa-times"></i>
+          Close
+        </button>
       </div>
+    </div>
+    {% elif state == "1" %}
+    <div id='errorPop' class="errorPopup">
+      <div class="popup-content">
+      <div class="error">
+        Must insert registers to upload
+      </div>
+      <button class="delete-button" onclick="hidePopup('errorPop')">
+        <i class="fas fa-times"></i>
+        Close
+      </button>
+    </div>
+  </div>
     {% elif state == "-1" %}
-      <div class="success">
+    <div id='errorPop' class="errorPopup">
+      <div class="popup-content">
+      <div class="error">
         Se ha registrado la transacción exitosamente
       </div>
+      <button class="add-container-button" onclick="hidePopup('errorPop')">
+        <i class="fas fa-check"></i>
+        OK
+      </button>
+    </div>
+    </div>
     {% endif %}
     <div id="popup" class="popup">
       <div class="popup-content">
@@ -161,7 +189,7 @@
               <br />
             </form>
             <div class="buttons-container">
-              <button class="add-container-button" onclick="hidePopup(); 
+              <button class="add-container-button" onclick="hidePopup('popup'); 
               addRow(
                 '{{ carrier[0][0] }} {{ carrier[0][1] }} {{ carrier[0][2]}}',
                 '{{ fleet[0][0] }}{{ fleet[0][1][1:] }}',
@@ -169,7 +197,7 @@
                 <i class="fas fa-paper-plane"></i>
                 Submit
               </button>
-              <button class="delete-button" onclick="hidePopup()">
+              <button class="delete-button" onclick="hidePopup('popup')">
                 <i class="fas fa-times"></i>
                 Close
               </button>
@@ -180,13 +208,13 @@
     </div>
     <div class="container-transport-main-container">
       <div class="upload-buttons-container">
-        <button class="add-container-button" onclick="showPopup()">
+        <button class="add-container-button" onclick="showPopup('popup'); refreshInfo()">
           <i class="fas fa-plus"></i>
           New row
         </button>
         
         <form id="mi-formulario" action="/containers" method="POST">
-          <button class="add-container-button" onclick="setInputValueAndSubmit(event)">
+          <button class="add-container-button" onclick="setInputValueAndSubmit(event);">
             <i class="fas fa-upload"></i>
             Upload list
           </button>

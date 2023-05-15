@@ -139,6 +139,31 @@ td button {
     display: none;
 }
 
+
+.errorPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.errorPopup .popup-content {
+    padding: 20px 40px;
+    
+    max-width: 200px;
+}
+
+
+.popup-content .error {
+    font-weight: bold;
+    text-align: center;
+    text-justify: inter-word;
+}
+
+
 .popup-content {
     display: flex;
     flex-direction: column;
@@ -151,7 +176,11 @@ td button {
     gap: 20px;
     overflow: hidden;
     border: 3px solid #205b3d;
+    animation-name: bounce;
+    animation-duration: 1s;
 }
+
+
 
 .inputs-and-text-container {
     display: flex;
