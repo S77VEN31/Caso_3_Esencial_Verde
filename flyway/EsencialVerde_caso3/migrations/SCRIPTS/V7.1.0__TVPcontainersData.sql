@@ -12,8 +12,7 @@ CREATE TABLE ContainersDataTable (
     company VARCHAR(255),
     producer VARCHAR(255),
     wasteType VARCHAR(255),
-    operationType VARCHAR(255),
-    quantity INT
+    operationType VARCHAR(255)
 );
 
 
@@ -39,9 +38,6 @@ BEGIN
 	DECLARE @InicieTransaccion BIT
     -- Declaracion de otras variables
     
-    
-    
-
     SET @InicieTransaccion = 0
 	IF @@TRANCOUNT=0 BEGIN
 		SET @InicieTransaccion = 1
@@ -65,14 +61,19 @@ BEGIN
             RAISERROR('You must enter the container quantity', 16, 1)
         END
 
+        -- Insert multiple rows based on the quantity
+        DECLARE @Counter INT
+        SET @Counter = 1
 
+        WHILE @Counter <= @quantity
+        BEGIN
+            INSERT INTO ContainersDataTable (carrier, plate, location, company, producer, wasteType, operationType)
+		    VALUES (@carrier, @plate, @location, @company, @producer, @wasteType, @operationType)
 
-        INSERT INTO ContainersDataTable (carrier, plate, location, company, producer, wasteType, operationType, quantity)
-		VALUES (@carrier, @plate, @location, @company, @producer,@wasteType, @operationType, @quantity)
-      
+            SET @Counter = @Counter + 1
+        END
 
-
-		IF @InicieTransaccion=1 BEGIN
+		IF @InicieTransaccion = 1 BEGIN
 			COMMIT
 		END
 	END TRY
@@ -82,17 +83,16 @@ BEGIN
 		SET @ErrorState = ERROR_STATE()
 		SET @Message = ERROR_MESSAGE()
 		
-		IF @InicieTransaccion=1 BEGIN
+		IF @InicieTransaccion = 1 BEGIN
 			ROLLBACK
 		END
 		RAISERROR('%s - Error Number: %i', 
 			@ErrorSeverity, @ErrorState, @Message, @CustomError)
 	END CATCH	
-
-
     
 END;
 RETURN 0
 GO
+
 
 SELECT * FROM ContainersDataTable;
