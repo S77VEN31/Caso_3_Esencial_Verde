@@ -84,13 +84,15 @@ class Database:
         
         cursor = self.cnxn.cursor()
         data = json.loads(data)
+        
         if data == []:
                     return ('1', currentIndex)
         # Convert the list of dictionaries into a list of tuples
         data = [
-            (d['carrier'], d['plate'], d['location'], d['company'], d['producer'], d['wasteType'], d['operationType'], int(d['quantity']) if d['quantity'].isdigit() else 0)
+            (d['carrier'], d['plate'], d['location'], d['company'], d['producer'].replace(" ", "", 1), d['wasteType'], d['operationType'], int(d['quantity']) if d['quantity'].isdigit() else 0)
             for d in data
         ]
+
         try:
             for row in data:
                 currentIndex = currentIndex + 1

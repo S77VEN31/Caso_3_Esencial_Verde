@@ -354,7 +354,7 @@ def containers(props):
 
 
 
-"""
+
 countries(countries_dict)
 cursor.execute("SELECT countryId FROM countries")
 country_ids = [row[0] for row in cursor.fetchall()]
@@ -398,7 +398,7 @@ models(models_dict)
 fleets(fleets_dict)
 
 containers(containers_dict)
-"""
+
 for i in range(containers_dict['num']):
     try:
         # Select a random container and waste type
