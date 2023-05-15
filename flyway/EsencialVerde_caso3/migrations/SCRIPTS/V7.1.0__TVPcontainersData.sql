@@ -61,9 +61,55 @@ BEGIN
             RAISERROR('You must enter the container quantity', 16, 1)
         END
 
+		IF (@operationType = 'Pickup') 
+		BEGIN 
+			IF (
+				SELECT COUNT(*) AS AvailableContainers
+				FROM containersXwasteTypes AS cw
+				JOIN containers AS c ON c.containerId = cw.containerId
+				JOIN wasteTypes AS wt ON wt.wasteTypeId = cw.wasteTypeId
+				WHERE wt.name = @wasteType
+				AND c.isInUse = 1
+			) >= @quantity
+			BEGIN
+				-- There are enough containers available
+				PRINT 'There are enough containers for the specified waste type and quantity.'
+			END
+			ELSE
+			BEGIN
+				-- There are not enough containers available
+				PRINT 'There are not enough containers for the specified waste type and quantity.'
+			END
+		END
+		ELSE
+		BEGIN
+			IF (
+				SELECT COUNT(*) AS AvailableContainers
+				FROM containersXwasteTypes AS cw
+				JOIN containers AS c ON c.containerId = cw.containerId
+				JOIN wasteTypes AS wt ON wt.wasteTypeId = cw.wasteTypeId
+				WHERE wt.name = @wasteType
+				AND c.isInUse = 0
+			) >= @quantity
+			BEGIN
+				-- There are enough containers available
+				PRINT 'There are enough containers for the specified waste type and quantity.'
+			END
+			ELSE
+			BEGIN
+				-- There are not enough containers available
+				PRINT 'There are not enough containers for the specified waste type and quantity.'
+			END
+		END
+
+
+
+
         -- Insert multiple rows based on the quantity
         DECLARE @Counter INT
         SET @Counter = 1
+
+
 
         WHILE @Counter <= @quantity
         BEGIN
