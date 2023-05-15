@@ -321,23 +321,6 @@ CREATE TABLE pickupSchedules (
     FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId),
 );
 
-CREATE TABLE carriers ( -- Tabla con el registro de los transportistas y donde pertenecen
-    carrierId INT NOT NULL PRIMARY KEY,
-    siteId INT,
-    wasteCollectorId INT, 
-    producerId INT,
-    FOREIGN KEY (producerId) REFERENCES producers(producerId),
-    FOREIGN KEY (siteId) REFERENCES wasteTreatmentSites(siteId),
-    FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
-);
-
-CREATE TABLE carriersXcontacts (
-    carrierId INT NOT NULL,
-    contactId INT NOT NULL,
-    FOREIGN KEY (carrierId) REFERENCES carriers(carrierId),
-    FOREIGN KEY (contactId) REFERENCES contacts(contactId)
-);
-
 CREATE TABLE vehicleTypes (
     typeId INT NOT NULL PRIMARY KEY,
     typeName VARCHAR(255) NOT NULL
@@ -385,7 +368,7 @@ CREATE TABLE containerLogs ( -- Trasabilidad de los contenedores
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
     FOREIGN KEY (fleetId) REFERENCES fleet(fleetId),
     FOREIGN KEY (countryTreatmentCost) REFERENCES countries(countryId),
-    FOREIGN KEY (carrierId) REFERENCES carriers(carrierId),
+    FOREIGN KEY (carrierId) REFERENCES contacts(contactId),
     FOREIGN KEY (pickupScheduleId) REFERENCES pickupSchedules(pickupScheduleId),
     FOREIGN KEY (containerId) REFERENCES containers(containerId) 
 );
