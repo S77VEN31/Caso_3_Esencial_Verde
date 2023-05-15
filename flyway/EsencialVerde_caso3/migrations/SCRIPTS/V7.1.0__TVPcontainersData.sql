@@ -1,23 +1,12 @@
+-----------------------------------------------------------
+-- Autor: joseGranados & stivenGuzman
+-- Fecha: 15/05/2023
+-- Descripcion: PROCEDURE to the insertion of the trazability of containers and exchange of containers 
+-----------------------------------------------------------
 -- Drop the existing objects if needed
 IF OBJECT_ID('InsertContainersData', 'P') IS NOT NULL
     DROP PROCEDURE InsertContainersData;
-
-IF OBJECT_ID('ContainersDataTable', 'U') IS NOT NULL
-    DROP TABLE ContainersDataTable;
-
-CREATE TABLE ContainersDataTable (
-    carrier VARCHAR(255),
-    plate VARCHAR(255),
-    location VARCHAR(255),
-    company VARCHAR(255),
-    producer VARCHAR(255),
-    wasteType VARCHAR(255),
-    operationType VARCHAR(255)
-);
-
-
-
-
+GO
 CREATE PROCEDURE InsertContainersData
 	@carrier VARCHAR(255),
     @plate VARCHAR(255),
@@ -27,7 +16,6 @@ CREATE PROCEDURE InsertContainersData
     @wasteType VARCHAR(255),
     @operationType VARCHAR(255),
     @quantity INT
-
 AS
 BEGIN
 
@@ -72,13 +60,36 @@ BEGIN
 				AND c.isInUse = 1
 			) >= @quantity
 			BEGIN
-				-- There are enough containers available
-				PRINT 'There are enough containers for the specified waste type and quantity.'
+				-- Devolver los N primeros containers inUse que tengan el tipo de basura que decuelve el cliente
+				INSERT INTO containerLogs 
+				(containerId, 
+				carrierId,
+				fleetId,
+				operationType,
+				producerId)
+				SELECT TOP(@quantity) 
+				containerId, 
+				(SELECT contactId FROM contacts WHERE name + ' ' + surname1 + ' ' + ISNULL(surname2, '') = @carrier),
+				(SELECT LEFT(@plate, LEN(@plate) - 6) AS ExtractedValue),
+				1,	-- Operation
+				(SELECT producerId FROM producers WHERE name = @producer)
+				FROM 
+				containers
+
+				-- Actualizar el estado de los containers
+				UPDATE containers
+				SET isInUse = 0
+				WHERE containerId IN 
+				(SELECT TOP (@quantity) containerId     
+				FROM containerLogs     
+				ORDER BY containerId DESC);
+				-- Termina el reembolso de containers
 			END
 			ELSE
 			BEGIN
 				-- There are not enough containers available
-				PRINT 'There are not enough containers for the specified waste type and quantity.'
+				RAISERROR('There are not enough containers for the specified waste type and quantity.', 16, 1)
+				----- CAM<BIAR ESTA PICHA
 			END
 		END
 		ELSE
@@ -92,33 +103,39 @@ BEGIN
 				AND c.isInUse = 0
 			) >= @quantity
 			BEGIN
-				-- There are enough containers available
-				PRINT 'There are enough containers for the specified waste type and quantity.'
+				-- Meter los N primeros containers a containerLogs si hay suficientes disponibles
+				INSERT INTO containerLogs 
+				(containerId, 
+				carrierId,
+				fleetId,
+				operationType,
+				producerId)
+				SELECT TOP(@quantity) 
+				containerId, 
+				(SELECT contactId FROM contacts WHERE name + ' ' + surname1 + ' ' + ISNULL(surname2, '') = @carrier),
+				(SELECT LEFT(@plate, LEN(@plate) - 6) AS ExtractedValue),
+				2,	-- Operation
+				(SELECT producerId FROM producers WHERE name = @producer)
+				FROM 
+				containers
+
+				-- Actualizar el estado de los containers
+				UPDATE containers
+				SET isInUse = 1
+				WHERE containerId IN 
+				(SELECT TOP (@quantity) containerId     
+				FROM containerLogs     
+				ORDER BY containerId DESC);
+				-- Termina la entrega de containers
 			END
 			ELSE
 			BEGIN
 				-- There are not enough containers available
-				PRINT 'There are not enough containers for the specified waste type and quantity.'
+				RAISERROR('There are not enough containers for the specified waste type and quantity.', 16, 1)
 			END
 		END
 
-
-
-
-        -- Insert multiple rows based on the quantity
-        DECLARE @Counter INT
-        SET @Counter = 1
-
-
-
-        WHILE @Counter <= @quantity
-        BEGIN
-            INSERT INTO ContainersDataTable (carrier, plate, location, company, producer, wasteType, operationType)
-		    VALUES (@carrier, @plate, @location, @company, @producer, @wasteType, @operationType)
-
-            SET @Counter = @Counter + 1
-        END
-
+		-- Hacer rollback en caso de que alguna validacion no se cumpla
 		IF @InicieTransaccion = 1 BEGIN
 			COMMIT
 		END
@@ -139,6 +156,3 @@ BEGIN
 END;
 RETURN 0
 GO
-
-
-SELECT * FROM ContainersDataTable;
