@@ -339,8 +339,9 @@ def containers(props):
     num_containers = props['num']
     for _ in range(num_containers):
         manufacturer_info = fake.company()
-        containers_data.append((manufacturer_info, fake.random_int(min=0, max=1), 1))
-    cursor.executemany("INSERT INTO containers (manufacturerInfo, isInUse, active) VALUES (?, ?, ?)", containers_data)
+        max_weight = round(random.uniform(1, 1000), 2)
+        containers_data.append((manufacturer_info, fake.random_int(min=0, max=1), max_weight, 1))
+    cursor.executemany("INSERT INTO containers (manufacturerInfo, isInUse, maxWeight, active) VALUES (?, ?, ?, ?)", containers_data)
     print(props['out'])
     cnxn.commit()
 
@@ -353,8 +354,7 @@ def containers(props):
 
 
 
-
-
+"""
 countries(countries_dict)
 cursor.execute("SELECT countryId FROM countries")
 country_ids = [row[0] for row in cursor.fetchall()]
@@ -396,9 +396,23 @@ payments(payments_dict)
 brands(brands_dict)
 models(models_dict)
 fleets(fleets_dict)
+
 containers(containers_dict)
+"""
+for i in range(containers_dict['num']):
+    try:
+        # Select a random container and waste type
+        cursor.execute("SELECT TOP 1 containerId, manufacturerInfo FROM containers ORDER BY NEWID()")
+        container_id, manufacturer_info = cursor.fetchone()
+        cursor.execute("SELECT TOP 1 wasteTypeId, name FROM wasteTypes ORDER BY NEWID()")
+        waste_type_id, waste_type_name = cursor.fetchone()
 
-
-
+        # Insert the container and waste type into the containersXwasteTypes table
+        query = f"INSERT INTO containersXwasteTypes (containerId, wasteTypeId) VALUES ({container_id}, {waste_type_id})"
+        cursor.execute(query)
+        cnxn.commit()
+    except Exception as e:
+        print(f"An error occurred on iteration {i+1}: {e}")
+        continue
 
 cnxn.close()

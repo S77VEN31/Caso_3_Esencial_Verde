@@ -13,7 +13,7 @@ CREATE TABLE ContainersDataTable (
     producer VARCHAR(255),
     wasteType VARCHAR(255),
     operationType VARCHAR(255),
-    quantity VARCHAR(255)
+    quantity INT
 );
 
 
@@ -27,7 +27,7 @@ CREATE PROCEDURE InsertContainersData
     @producer VARCHAR(255),
     @wasteType VARCHAR(255),
     @operationType VARCHAR(255),
-    @quantity VARCHAR(255)
+    @quantity INT
 
 AS
 BEGIN
@@ -55,19 +55,17 @@ BEGIN
         IF (@producer = 'no ingresado') BEGIN
             RAISERROR('You must enter the producer', 16, 1)
         END
-
 		IF (@wasteType = 'no ingresado') BEGIN
             RAISERROR('You must enter the waste type', 16, 1)
         END
-
 		IF (@operationType = 'no ingresado') BEGIN
             RAISERROR('You must enter the operation type', 16, 1)
         END
-
-		IF (@quantity = 'no ingresado') BEGIN
+		IF (@quantity = 0) BEGIN
             RAISERROR('You must enter the container quantity', 16, 1)
-
         END
+
+
 
         INSERT INTO ContainersDataTable (carrier, plate, location, company, producer, wasteType, operationType, quantity)
 		VALUES (@carrier, @plate, @location, @company, @producer,@wasteType, @operationType, @quantity)
