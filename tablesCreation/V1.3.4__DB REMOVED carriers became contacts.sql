@@ -411,20 +411,6 @@ CREATE TABLE treatmentXcountriesPriceLogs (
     FOREIGN KEY (treatmentMethodXcountriesId) REFERENCES treatmentMethodsXcountries(treatmentMethodXcountriesId)
 )
 
-CREATE TABLE containersStockLogs (
-    logId INT NOT NULL PRIMARY KEY IDENTITY,
-    
-    
-    containerId INT NOT NULL,
-    action INT NOT NULL, -- request 1, return 2
-    createAt DATE NOT NULL DEFAULT GETDATE(),
-    updateAt DATE NOT NULL DEFAULT GETDATE(),
-    CHECKSUM VARBINARY(64),
-    
-    FOREIGN KEY (containerId) REFERENCES containers(containerId),
-    
-);
-
 CREATE TABLE contractTypes (        -- TO DO
     contractTypeId INT NOT NULL PRIMARY KEY IDENTITY,
     contractTypeName VARCHAR(255) NOT NULL
