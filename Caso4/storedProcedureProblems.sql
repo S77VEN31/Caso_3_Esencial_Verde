@@ -1,6 +1,8 @@
 -- ----------------- ------
 --  Primer Procedure ------
 -- ----------------- ------
+DROP PROCEDURE IF EXISTS UpdateExistingContact;
+
 CREATE PROCEDURE UpdateExistingContact
     @ContactId INT,
     @Name VARCHAR(255) = NULL,
