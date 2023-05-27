@@ -32,3 +32,21 @@ END
 
 CLOSE ProcedureCursor
 DEALLOCATE ProcedureCursor
+
+
+
+
+EXEC sp_addlinkedserver   
+   @server = 'LinkedS', 
+   @srvproduct = '', 
+   @provider = 'SQLNCLI', 
+   @datasrc = 'localhost, 1433';
+
+EXEC sp_addlinkedsrvlogin 
+   @rmtsrvname = 'LinkedS',
+   @useself = 'False',
+   @rmtuser = 'sa',
+   @rmtpassword = 'Sven1234';
+
+INSERT INTO [LinkedS].[caso3].[dbo].[containerLogs]
+SELECT * FROM [sys].[dm_exec_query_stats];
