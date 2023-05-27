@@ -1,11 +1,12 @@
 @api = http://localhost:3000/contacts
 
 ###
-GET {{api}}/Buyer_3
+GET {{api}}/Buyer_500
 
 ###
 POST {{api}}
 Content-Type: application/json
+
 {
   "name": "Pedrito",
   "surname1": "Gonzales",
