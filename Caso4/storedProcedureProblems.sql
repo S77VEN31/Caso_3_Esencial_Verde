@@ -1,7 +1,8 @@
--- ----------------- ------
---  Primer Procedure ------
--- ----------------- ------
+-- ------------ --
+--  Procedures  --
+-- ------------ --
 DROP PROCEDURE IF EXISTS UpdateExistingContact;
+GO
 
 CREATE PROCEDURE UpdateExistingContact
     @ContactId INT,
@@ -17,32 +18,95 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    UPDATE contacts
-    SET
-        name = ISNULL(@Name, name),
-        surname1 = ISNULL(@Surname1, surname1),
-        surname2 = ISNULL(@Surname2, surname2),
-        email = ISNULL(@Email, email),
-        phone = ISNULL(@Phone, phone),
-        notes = ISNULL(@Notes, notes),
-        contactType = ISNULL(@ContactType, contactType),
-        active = ISNULL(@Active, active),
-        updateAt = GETDATE()
-    WHERE contactId = @ContactId;
-END
+    BEGIN TRY
+        -- Inicio de la transacción
+        BEGIN TRANSACTION;
 
--- Visualizamos algún contacto previo a actualizar
-SELECT * FROM contacts WHERE contactId = 1
+        -- Verificar si se ha proporcionado un valor para la columna 'name'
+        IF @Name IS NOT NULL
+        BEGIN
+            -- Realizar la actualización solo si se proporciona un valor para 'name'
+            UPDATE contacts
+            SET name = @Name
+            WHERE contactId = @ContactId;
+        END
 
--- Ejemplo de Ejecución
-EXEC UpdateExistingContact
-    @ContactId = 3,
-    @Email = 'nuevoemail@example.com',
-    @Phone = '1234567890',
-    @Active = 0;
+        -- Realizar la actualización de las demás columnas
+        UPDATE contacts
+        SET
+            surname1 = ISNULL(@Surname1, surname1),
+            surname2 = ISNULL(@Surname2, surname2),
+            email = ISNULL(@Email, email),
+            phone = ISNULL(@Phone, phone),
+            notes = ISNULL(@Notes, notes),
+            contactType = ISNULL(@ContactType, contactType),
+            active = ISNULL(@Active, active),
+            updateAt = GETDATE()
+        WHERE contactId = @ContactId;
+        
+        -- Verificar si se ha actualizado algún registro
+        IF @@ROWCOUNT = 0
+        BEGIN
+            -- No se encontró ningún registro para actualizar, realizar un INSERT
+            INSERT INTO contacts (contactId, name, surname1, surname2, email, phone, notes, contactType, active, updateAt)
+            VALUES (@ContactId, @Name, @Surname1, @Surname2, @Email, @Phone, @Notes, @ContactType, @Active, GETDATE());
+        END
 
---- Ejemplo de Problemas
+        -- Verificar si ya existe un contacto con el mismo número de teléfono o correo electrónico
+        IF EXISTS (SELECT 1 FROM contacts WHERE (phone = @Phone OR email = @Email) AND contactId <> @ContactId)
+        BEGIN
+            -- Error: ya existe un contacto con el mismo número de teléfono o correo electrónico
+            -- Realizar un rollback
+            WAITFOR DELAY '00:00:05'; -- Espera de 5 segundos
+            ROLLBACK TRANSACTION;
+            THROW 51000, 'Ya existe un contacto con el mismo número de teléfono o correo electrónico.', 1;
+        END
 
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+
+        -- Mensaje de éxito
+        PRINT 'La actualización del contacto se completó correctamente.';
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, deshacer la transacción
+        ROLLBACK TRANSACTION;
+
+        -- Mensaje de error
+        PRINT 'Error en la actualización del contacto. Se ha deshecho.';
+
+        -- Mostrar información detallada del error
+        PRINT ERROR_MESSAGE();
+    END CATCH;
+END;
+GO
+
+-- Modificación del procedimiento GetContactsGmailNumber
+DROP PROCEDURE IF EXISTS GetContactsGmailNumber;
+GO
+CREATE PROCEDURE GetContactsGmailNumber
+AS
+BEGIN
+SET NOCOUNT ON;
+    
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        
+        -- Simulación de un retraso para aumentar la posibilidad de un error de "LOST UPDATE"
+        WAITFOR DELAY '00:00:02'; -- Espera de 2 segundos
+        
+        SELECT *
+        FROM contacts
+        WHERE (phone IS NOT NULL OR email LIKE '%@gmail.com%') AND (phone IS NOT NULL OR email IS NOT NULL);
+        
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        
+        THROW;
+    END CATCH;
+END;
 -- ---------------------------------------------------------------------------------------------------------------------------
 --a) Dirty Read:
 -- En este escenario, una transacción realiza una lectura de datos sin esperar a que otra transacción haya confirmado sus cambios. 
@@ -50,48 +114,287 @@ EXEC UpdateExistingContact
 -- En el ejemplo proporcionado, la Transacción 1 lee un contacto antes de que la Transacción 2 lo modifique, lo que podría resultar en la lectura de datos no válidos.
 -- ---------------------------------------------------------------------------------------------------------------------------
 
--- Transacción 1
-BEGIN TRANSACTION
-    -- Realizar una lectura sucia (dirty read)
-    SELECT * FROM contacts WITH (NOLOCK) WHERE contactId = 1
+-DROP PROCEDURE IF EXISTS UpdateExistingContact;
+GO
 
--- Transacción 2
-BEGIN TRANSACTION
-    -- Modificar el contacto mientras la Transacción 1 aún no ha sido confirmada
-    EXEC UpdateExistingContact
-        @ContactId = 1,
-        @Email = 'nuevoemail@example.com',
-        @Phone = '1234567890',
-        @Active = 0;
+CREATE PROCEDURE UpdateExistingContact
+    @ContactId INT,
+    @Name VARCHAR(255) = NULL,
+    @Surname1 VARCHAR(255) = NULL,
+    @Surname2 VARCHAR(255) = NULL,
+    @Email VARCHAR(255) = NULL,
+    @Phone VARCHAR(20) = NULL,
+    @Notes VARCHAR(255) = NULL,
+    @ContactType VARCHAR(255) = NULL,
+    @Active BIT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
 
--- Confirmar o revertir las transacciones según sea necesario
-COMMIT TRANSACTION -- Transacción 1
-COMMIT TRANSACTION -- Transacción 2
+    BEGIN TRY
+        -- Inicio de la transacción
+        BEGIN TRANSACTION;
+
+        -- Verificar si se ha proporcionado un valor para la columna 'name'
+        IF @Name IS NOT NULL
+        BEGIN
+            -- Realizar la actualización solo si se proporciona un valor para 'name'
+            UPDATE contacts
+            SET name = @Name
+            WHERE contactId = @ContactId;
+        END
+
+        -- Realizar la actualización de las demás columnas
+        UPDATE contacts
+        SET
+            surname1 = ISNULL(@Surname1, surname1),
+            surname2 = ISNULL(@Surname2, surname2),
+            email = ISNULL(@Email, email),
+            phone = ISNULL(@Phone, phone),
+            notes = ISNULL(@Notes, notes),
+            contactType = ISNULL(@ContactType, contactType),
+            active = ISNULL(@Active, active),
+            updateAt = GETDATE()
+        WHERE contactId = @ContactId;
+		
+        -- Verificar si se ha actualizado algún registro
+        IF @@ROWCOUNT = 0
+        BEGIN
+            -- No se encontró ningún registro para actualizar, realizar un INSERT
+            INSERT INTO contacts (contactId, name, surname1, surname2, email, phone, notes, contactType, active, updateAt)
+            VALUES (@ContactId, @Name, @Surname1, @Surname2, @Email, @Phone, @Notes, @ContactType, @Active, GETDATE());
+        END
+
+        -- Verificar si ya existe un contacto con el mismo número de teléfono o correo electrónico
+        IF EXISTS (SELECT 1 FROM contacts WHERE (phone = @Phone OR email = @Email) AND contactId <> @ContactId)
+        BEGIN
+            -- Error: ya existe un contacto con el mismo número de teléfono o correo electrónico
+            -- Realizar un rollback
+			WAITFOR DELAY '00:00:05'; -- Espera de 2 segundos
+            ROLLBACK TRANSACTION;
+            THROW 51000, 'Ya existe un contacto con el mismo número de teléfono o correo electrónico.', 1;
+        END
+
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+
+        -- Mensaje de éxito
+        PRINT 'La actualización del contacto se completó correctamente.';
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, deshacer la transacción
+        ROLLBACK TRANSACTION;
+
+        -- Mensaje de error
+        PRINT 'Error en la actualización del contacto. Se ha deshecho.';
+
+        -- Mostrar información detallada del error
+        PRINT ERROR_MESSAGE();
+    END CATCH;
+END;
+GO
+
+DROP PROCEDURE IF EXISTS GetContactsGmailNumber;
+GO
+CREATE PROCEDURE GetContactsGmailNumber
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        
+        SELECT *
+        FROM contacts
+        WHERE (phone IS NOT NULL OR email LIKE '%@gmail.com%') AND (phone IS NOT NULL OR email IS NOT NULL);
+        
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        
+        THROW;
+    END CATCH;
+END;
+
+-- Primer EXEC: Actualizar el contacto 2 con el mismo número de teléfono que el contacto 1
+EXEC UpdateExistingContact
+    @ContactId = 2,
+    @Phone = '1234567890';
+-- Segundo EXEC: Obtener los contactos filtrados por teléfono o correo electrónico con el procedimiento GetContactsGmailNumber
+EXEC GetContactsGmailNumber
+
+-- El problema se soluciona cambiando el nivel de isolación antes de las transaction del procedimiento
+
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- b) Lost Update:
 -- En el ejemplo, la Transacción 1 lee un contacto y la Transacción 2 modifica el mismo contacto antes de que la Transacción 1
 -- confirme sus cambios. Como resultado, los cambios realizados por la Transacción 1 se pierden.
 -- ---------------------------------------------------------------------------------------------------------------------------
+-- Modificación del procedimiento UpdateExistingContact
+DROP PROCEDURE IF EXISTS UpdateExistingContact;
+GO
 
+CREATE PROCEDURE UpdateExistingContact
+    @ContactId INT,
+    @Name VARCHAR(255) = NULL,
+    @Surname1 VARCHAR(255) = NULL,
+    @Surname2 VARCHAR(255) = NULL,
+    @Email VARCHAR(255) = NULL,
+    @Phone VARCHAR(20) = NULL,
+    @Notes VARCHAR(255) = NULL,
+    @ContactType VARCHAR(255) = NULL,
+    @Active BIT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        -- Inicio de la transacción
+        BEGIN TRANSACTION;
+
+        -- Obtener los valores actuales del contacto antes de la actualización
+        DECLARE @CurrentName VARCHAR(255), @CurrentSurname1 VARCHAR(255);
+        SELECT @CurrentName = name, @CurrentSurname1 = surname1
+        FROM contacts
+        WHERE contactId = @ContactId;
+
+        -- Hacer una pausa para simular una concurrencia temporal
+        WAITFOR DELAY '00:00:02'; -- Espera de 2 segundos
+
+    
+
+        -- Actualizar los demás campos con los valores proporcionados
+        UPDATE contacts
+        SET
+			name = ISNULL(@Name, @CurrentName),
+			surname1 = ISNULL(@Surname1, @CurrentSurname1),
+            surname2 = ISNULL(@Surname2, surname2),
+            email = ISNULL(@Email, email),
+            phone = ISNULL(@Phone, phone),
+            notes = ISNULL(@Notes, notes),
+            contactType = ISNULL(@ContactType, contactType),
+            active = ISNULL(@Active, active),
+            updateAt = GETDATE()
+        WHERE contactId = @ContactId;
+
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+
+        -- Mostrar los valores actualizados
+        SELECT *
+        FROM contacts
+        WHERE contactId = @ContactId;
+
+        -- Mensaje de éxito
+        PRINT 'La actualización del contacto se completó correctamente.';
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, deshacer la transacción
+        ROLLBACK TRANSACTION;
+
+        -- Mensaje de error
+        PRINT 'Error en la actualización del contacto. Se ha deshecho.';
+
+        -- Mostrar información detallada del error
+        PRINT ERROR_MESSAGE();
+    END CATCH;
+END;
+GO
+
+
+
+-- Solo modificamos el primer procedure
 -- Transacción 1
-BEGIN TRANSACTION
-    -- Leer el contacto sin bloquearlo
-    SELECT * FROM contacts WHERE contactId = 1
+-- Transacción 1
+EXEC UpdateExistingContact
+    @ContactId = 7,
+    @Name = 'a';
 
--- Transacción 2
-BEGIN TRANSACTION
-    -- Modificar el mismo contacto sin haber confirmado la Transacción 1
-    EXEC UpdateExistingContact
-        @ContactId = 1,
-        @Email = 'nuevoemail@example.com',
-        @Phone = '1234567890',
-        @Active = 0;
+-- Transacción 2 (ejecutada simultáneamente con la Transacción 1)
+EXEC UpdateExistingContact
+    @ContactId = 7,
+    @Surname1 = 'a';
 
--- Confirmar o revertir las transacciones según sea necesario
-COMMIT TRANSACTION -- Transacción 1
-COMMIT TRANSACTION -- Transacción 2
+-- Se juntaron dos actualizaciones de datos que en un inicio no debieron ejecutarse juntas
 
+-- Solución
+
+-- Para evitar el error de actualización perdida, podemos utilizar bloqueos (locks) en la base de datos para garantizar
+-- la exclusividad de la actualización. Podemos lograr esto utilizando la cláusula UPDLOCK en la consulta de actualización.
+-- Aquí hay una modificación al procedimiento UpdateExistingContact que incluye bloqueos:
+-- Modificación del procedimiento UpdateExistingContact
+-- Modificación del procedimiento UpdateExistingContact
+DROP PROCEDURE IF EXISTS UpdateExistingContact;
+GO
+
+CREATE PROCEDURE UpdateExistingContact
+    @ContactId INT,
+    @Name VARCHAR(255) = NULL,
+    @Surname1 VARCHAR(255) = NULL,
+    @Surname2 VARCHAR(255) = NULL,
+    @Email VARCHAR(255) = NULL,
+    @Phone VARCHAR(20) = NULL,
+    @Notes VARCHAR(255) = NULL,
+    @ContactType VARCHAR(255) = NULL,
+    @Active BIT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        -- Inicio de la transacción
+        BEGIN TRANSACTION;
+
+        -- Obtener los valores actuales del contacto antes de la actualización
+        DECLARE @CurrentName VARCHAR(255), @CurrentSurname1 VARCHAR(255);
+
+        SELECT @CurrentName = name, @CurrentSurname1 = surname1 
+        FROM contacts WITH (UPDLOCK)
+        WHERE contactId = @ContactId;
+
+        -- Hacer una pausa para simular una concurrencia temporal
+        WAITFOR DELAY '00:00:02'; -- Espera de 2 segundos
+
+        -- Actualizar los campos utilizando UPDLOCK y los valores actuales obtenidos
+        UPDATE contacts WITH (UPDLOCK)
+        SET
+            name = ISNULL(@Name, @CurrentName),
+            surname1 = ISNULL(@Surname1, @CurrentSurname1),
+            surname2 = ISNULL(@Surname2, surname2),
+            email = ISNULL(@Email, email),
+            phone = ISNULL(@Phone, phone),
+            notes = ISNULL(@Notes, notes),
+            contactType = ISNULL(@ContactType, contactType),
+            active = ISNULL(@Active, active),
+            updateAt = GETDATE()
+        WHERE contactId = @ContactId;
+
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+
+        -- Mostrar los valores actualizados
+        SELECT *
+        FROM contacts
+        WHERE contactId = @ContactId;
+
+        -- Mensaje de éxito
+        PRINT 'La actualización del contacto se completó correctamente.';
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, deshacer la transacción
+        ROLLBACK TRANSACTION;
+
+        -- Mensaje de error
+        PRINT 'Error en la actualización del contacto. Se ha deshecho.';
+
+        -- Mostrar información detallada del error
+        PRINT ERROR_MESSAGE();
+    END CATCH;
+END;
+GO
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- c) Phantom:
 --En el ejemplo dado, la Transacción 1 realiza una consulta para obtener contactos con un cierto tipo, 
@@ -141,100 +444,3 @@ BEGIN TRANSACTION
 -- Confirmar o revertir las transacciones según sea necesario
 COMMIT TRANSACTION -- Transacción 1
 COMMIT TRANSACTION -- Transacción 2
-
--- ------------------- ------
---  Segundo Procedure  ------
--- ------------------- ------
-CREATE PROCEDURE GetProducerDetails
-    @ProducerId INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT *
-    FROM producers
-    WHERE producerId = @ProducerId;
-END;
-
--- Ejemplo de ejecución
-
-EXEC GetProducerDetails @ProducerId = 1;
-
---- Ejemplo de Problemas
-
--- ---------------------------------------------------------------------------------------------------------------------------
--- a) Dirty Read: 
--- En este ejemplo, la transacción 1 realiza una lectura del productor con ID 1,
--- pero antes de que se complete la transacción, la transacción 2 actualiza el nombre del mismo productor.
--- Como resultado, la transacción 1 podría leer un nombre no válido o no confirmado debido a la lectura sucia (dirty read).
--- ---------------------------------------------------------------------------------------------------------------------------
-
--- Transacción 1
-BEGIN TRANSACTION;
-EXEC GetProducerDetails @ProducerId = 1;
-
--- Transacción 2 (en paralelo con la transacción 1)
-BEGIN TRANSACTION;
-UPDATE producers
-SET name = 'Nuevo Nombre'
-WHERE producerId = 1;
-COMMIT;
-
--- Continuar con la transacción 1
-COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------------
--- b) Lost Update: 
--- En este ejemplo, la transacción 1 realiza una lectura y una posterior actualización del balance del productor con ID 1. 
--- Sin embargo, entre la lectura y la actualización, la transacción 2 también actualiza el balance del mismo productor. 
--- Como resultado, la actualización realizada por la transacción 1 puede perderse debido a la sobreescritura (lost update).
--- ---------------------------------------------------------------------------------------------------------------------------
-
--- Transacción 1
-BEGIN TRANSACTION;
-EXEC GetProducerDetails @ProducerId = 1;
-
--- Transacción 2 (en paralelo con la transacción 1)
-BEGIN TRANSACTION;
-INSERT INTO producers (name, locationId, companyId, balance)
-VALUES ('Nuevo Productor', 2, 1, 0);
-COMMIT;
-
--- Continuar con la transacción 1
-COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------------
--- c) Phantom:
--- En este ejemplo, la transacción 1 realiza una lectura de los productores existentes. Entre la lectura y la confirmación de la transacción,
--- la transacción 2 inserta un nuevo productor. Como resultado, la transacción 1 puede mostrar un conjunto diferente de productores en la lectura,
--- lo que genera una "aparición" de nuevos registros (phantom).
--- ---------------------------------------------------------------------------------------------------------------------------
--- Transacción 1
-BEGIN TRANSACTION;
-EXEC GetProducerDetails @ProducerId = 1;
-
--- Transacción 2 (en paralelo con la transacción 1)
-BEGIN TRANSACTION;
-INSERT INTO producers (name, locationId, companyId, balance)
-VALUES ('Nuevo Productor', 2, 1, 0);
-COMMIT;
-
--- Continuar con la transacción 1
-COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------------
--- d) Deadlock:
--- En este ejemplo, tanto la transacción 1 como la transacción 2 intentan ejecutar el stored procedure "GetProducerDetails"
--- en paralelo para diferentes productores (ID 1 y ID 2). Si ambas transacciones mantienen los bloqueos adquiridos durante la ejecución del
--- stored procedure y no se liberan, se producirá un deadlock.
--- ---------------------------------------------------------------------------------------------------------------------------
--- Transacción 1
-BEGIN TRANSACTION;
-EXEC GetProducerDetails @ProducerId = 1;
-
--- Transacción 2 (en paralelo con la transacción 1)
-BEGIN TRANSACTION;
-EXEC GetProducerDetails @ProducerId = 2;
-
--- Continuar con la transacción 1
-COMMIT;
