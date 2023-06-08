@@ -1,9 +1,9 @@
 # TO DO:
 cree usuarios en la base de datos que le permita probar lo siguiente: 
-a) es posible negar todo acceso a las tablas de la base de datos y operarla únicamente por medio de ejecución de stored procedures 
-b) es posible restringir la visibilidad de columnas a ciertos usuarios 
-c) se pueden crear roles, y que usuarios pertenezcan a roles, dichos roles podrían tener restricciones de tablas y columnas que aplican a los usuarios que pertenecen a dicho role 
-d) como resuelve sql server prioridades de permisos en la jerarquía, por ejemplo que un nivel superior niego acceso a algo y un nivel inferior se le asigne
+[x] a) es posible negar todo acceso a las tablas de la base de datos y operarla únicamente por medio de ejecución de stored procedures 
+[x] b) es posible restringir la visibilidad de columnas a ciertos usuarios 
+[x] c) se pueden crear roles, y que usuarios pertenezcan a roles, dichos roles podrían tener restricciones de tablas y columnas que aplican a los usuarios que pertenecen a dicho roles
+[ ] d) como resuelve sql server prioridades de permisos en la jerarquía, por ejemplo que un nivel superior niego acceso a algo y un nivel inferior se le asigne
 
 - de manera práctica demuestre como funciona un backup con su restore respectivo, usando método full e incremental
 
@@ -18,6 +18,11 @@ d) como resuelve sql server prioridades de permisos en la jerarquía, por ejempl
     - deberá tener un subtotal por industria y un total al final del reporte
     - finalmente, la gerencia quiere poder visualizar gráficamente cuáles ciudades o localidades están enviando sus desechos a cuáles centros de recolección, pudiendo observar dicha relación y su volumen acumulado a la fecha. También se quiere ver dicha relación por empresa productora y por empresas recolectoras. Para ello cree las consultas necesarias o bien haga el data export que genere un CSV que pueda ser cargado a neo4J para visualizar dicha relación.
 
+# PREGUNTAS
+Cuando mencionas en el punto:
+d) como resuelve sql server prioridades de permisos en la jerarquía, por ejemplo que un nivel superior niego acceso a algo y un nivel inferior se le asigne
+
+Te refieres a que sepamos que pasa cuando asigno a un objeto un permiso DENY pero por debajo hay un GRANT, que en este caso se queda el DENY, algo así es lo que quieres que reconozcamos o estoy muy perdido?
 # TO FIX
  EMPTY 😎
 # PROCEDURES/TRIGGERS TO DO:
