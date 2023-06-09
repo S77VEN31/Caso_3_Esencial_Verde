@@ -6,10 +6,10 @@ import time
 from googletrans import Translator
 faker = Faker()
 translator = Translator()
-server = 'JPABLIX'
+server = 'JPABLIX\MSSQLSERVER02'
 database = 'caso3'
 username = 'sa'
-password = 'Pablito09'
+password = '1234'
 cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 cursor = cnxn.cursor()
 fake = Faker()
@@ -71,7 +71,8 @@ currencies_dict = {'out': 'currencies inserted', 'data': [
 currencyRates_dict = {'out': 'currency rates inserted', 'num': 1000 }
 transactions_dict = {'out': 'transactions inserted', 'num': 5000 }
 payments_dict = {'out': 'payments inserted', 'num': 5000 }
-
+contractTypes_dict = {'out': 'contract types inserted', 'num': 5 }
+contracts_dict = {'out': 'contracts inserted', 'num': 5000 }
 
 
 # === countries === #
@@ -306,6 +307,33 @@ def payments (props):
     print(props['out'])
     cnxn.commit()
 
+# === contractTypes === #
+def contractTypes (props):
+    num_contractTypes = props['num']
+    for _ in range(num_contractTypes):
+        contractTypeName = fake.word()
+        query = f"INSERT INTO contractTypes (contractTypeName) VALUES ('{contractTypeName}')"
+        cursor.execute(query)
+    print(props['out'])
+    cnxn.commit()
+
+# === contracts === #
+def contracts (props):
+    num_contracts = props['num']
+    for _ in range(num_contracts):
+        contractTypeId = random.choice(contractType)
+        wasteTypeId = random.choice(wasteType)
+        producerId = random.choice(producer)
+        countryId = random.choice(country)
+        startDate = fake.date_between(start_date='-3y', end_date='today')
+        endDate = fake.date_between(start_date=startDate, end_date='+6m')
+        contractCreator = random.choice(contact)
+        contractSigner = random.choice(contact2)
+        checksum = fake.binary(length=64)
+        query = f"INSERT INTO contracts (contractTypeId, producerId, countryId, startDate, endDate, contractCreator, contractSigner, CHECKSUM, wasteTypeId) VALUES ({contractTypeId}, {producerId}, {countryId}, '{startDate}', '{endDate}', {contractCreator}, {contractSigner}, 0x{checksum.hex()}, {wasteTypeId})"
+        cursor.execute(query)
+    print(props['out'])
+    cnxn.commit()
 
 
 
@@ -357,10 +385,20 @@ transactions(transactions_dict)
 cursor.execute("SELECT transactionId FROM transactions")
 transaction = [row[0] for row in cursor.fetchall()]
 payments(payments_dict)
+contractTypes (contractTypes_dict)
 '''
-contacts (contacts_dict)
-
-
-
+cursor.execute("SELECT contractTypeId FROM contractTypes")
+contractType = [row[0] for row in cursor.fetchall()]
+cursor.execute("SELECT wasteTypeId FROM wasteTypes")
+wasteType = [row[0] for row in cursor.fetchall()]
+cursor.execute("SELECT producerId FROM producers")
+producer = [row[0] for row in cursor.fetchall()]
+cursor.execute("SELECT countryId FROM countries")
+country = [row[0] for row in cursor.fetchall()]
+cursor.execute("SELECT contactId FROM contacts")
+contact = [row[0] for row in cursor.fetchall()]
+cursor.execute("SELECT contactId FROM contacts")
+contact2 = [row[0] for row in cursor.fetchall()]
+contracts (contracts_dict)
 
 cnxn.close()

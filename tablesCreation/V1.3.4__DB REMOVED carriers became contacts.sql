@@ -70,12 +70,14 @@ CREATE TABLE companies (
     companyId INT NOT NULL PRIMARY KEY IDENTITY,
     companyName VARCHAR(255) NOT NULL,
     companyCategoryId INT, 
+    countryId INT NOT NULL,
     isLocal BIT NOT NULL DEFAULT 1,
     carbonFootprint DECIMAL(10, 2),
     active BIT NOT NULL DEFAULT 1,
     createAt DATE NOT NULL DEFAULT GETDATE(),
     updateAt DATE NOT NULL DEFAULT GETDATE(),
     CHECKSUM VARBINARY(64),
+    FOREIGN KEY (countryId) REFERENCES countries(countryId),
     FOREIGN KEY (companyCategoryId) REFERENCES companyCategories(companyCategoryId)
 );
 
@@ -420,6 +422,7 @@ CREATE TABLE contracts (            -- TO DO
     contractId INT NOT NULL PRIMARY KEY IDENTITY,
     contractTypeId INT NOT NULL,
     wasteCollectorId INT,
+    wasteTypeId INT NOT NULL,
     producerId INT NOT NULL,
     countryId INT NOT NULL,
     startDate DATE NOT NULL,
@@ -434,7 +437,9 @@ CREATE TABLE contracts (            -- TO DO
     FOREIGN KEY (wasteCollectorId) REFERENCES wasteCollectors(wasteCollectorId),
     FOREIGN KEY (producerId) REFERENCES producers(producerId),
     FOREIGN KEY (contractCreator) REFERENCES contacts(contactId),
-    FOREIGN KEY (contractSigner) REFERENCES contacts(contactId)
+    FOREIGN KEY (contractSigner) REFERENCES contacts(contactId),
+    FOREIGN KEY (countryId) REFERENCES countries(countryId),
+    FOREIGN KEY (wasteTypeId) REFERENCES wasteTypes(wasteTypeId)
 );
 
 CREATE TABLE contractsXtretmentPriceLogs ( -- TO DO
