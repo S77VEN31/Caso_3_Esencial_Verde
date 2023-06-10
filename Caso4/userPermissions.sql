@@ -21,8 +21,6 @@ GRANT EXECUTE ON OBJECT::dbo.GetContactsGmailNumber TO usuario;
     EXEC sp_addrolemember 'usuarioPrueba', 'stiven_segura'
 
 
-
-
 SELECT
     co.name AS [País o Región],
     p.name AS Industria,

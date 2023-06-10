@@ -5,34 +5,20 @@ cree usuarios en la base de datos que le permita probar lo siguiente:
 [x] c) se pueden crear roles, y que usuarios pertenezcan a roles, dichos roles podrían tener restricciones de tablas y columnas que aplican a los usuarios que pertenecen a dicho roles
 [x] d) como resuelve sql server prioridades de permisos en la jerarquía, por ejemplo que un nivel superior niego acceso a algo y un nivel inferior se le asigne
 
-ALTER TABLE contracts
-ADD wasteTypeId INT NOT NULL;
+[ ] - de manera práctica demuestre como funciona un backup con su restore respectivo, usando método full e incremental
 
-ALTER TABLE companies
-ADD countryId INT;
-UPDATE c
-SET c.countryId = cc.countryId
-FROM companies c
-JOIN (
-  SELECT countryId, ROW_NUMBER() OVER (ORDER BY NEWID()) AS rn
-  FROM countries
-) cc ON c.companyId = cc.rn
+[ ] - usando una herramienta de reporting, por ejemplo microsoft reporting services (se puede usar en docker), powerbi, tableau o kibana, cree un reporte del sistema con la siguiente especificación:
 
+[ ]     - titulo del reporte
+[ ]     - subtitulo del reporte es el rango de fechas de los datos del reporte
+[ ]     - columnas: país o región, industria, tipo de residuo, costo, venta y ganancia, estas últimas en la moneda base, por ejemplo $
+[ ]     - contenido: seleccionando el país o una región de forma exclusiva y un rango de fechas, despliegue para todos los tipos de residuos el total recolectado por industria, lo que ha costado procesar dicho total de residuo, lo que se ha cobrado por procesarlo y la diferencia o ganancia neta.
+[ ]     - ordenado ascendente por país o región, industria y tipo de residuo
+[ ]     - ordenado descendente por ganancia
+[ ]     - deberá tener un subtotal por industria y un total al final del reporte
+[ ]     - finalmente, la gerencia quiere poder visualizar gráficamente cuáles ciudades o localidades están enviando sus desechos a cuáles centros de recolección, pudiendo observar dicha relación y su volumen acumulado a la fecha. También se quiere ver dicha relación por empresa productora y por empresas recolectoras. Para ello cree las consultas necesarias o bien haga el data export que genere un CSV que pueda ser cargado a neo4J para visualizar dicha relación.
 
-- de manera práctica demuestre como funciona un backup con su restore respectivo, usando método full e incremental
-
-- usando una herramienta de reporting, por ejemplo microsoft reporting services (se puede usar en docker), powerbi, tableau o kibana, cree un reporte del sistema con la siguiente especificación:
-
-    - titulo del reporte
-    - subtitulo del reporte es el rango de fechas de los datos del reporte
-    - contenido: seleccionando el país o una región de forma exclusiva y un rango de fechas, despliegue para todos los tipos de residuos el total recolectado por industria, lo que ha costado procesar dicho total de residuo, lo que se ha cobrado por procesarlo y la diferencia o ganancia neta.
-    - columnas: país o región, industria, tipo de residuo, costo, venta y ganancia, estas últimas en la moneda base, por ejemplo $
-    - ordenado ascendente por país o región, industria y tipo de residuo
-    - ordenado descendente por ganancia
-    - deberá tener un subtotal por industria y un total al final del reporte
-    - finalmente, la gerencia quiere poder visualizar gráficamente cuáles ciudades o localidades están enviando sus desechos a cuáles centros de recolección, pudiendo observar dicha relación y su volumen acumulado a la fecha. También se quiere ver dicha relación por empresa productora y por empresas recolectoras. Para ello cree las consultas necesarias o bien haga el data export que genere un CSV que pueda ser cargado a neo4J para visualizar dicha relación.
-
-- finalmente, la gerencia quiere poder visualizar gráficamente cuáles ciudades o localidades están enviando sus desechos a cuáles centros de recolección, pudiendo observar dicha relación y su volumen acumulado a la fecha. También se quiere ver dicha relación por empresa productora y por empresas recolectoras. Para ello cree las consultas necesarias o bien haga el data export que genere un CSV que pueda ser cargado a neo4J para visualizar dicha relación.
+[ ] - finalmente, la gerencia quiere poder visualizar gráficamente cuáles ciudades o localidades están enviando sus desechos a cuáles centros de recolección, pudiendo observar dicha relación y su volumen acumulado a la fecha. También se quiere ver dicha relación por empresa productora y por empresas recolectoras. Para ello cree las consultas necesarias o bien haga el data export que genere un CSV que pueda ser cargado a neo4J para visualizar dicha relación.
 
 # PREGUNTAS
 Cuando mencionas en el punto:
