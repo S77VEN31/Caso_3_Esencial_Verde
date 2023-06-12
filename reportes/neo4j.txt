@@ -1,38 +1,9 @@
-// Crear los nodos de los productores
-LOAD CSV WITH HEADERS FROM 'file:///desechosXproductorXcollector.csv' AS line
-CREATE (:Productor {
-  id: toInteger(line.productor),
-  name: line.name,
-  weight: toFloat(line.weight),
-  type: toInteger(line.type),
-  country: line.country,
-  state: line.state,
-  city: line.city,
-  zip: line.zip,
-  latitude: toFloat(line.latitude),
-  longitude: toFloat(line.longitude),
-  company: line.company
-})
+LOAD CSV WITH HEADERS FROM 'file:///desechosXproductorXcollector.csv' AS row FIELDTERMINATOR ';'
+WITH row
+MERGE (p:Producer {name: row.producerName})
+SET p.company = row.pCompany, p.country = row.producerC, p.state = row.producerS, p.city = row.producerCi
 
-// Crear los nodos de los collectors
-LOAD CSV WITH HEADERS FROM 'file:///desechosXproductorXcollector.csv' AS line
-CREATE (:Collector {
-  id: toInteger(line.collector)
-})
+MERGE (c:Collector {name: row.collectorName})
+SET c.country = row.collectorC, c.state = row.collectorS, c.city = row.collectorCi
 
-// Crear las relaciones entre los productores y los collectors basadas en el peso
-LOAD CSV WITH HEADERS FROM 'file:///desechosXproductorXcollector.csv' AS line
-MATCH (p:Productor {id: toInteger(line.productor)})
-MATCH (c:Collector {id: toInteger(line.collector)})
-MERGE (p)-[:ENVIADO {weight: toFloat(line.weight)}]->(c)
-
-// Crear los nodos de las ciudades y relacionarlos con los productores y los collectors
-LOAD CSV WITH HEADERS FROM 'file:///desechosXproductorXcollector.csv' AS line
-FIELDTERMINATOR ';'
-MERGE (city:City {name: line.city})
-WITH line, city
-MATCH (p:Productor {id: toInteger(line.productor)})
-MERGE (p)-[:ENVIADO_A]->(city)
-WITH line, city
-MATCH (c:Collector {id: toInteger(line.collector)})
-MERGE (c)-[:RECIBIDO_EN]->(city)
+MERGE (p)-[:COLLECTS {weight: toFloat(row.weight)}]->(c)
