@@ -6,8 +6,8 @@ import time
 from googletrans import Translator
 faker = Faker()
 translator = Translator()
-server = 'JPABLIX\MSSQLSERVER02'
-database = 'caso3'
+server = 'DESKTOP-EVNPENN'#'JPABLIX\MSSQLSERVER02'
+database = 'caso3_test'#'caso3'
 username = 'sa'
 password = '1234'
 cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
@@ -73,7 +73,7 @@ transactions_dict = {'out': 'transactions inserted', 'num': 5000 }
 payments_dict = {'out': 'payments inserted', 'num': 5000 }
 contractTypes_dict = {'out': 'contract types inserted', 'num': 5 }
 contracts_dict = {'out': 'contracts inserted', 'num': 5000 }
-
+coutryTreatmentCost_dict = {'out': 'country inserted'}
 
 # === countries === #
 def countries (props): 
@@ -335,7 +335,18 @@ def contracts (props):
     print(props['out'])
     cnxn.commit()
 
+# === coutryTreatmentCost === #
+def coutryTreatmentCost(props):
+    for country in country_ids:
+        for treatmentMethod in treatmentMethod_ids:
+            cost = round(random.uniform(1, 100), 2)
+            query = f"INSERT INTO countryTreatmentCost (treatmentMethodId, countryId, cost) VALUES ({treatmentMethod}, {country}, {cost})"
+            cursor.execute(query)
+    print(props['out'])
+    cnxn.commit()
 
+        
+    
 
 
 
@@ -386,7 +397,7 @@ cursor.execute("SELECT transactionId FROM transactions")
 transaction = [row[0] for row in cursor.fetchall()]
 payments(payments_dict)
 contractTypes (contractTypes_dict)
-'''
+
 cursor.execute("SELECT contractTypeId FROM contractTypes")
 contractType = [row[0] for row in cursor.fetchall()]
 cursor.execute("SELECT wasteTypeId FROM wasteTypes")
@@ -400,5 +411,12 @@ contact = [row[0] for row in cursor.fetchall()]
 cursor.execute("SELECT contactId FROM contacts")
 contact2 = [row[0] for row in cursor.fetchall()]
 contracts (contracts_dict)
+'''
+cursor.execute("SELECT countryId FROM countries")
+country_ids = [row[0] for row in cursor.fetchall()]
+cursor.execute("SELECT methodId FROM treatmentMethods")
+treatmentMethod_ids = [row[0] for row in cursor.fetchall()]
+coutryTreatmentCost(coutryTreatmentCost_dict)
+
 
 cnxn.close()
