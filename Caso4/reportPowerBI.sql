@@ -1,12 +1,11 @@
--- Select para el reporte de Power BI
 SELECT
 	co.name AS country,
 	com.companyName AS company,
 	wt.name AS wasteType,
 	i.postdate,
 	SUM(i.amount) AS totalCollected,
-	SUM(ctc.cost * i.amount) AS totalCostProcessed,
-	SUM(ctc.cost * i.amount) - SUM(ctc.cost * i.amount * wt2.cost) AS netProfit
+	SUM(ctc.cost) AS totalCostProcessed,
+	SUM(i.amount) - SUM(ctc.cost) AS netProfit -- SUM(ctc.cost * i.amount * wt2.cost) AS netProfit
 FROM
 	companies com
 	INNER JOIN invoices i ON com.companyId = i.companyId
