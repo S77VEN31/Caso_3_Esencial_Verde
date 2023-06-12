@@ -11,13 +11,13 @@ INNER JOIN countries co ON s.countryId = co.countryId
 INNER JOIN companies comp ON p.companyId = comp.companyId
 WHERE cl.operationType = 1;
 -- con acumulado
-SELECT p.producerId, p.name AS producerName, SUM(cl.weight) AS accumulatedWeight, cl.operationType,
-       co.name AS producerCountry, s.name AS producerState, ci.name AS producerCity, 
-       l.zipcode AS producerZipcode, l.latitude AS producerLatitude, l.longitude AS producerLongitude, 
+	SELECT p.producerId, p.name AS producerName, SUM(cl.weight) AS accumulatedWeight, cl.operationType,
+       co.name AS collectorCountry, s.name AS collectorState, ci.name AS collectorCity, 
+       l.zipcode AS collectorZipcode, l.latitude AS collectorLatitude, l.longitude AS collectorLongitude, 
        comp.companyName AS producerCompany, cl.wasteCollectorId
 FROM containerLogs cl
 INNER JOIN producers p ON cl.producerId = p.producerId
-INNER JOIN locations l ON p.locationId = l.locationId
+INNER JOIN locations l ON cl.wasteCollectorId = l.locationId
 INNER JOIN cities ci ON l.cityId = ci.cityId
 INNER JOIN states s ON ci.stateId = s.stateId
 INNER JOIN countries co ON s.countryId = co.countryId

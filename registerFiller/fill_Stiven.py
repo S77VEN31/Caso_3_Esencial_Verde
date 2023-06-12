@@ -6,10 +6,10 @@ import time
 from googletrans import Translator
 faker = Faker()
 translator = Translator()
-server = 'localhost'
+server = 'DESKTOP-NBRERFJ'
 database = 'caso3'
 username = 'sa'
-password = 'Sven1234'
+password = '1234'
 cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 cursor = cnxn.cursor()
 fake = Faker()
@@ -347,7 +347,7 @@ def containers(props):
 
 
 
-
+'''
 
 
 
@@ -414,5 +414,32 @@ for i in range(containers_dict['num']):
     except Exception as e:
         print(f"An error occurred on iteration {i+1}: {e}")
         continue
+'''
+
+for _ in range(20000):
+    containerId = random.randint(1, 1000)
+    carrierId = random.randint(1, 1000)
+    fleetId = random.randint(1, 180)
+    weight = random.uniform(10, 100.0)
+    operationType = 1
+    wasteCollectorId = random.randint(1, 20)
+    producerId = random.randint(1, 20)
+    query = f"INSERT INTO containerLogs (containerId, carrierId, fleetId, weight, operationType, wasteCollectorId, producerId)" \
+            f"VALUES ({containerId}, {carrierId}, {fleetId}, {weight}, {operationType}, {wasteCollectorId}, {producerId})"
+    
+    try:
+        cursor.execute(query)
+        cnxn.commit()
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        cnxn.rollback()
+
+
+
+
+
+
+
+
 
 cnxn.close()

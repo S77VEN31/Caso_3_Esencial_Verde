@@ -1,0 +1,401 @@
+﻿productor;name;weight;type;country;state;city;zip;latitude;longitude;company;collector
+1;Productor 1;3032.03;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Chevron;12
+1;Productor 1;2406.10;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Chevron;13
+1;Productor 1;2505.90;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Chevron;15
+1;Productor 1;2532.84;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Chevron;14
+1;Productor 1;3134.14;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Chevron;17
+1;Productor 1;2414.08;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Chevron;16
+1;Productor 1;2699.81;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Chevron;11
+1;Productor 1;2999.54;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Chevron;4
+1;Productor 1;2841.90;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Chevron;6
+1;Productor 1;2990.30;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Chevron;2
+1;Productor 1;2962.22;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Chevron;1
+1;Productor 1;3046.46;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Chevron;3
+1;Productor 1;2578.21;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Chevron;9
+1;Productor 1;3138.20;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Chevron;5
+1;Productor 1;2775.85;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Chevron;7
+1;Productor 1;2677.93;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Chevron;10
+1;Productor 1;3658.99;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Chevron;8
+1;Productor 1;3611.23;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Chevron;18
+1;Productor 1;2851.68;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Chevron;19
+1;Productor 1;2599.55;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Chevron;20
+2;Productor 2;3202.70;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Apple;12
+2;Productor 2;2629.33;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Apple;13
+2;Productor 2;2570.19;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Apple;15
+2;Productor 2;2734.28;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Apple;14
+2;Productor 2;2078.56;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Apple;17
+2;Productor 2;2510.23;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Apple;16
+2;Productor 2;2672.81;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Apple;11
+2;Productor 2;3303.52;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Apple;4
+2;Productor 2;3494.27;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Apple;6
+2;Productor 2;3080.21;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Apple;2
+2;Productor 2;2270.15;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Apple;1
+2;Productor 2;3053.00;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Apple;3
+2;Productor 2;3162.71;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Apple;9
+2;Productor 2;2564.15;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Apple;5
+2;Productor 2;3167.16;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Apple;7
+2;Productor 2;2351.44;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Apple;10
+2;Productor 2;2288.20;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Apple;8
+2;Productor 2;2244.78;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Apple;18
+2;Productor 2;3276.39;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Apple;19
+2;Productor 2;3293.89;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Apple;20
+3;Productor 3;2717.15;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Ford;12
+3;Productor 3;2523.03;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Ford;13
+3;Productor 3;2233.73;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Ford;15
+3;Productor 3;2017.89;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Ford;14
+3;Productor 3;2146.81;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Ford;17
+3;Productor 3;3137.56;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Ford;16
+3;Productor 3;3196.30;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Ford;11
+3;Productor 3;1908.98;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Ford;4
+3;Productor 3;2714.50;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Ford;6
+3;Productor 3;3135.77;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Ford;2
+3;Productor 3;2810.07;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Ford;1
+3;Productor 3;2062.01;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Ford;3
+3;Productor 3;3037.86;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Ford;9
+3;Productor 3;1912.57;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Ford;5
+3;Productor 3;2111.15;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Ford;7
+3;Productor 3;2687.36;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Ford;10
+3;Productor 3;2630.83;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Ford;8
+3;Productor 3;2123.42;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Ford;18
+3;Productor 3;2711.91;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Ford;19
+3;Productor 3;2865.76;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Ford;20
+4;Productor 4;3407.89;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Monsanto;12
+4;Productor 4;2424.92;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Monsanto;13
+4;Productor 4;2373.17;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Monsanto;15
+4;Productor 4;2811.41;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Monsanto;14
+4;Productor 4;2430.26;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Monsanto;17
+4;Productor 4;2896.01;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Monsanto;16
+4;Productor 4;2442.84;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Monsanto;11
+4;Productor 4;2452.67;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Monsanto;4
+4;Productor 4;2440.78;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Monsanto;6
+4;Productor 4;3328.88;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Monsanto;2
+4;Productor 4;2077.50;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Monsanto;1
+4;Productor 4;2702.49;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Monsanto;3
+4;Productor 4;2548.51;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Monsanto;9
+4;Productor 4;3364.05;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Monsanto;5
+4;Productor 4;2914.30;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Monsanto;7
+4;Productor 4;2820.40;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Monsanto;10
+4;Productor 4;2356.94;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Monsanto;8
+4;Productor 4;3213.00;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Monsanto;18
+4;Productor 4;3495.97;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Monsanto;19
+4;Productor 4;3148.26;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Monsanto;20
+5;Productor 5;1637.96;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Walmart;12
+5;Productor 5;2488.10;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Walmart;13
+5;Productor 5;2224.50;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Walmart;15
+5;Productor 5;3191.67;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Walmart;14
+5;Productor 5;2791.09;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Walmart;17
+5;Productor 5;2487.03;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Walmart;16
+5;Productor 5;3199.42;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Walmart;11
+5;Productor 5;2053.25;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Walmart;4
+5;Productor 5;2925.12;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Walmart;6
+5;Productor 5;3359.09;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Walmart;2
+5;Productor 5;2780.96;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Walmart;1
+5;Productor 5;3283.63;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Walmart;3
+5;Productor 5;2997.45;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Walmart;9
+5;Productor 5;2146.79;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Walmart;5
+5;Productor 5;3424.60;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Walmart;7
+5;Productor 5;2318.78;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Walmart;10
+5;Productor 5;2616.85;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Walmart;8
+5;Productor 5;2623.92;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Walmart;18
+5;Productor 5;2988.21;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Walmart;19
+5;Productor 5;2471.81;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Walmart;20
+6;Productor 6;3244.84;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;FedEx;12
+6;Productor 6;2875.03;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;FedEx;13
+6;Productor 6;2669.90;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;FedEx;15
+6;Productor 6;2603.40;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;FedEx;14
+6;Productor 6;2177.90;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;FedEx;17
+6;Productor 6;2854.10;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;FedEx;16
+6;Productor 6;2353.97;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;FedEx;11
+6;Productor 6;2690.43;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;FedEx;4
+6;Productor 6;2188.99;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;FedEx;6
+6;Productor 6;3052.52;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;FedEx;2
+6;Productor 6;2532.92;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;FedEx;1
+6;Productor 6;2191.11;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;FedEx;3
+6;Productor 6;2747.00;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;FedEx;9
+6;Productor 6;3270.08;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;FedEx;5
+6;Productor 6;2264.94;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;FedEx;7
+6;Productor 6;3712.99;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;FedEx;10
+6;Productor 6;2531.65;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;FedEx;8
+6;Productor 6;2660.85;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;FedEx;18
+6;Productor 6;2118.69;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;FedEx;19
+6;Productor 6;2506.27;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;FedEx;20
+7;Productor 7;3237.85;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Kaiser Permanente;12
+7;Productor 7;3106.99;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Kaiser Permanente;13
+7;Productor 7;2954.95;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Kaiser Permanente;15
+7;Productor 7;3268.97;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Kaiser Permanente;14
+7;Productor 7;2653.30;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Kaiser Permanente;17
+7;Productor 7;1857.19;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Kaiser Permanente;16
+7;Productor 7;2761.50;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Kaiser Permanente;11
+7;Productor 7;3512.58;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Kaiser Permanente;4
+7;Productor 7;2828.57;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Kaiser Permanente;6
+7;Productor 7;3081.04;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Kaiser Permanente;2
+7;Productor 7;3073.82;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Kaiser Permanente;1
+7;Productor 7;3738.41;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Kaiser Permanente;3
+7;Productor 7;2112.86;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Kaiser Permanente;9
+7;Productor 7;2460.08;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Kaiser Permanente;5
+7;Productor 7;2086.77;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Kaiser Permanente;7
+7;Productor 7;3099.75;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Kaiser Permanente;10
+7;Productor 7;3199.31;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Kaiser Permanente;8
+7;Productor 7;2682.26;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Kaiser Permanente;18
+7;Productor 7;2957.05;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Kaiser Permanente;19
+7;Productor 7;3269.97;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Kaiser Permanente;20
+8;Productor 8;2488.55;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Harvard University;12
+8;Productor 8;2871.37;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Harvard University;13
+8;Productor 8;3634.60;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Harvard University;15
+8;Productor 8;3062.49;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Harvard University;14
+8;Productor 8;2951.14;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Harvard University;17
+8;Productor 8;2035.94;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Harvard University;16
+8;Productor 8;3100.88;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Harvard University;11
+8;Productor 8;2744.86;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Harvard University;4
+8;Productor 8;2244.90;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Harvard University;6
+8;Productor 8;2393.18;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Harvard University;2
+8;Productor 8;2854.80;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Harvard University;1
+8;Productor 8;3166.34;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Harvard University;3
+8;Productor 8;2889.67;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Harvard University;9
+8;Productor 8;2911.85;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Harvard University;5
+8;Productor 8;2178.30;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Harvard University;7
+8;Productor 8;2791.82;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Harvard University;10
+8;Productor 8;2868.05;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Harvard University;8
+8;Productor 8;2488.98;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Harvard University;18
+8;Productor 8;2399.01;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Harvard University;19
+8;Productor 8;2519.29;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Harvard University;20
+9;Productor 9;2431.40;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Exelon;12
+9;Productor 9;3010.43;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Exelon;13
+9;Productor 9;2540.87;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Exelon;15
+9;Productor 9;2705.55;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Exelon;14
+9;Productor 9;3151.53;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Exelon;17
+9;Productor 9;2189.15;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Exelon;16
+9;Productor 9;2541.96;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Exelon;11
+9;Productor 9;2599.25;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Exelon;4
+9;Productor 9;2936.65;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Exelon;6
+9;Productor 9;2416.65;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Exelon;2
+9;Productor 9;2718.26;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Exelon;1
+9;Productor 9;2344.36;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Exelon;3
+9;Productor 9;3176.69;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Exelon;9
+9;Productor 9;3371.94;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Exelon;5
+9;Productor 9;3172.25;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Exelon;7
+9;Productor 9;3411.25;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Exelon;10
+9;Productor 9;2535.68;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Exelon;8
+9;Productor 9;3271.70;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Exelon;18
+9;Productor 9;2694.03;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Exelon;19
+9;Productor 9;2977.24;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Exelon;20
+10;Productor 10;3033.64;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;JPMorgan Chase;12
+10;Productor 10;2255.06;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;JPMorgan Chase;13
+10;Productor 10;3607.75;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;JPMorgan Chase;15
+10;Productor 10;2660.11;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;JPMorgan Chase;14
+10;Productor 10;2805.62;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;JPMorgan Chase;17
+10;Productor 10;2486.02;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;JPMorgan Chase;16
+10;Productor 10;2613.11;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;JPMorgan Chase;11
+10;Productor 10;3055.94;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;JPMorgan Chase;4
+10;Productor 10;2759.79;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;JPMorgan Chase;6
+10;Productor 10;2101.36;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;JPMorgan Chase;2
+10;Productor 10;2709.84;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;JPMorgan Chase;1
+10;Productor 10;3277.71;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;JPMorgan Chase;3
+10;Productor 10;2829.12;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;JPMorgan Chase;9
+10;Productor 10;2841.81;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;JPMorgan Chase;5
+10;Productor 10;3102.20;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;JPMorgan Chase;7
+10;Productor 10;2462.17;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;JPMorgan Chase;10
+10;Productor 10;2067.26;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;JPMorgan Chase;8
+10;Productor 10;2203.40;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;JPMorgan Chase;18
+10;Productor 10;2594.04;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;JPMorgan Chase;19
+10;Productor 10;3756.25;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;JPMorgan Chase;20
+11;Productor 11;2965.83;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Apple;12
+11;Productor 11;2585.10;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Apple;13
+11;Productor 11;2180.01;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Apple;15
+11;Productor 11;2610.58;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Apple;14
+11;Productor 11;3581.53;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Apple;17
+11;Productor 11;2356.75;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Apple;16
+11;Productor 11;2800.01;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Apple;11
+11;Productor 11;1813.10;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Apple;4
+11;Productor 11;2581.90;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Apple;6
+11;Productor 11;3496.23;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Apple;2
+11;Productor 11;2750.13;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Apple;1
+11;Productor 11;2952.81;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Apple;3
+11;Productor 11;2465.28;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Apple;9
+11;Productor 11;2915.39;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Apple;5
+11;Productor 11;2690.14;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Apple;7
+11;Productor 11;2836.17;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Apple;10
+11;Productor 11;3397.92;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Apple;8
+11;Productor 11;3123.60;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Apple;18
+11;Productor 11;2268.90;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Apple;19
+11;Productor 11;2957.31;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Apple;20
+12;Productor 12;2814.99;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Ford;12
+12;Productor 12;3142.11;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Ford;13
+12;Productor 12;2679.54;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Ford;15
+12;Productor 12;3325.25;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Ford;14
+12;Productor 12;2546.32;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Ford;17
+12;Productor 12;2636.43;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Ford;16
+12;Productor 12;3086.77;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Ford;11
+12;Productor 12;3331.83;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Ford;4
+12;Productor 12;3231.21;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Ford;6
+12;Productor 12;2960.80;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Ford;2
+12;Productor 12;2886.11;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Ford;1
+12;Productor 12;2761.76;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Ford;3
+12;Productor 12;3030.47;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Ford;9
+12;Productor 12;3049.89;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Ford;5
+12;Productor 12;2877.41;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Ford;7
+12;Productor 12;2364.50;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Ford;10
+12;Productor 12;2803.66;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Ford;8
+12;Productor 12;2762.16;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Ford;18
+12;Productor 12;3074.92;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Ford;19
+12;Productor 12;2686.86;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Ford;20
+13;Productor 13;2808.03;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Monsanto;12
+13;Productor 13;2631.59;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Monsanto;13
+13;Productor 13;2629.37;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Monsanto;15
+13;Productor 13;3246.59;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Monsanto;14
+13;Productor 13;2885.30;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Monsanto;17
+13;Productor 13;2738.52;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Monsanto;16
+13;Productor 13;2767.56;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Monsanto;11
+13;Productor 13;2723.48;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Monsanto;4
+13;Productor 13;2847.10;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Monsanto;6
+13;Productor 13;2539.52;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Monsanto;2
+13;Productor 13;2941.21;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Monsanto;1
+13;Productor 13;1971.87;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Monsanto;3
+13;Productor 13;2615.20;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Monsanto;9
+13;Productor 13;3195.87;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Monsanto;5
+13;Productor 13;2712.94;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Monsanto;7
+13;Productor 13;3845.22;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Monsanto;10
+13;Productor 13;3234.56;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Monsanto;8
+13;Productor 13;2282.78;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Monsanto;18
+13;Productor 13;1761.84;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Monsanto;19
+13;Productor 13;2698.76;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Monsanto;20
+14;Productor 14;2906.61;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Chevron;12
+14;Productor 14;3355.70;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Chevron;13
+14;Productor 14;3077.64;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Chevron;15
+14;Productor 14;2622.62;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Chevron;14
+14;Productor 14;4045.02;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Chevron;17
+14;Productor 14;2918.56;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Chevron;16
+14;Productor 14;2674.56;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Chevron;11
+14;Productor 14;2284.15;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Chevron;4
+14;Productor 14;3253.22;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Chevron;6
+14;Productor 14;1786.58;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Chevron;2
+14;Productor 14;3052.16;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Chevron;1
+14;Productor 14;2430.41;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Chevron;3
+14;Productor 14;3287.61;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Chevron;9
+14;Productor 14;3267.58;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Chevron;5
+14;Productor 14;2947.53;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Chevron;7
+14;Productor 14;2616.60;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Chevron;10
+14;Productor 14;2946.92;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Chevron;8
+14;Productor 14;2112.47;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Chevron;18
+14;Productor 14;1830.38;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Chevron;19
+14;Productor 14;2399.19;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Chevron;20
+15;Productor 15;2364.30;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Walmart;12
+15;Productor 15;3202.81;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Walmart;13
+15;Productor 15;2421.50;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Walmart;15
+15;Productor 15;3213.85;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Walmart;14
+15;Productor 15;2768.39;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Walmart;17
+15;Productor 15;2787.08;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Walmart;16
+15;Productor 15;2245.13;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Walmart;11
+15;Productor 15;3327.85;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Walmart;4
+15;Productor 15;2870.48;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Walmart;6
+15;Productor 15;2885.31;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Walmart;2
+15;Productor 15;2727.92;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Walmart;1
+15;Productor 15;2475.34;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Walmart;3
+15;Productor 15;3382.03;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Walmart;9
+15;Productor 15;2780.82;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Walmart;5
+15;Productor 15;2483.75;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Walmart;7
+15;Productor 15;2642.07;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Walmart;10
+15;Productor 15;2611.72;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Walmart;8
+15;Productor 15;2645.64;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Walmart;18
+15;Productor 15;2617.96;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Walmart;19
+15;Productor 15;2510.13;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Walmart;20
+16;Productor 16;2802.72;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;FedEx;12
+16;Productor 16;2177.60;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;FedEx;13
+16;Productor 16;2840.36;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;FedEx;15
+16;Productor 16;3453.01;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;FedEx;14
+16;Productor 16;2671.04;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;FedEx;17
+16;Productor 16;2701.30;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;FedEx;16
+16;Productor 16;2334.58;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;FedEx;11
+16;Productor 16;2307.46;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;FedEx;4
+16;Productor 16;2426.64;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;FedEx;6
+16;Productor 16;2410.69;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;FedEx;2
+16;Productor 16;3347.94;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;FedEx;1
+16;Productor 16;2004.91;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;FedEx;3
+16;Productor 16;2696.17;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;FedEx;9
+16;Productor 16;1840.24;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;FedEx;5
+16;Productor 16;2653.69;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;FedEx;7
+16;Productor 16;3248.23;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;FedEx;10
+16;Productor 16;2735.26;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;FedEx;8
+16;Productor 16;2643.80;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;FedEx;18
+16;Productor 16;2580.54;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;FedEx;19
+16;Productor 16;2189.75;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;FedEx;20
+17;Productor 17;2652.22;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Harvard University;12
+17;Productor 17;3129.03;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Harvard University;13
+17;Productor 17;2601.11;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Harvard University;15
+17;Productor 17;2897.05;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Harvard University;14
+17;Productor 17;2670.58;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Harvard University;17
+17;Productor 17;3141.21;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Harvard University;16
+17;Productor 17;2672.88;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Harvard University;11
+17;Productor 17;3317.68;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Harvard University;4
+17;Productor 17;2826.59;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Harvard University;6
+17;Productor 17;2237.02;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Harvard University;2
+17;Productor 17;3214.35;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Harvard University;1
+17;Productor 17;2088.59;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Harvard University;3
+17;Productor 17;2578.33;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Harvard University;9
+17;Productor 17;2488.41;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Harvard University;5
+17;Productor 17;1763.69;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Harvard University;7
+17;Productor 17;3049.96;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Harvard University;10
+17;Productor 17;3156.69;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Harvard University;8
+17;Productor 17;3247.45;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Harvard University;18
+17;Productor 17;3382.70;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Harvard University;19
+17;Productor 17;2516.76;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Harvard University;20
+18;Productor 18;2103.34;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;JPMorgan Chase;12
+18;Productor 18;3384.27;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;JPMorgan Chase;13
+18;Productor 18;2372.66;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;JPMorgan Chase;15
+18;Productor 18;2585.57;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;JPMorgan Chase;14
+18;Productor 18;3074.77;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;JPMorgan Chase;17
+18;Productor 18;2243.09;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;JPMorgan Chase;16
+18;Productor 18;2822.36;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;JPMorgan Chase;11
+18;Productor 18;2780.03;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;JPMorgan Chase;4
+18;Productor 18;2200.04;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;JPMorgan Chase;6
+18;Productor 18;2839.43;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;JPMorgan Chase;2
+18;Productor 18;2515.35;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;JPMorgan Chase;1
+18;Productor 18;2807.83;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;JPMorgan Chase;3
+18;Productor 18;3048.03;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;JPMorgan Chase;9
+18;Productor 18;2566.38;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;JPMorgan Chase;5
+18;Productor 18;3143.03;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;JPMorgan Chase;7
+18;Productor 18;2962.68;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;JPMorgan Chase;10
+18;Productor 18;2264.08;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;JPMorgan Chase;8
+18;Productor 18;2290.70;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;JPMorgan Chase;18
+18;Productor 18;3664.43;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;JPMorgan Chase;19
+18;Productor 18;2601.56;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;JPMorgan Chase;20
+19;Productor 19;1880.43;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Kaiser Permanente;12
+19;Productor 19;2107.18;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Kaiser Permanente;13
+19;Productor 19;2444.72;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Kaiser Permanente;15
+19;Productor 19;2434.64;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Kaiser Permanente;14
+19;Productor 19;2615.20;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Kaiser Permanente;17
+19;Productor 19;2277.39;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Kaiser Permanente;16
+19;Productor 19;2967.80;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Kaiser Permanente;11
+19;Productor 19;2485.68;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Kaiser Permanente;4
+19;Productor 19;2919.34;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Kaiser Permanente;6
+19;Productor 19;2632.29;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Kaiser Permanente;2
+19;Productor 19;2638.64;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Kaiser Permanente;1
+19;Productor 19;3576.79;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Kaiser Permanente;3
+19;Productor 19;2894.21;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Kaiser Permanente;9
+19;Productor 19;2776.38;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Kaiser Permanente;5
+19;Productor 19;2997.76;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Kaiser Permanente;7
+19;Productor 19;2524.52;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Kaiser Permanente;10
+19;Productor 19;2763.62;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Kaiser Permanente;8
+19;Productor 19;2594.35;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Kaiser Permanente;18
+19;Productor 19;3029.39;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Kaiser Permanente;19
+19;Productor 19;3151.22;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Kaiser Permanente;20
+20;Productor 20;3004.53;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;Exelon;12
+20;Productor 20;2466.51;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;Exelon;13
+20;Productor 20;3261.02;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;Exelon;15
+20;Productor 20;2656.51;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;Exelon;14
+20;Productor 20;3002.78;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;Exelon;17
+20;Productor 20;2441.96;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;Exelon;16
+20;Productor 20;2049.91;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;Exelon;11
+20;Productor 20;3788.65;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;Exelon;4
+20;Productor 20;2633.50;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;Exelon;6
+20;Productor 20;3437.02;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;Exelon;2
+20;Productor 20;2012.60;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;Exelon;1
+20;Productor 20;2584.32;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;Exelon;3
+20;Productor 20;2829.01;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;Exelon;9
+20;Productor 20;1427.90;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;Exelon;5
+20;Productor 20;2293.75;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;Exelon;7
+20;Productor 20;3109.31;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;Exelon;10
+20;Productor 20;2633.52;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;Exelon;8
+20;Productor 20;2617.30;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;Exelon;18
+20;Productor 20;3440.33;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;Exelon;19
+20;Productor 20;2499.57;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;Exelon;20
