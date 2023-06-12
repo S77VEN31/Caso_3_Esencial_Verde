@@ -1,0 +1,21 @@
+﻿collector;name;weight;type;country;state;city;zipcode;latitude;longitude;company
+2;Republic Services;56163.89;1;Mexico;Jalisco;Guadalajara;44100;20.65970000;-103.34960000;16
+16;Waste Connections of Canada;51109.60;1;Costa Rica;Puntarenas;Puntarenas;60101;9.97680000;-84.83830000;NULL
+12;Casella Waste Systems;54737.01;1;Costa Rica;Alajuela;Alajuela;20101;10.02110000;-84.21110000;NULL
+15;Wheelabrator;53823.49;1;Costa Rica;Guanacaste;Liberia;50101;10.63400000;-85.44080000;NULL
+19;Progressive Waste Solutions;55738.37;1;United States;Arkansas;Little Rock;72201;34.74648100;-92.28959500;NULL
+17;Waste Industries of Canada;56181.28;1;Costa Rica;Limon;Limon;70101;9.99220000;-83.03110000;NULL
+6;Veolia Environmental Services;55165.49;1;Mexico;Chihuahua;Ciudad Juarez;32000;31.69040000;-106.42450000;17
+11;Rumpke Consolidated Companies;54004.16;1;Costa Rica;San Jose;San Jose;10101;9.92810000;-84.09070000;NULL
+18;Green For Life Environmental;53443.79;1;United States;Arizona;Phoenix;85001;34.04892700;-111.09373500;NULL
+9;Waste Pro;56906.42;1;Mexico;Oaxaca;Oaxaca de Juarez;68000;17.06540000;-96.72360000;17
+7;Clean Harbors;53761.21;1;Mexico;Quintana Roo;Cancun;77500;21.16190000;-86.85150000;17
+10;Covanta Energy;57533.15;1;Mexico;San Luis Potosi;San Luis Potosi;78000;22.15660000;-100.98550000;NULL
+13;GFL Environmental;54772.26;1;Costa Rica;Cartago;Cartago;30101;9.86260000;-83.92100000;NULL
+8;Stericycle;55301.71;1;Mexico;Sonora;Hermosillo;83000;29.07290000;-110.95590000;17
+20;Waste Management of Canada;55619.40;1;United States;California;Los Angeles;95814;38.58157200;-121.49440000;NULL
+1;Waste Management;54876.95;1;Mexico;Mexico;Mexico City;1000;19.43260000;-99.13320000;16
+5;Advanced Disposal Services;54290.38;1;Mexico;Puebla;Puebla;72000;19.04130000;-98.20620000;16
+14;New Jersey Resources;56634.28;1;Costa Rica;Heredia;Heredia;40101;10.00200000;-84.11790000;NULL
+3;Waste Connections;54520.15;1;Mexico;Nuevo Leon;Monterrey;64000;25.68660000;-100.31610000;16
+4;Waste Industries;55480.93;1;Mexico;Baja California;Tijuana;22000;32.51490000;-117.03820000;16

@@ -1,0 +1,9 @@
+LOAD CSV WITH HEADERS FROM 'file:///desechosXproductorXcollector.csv' AS row FIELDTERMINATOR ';'
+WITH row
+MERGE (p:Producer {name: row.producerName})
+SET p.company = row.pCompany, p.country = row.producerC, p.state = row.producerS, p.city = row.producerCi
+
+MERGE (c:Collector {name: row.collectorName})
+SET c.country = row.collectorC, c.state = row.collectorS, c.city = row.collectorCi
+
+MERGE (p)-[:COLLECTS {weight: toFloat(row.weight)}]->(c)
